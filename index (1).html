@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مساعد دعم متجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f11;
+    --surface: #18181c;
+    --surface2: #222228;
+    --border: #2e2e38;
+    --accent: #e8365d;
+    --accent2: #ff6b8a;
+    --text: #f0f0f4;
+    --text2: #9090a0;
+    --text3: #60606e;
+    --green: #2dd4a0;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* HEADER */
+  header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .logo-dot {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  .header-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(232,54,93,0.12);
+    border: 1px solid rgba(232,54,93,0.25);
+    border-radius: 20px;
+    color: var(--accent2);
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0 1.5rem;
+  }
+  .tab-btn {
+    padding: 12px 18px;
+    font-size: 14px;
+    color: var(--text3);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text2); }
+  .tab-btn.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  /* MAIN */
+  main { flex: 1; max-width: 780px; margin: 0 auto; width: 100%; padding: 1.5rem; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* CHAT PANEL */
+  .chat-wrap { display: flex; flex-direction: column; height: calc(100vh - 180px); }
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .msg { display: flex; gap: 10px; align-items: flex-start; }
+  .msg.user { flex-direction: row-reverse; }
+  .avatar {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .avatar.bot { background: rgba(232,54,93,0.15); color: var(--accent2); border: 1px solid rgba(232,54,93,0.2); }
+  .avatar.user { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+  .bubble {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 85%;
+    border: 1px solid var(--border);
+  }
+  .msg.bot .bubble { background: var(--surface); border-radius: var(--radius) var(--radius) var(--radius) 4px; }
+  .msg.user .bubble { background: var(--surface2); border-radius: var(--radius) var(--radius) 4px var(--radius); }
+  .bubble .step-list { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .bubble .step {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 6px 10px;
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    min-width: 22px; height: 22px;
+    background: rgba(232,54,93,0.15);
+    color: var(--accent2);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .bubble .copy-btn {
+    margin-top: 10px;
+    padding: 6px 14px;
+    font-size: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text2);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .bubble .copy-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .typing-dots { display: flex; gap: 5px; padding: 4px 0; align-items: center; }
+  .typing-dots span {
+    width: 7px; height: 7px;
+    background: var(--text3);
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+
+  /* INPUT */
+  .input-area {
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--border);
+  }
+  .input-row { display: flex; gap: 8px; }
+  .input-row textarea {
+    flex: 1;
+    padding: 11px 14px;
+    font-size: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: inherit;
+    resize: none;
+    height: 46px;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+  .input-row textarea:focus { outline: none; border-color: rgba(232,54,93,0.5); }
+  .send-btn {
+    width: 46px; height: 46px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius);
+    color: #fff;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 18px;
+  }
+  .send-btn:hover { background: var(--accent2); transform: scale(1.04); }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .input-hint { font-size: 12px; color: var(--text3); margin-top: 8px; }
+
+  /* QUICK SUGGESTIONS */
+  .suggestions {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    padding: 12px 0;
+  }
+  .sug-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .sug-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  /* KB PANEL */
+  .kb-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+  .kb-header h2 { font-size: 16px; font-weight: 600; }
+  .kb-stats { font-size: 13px; color: var(--text2); }
+  .kb-stats span { color: var(--accent2); font-weight: 600; }
+
+  .import-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .import-box h3 { font-size: 14px; font-weight: 500; margin-bottom: 8px; color: var(--text2); }
+  .import-box textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px 12px;
+    font-size: 13px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    resize: vertical;
+    line-height: 1.6;
+    direction: rtl;
+  }
+  .import-box textarea:focus { outline: none; border-color: rgba(232,54,93,0.4); }
+  .import-actions { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .btn-primary {
+    padding: 8px 18px;
+    font-size: 13px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-secondary {
+    padding: 8px 14px;
+    font-size: 13px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text2);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: var(--text3); }
+
+  .kb-search {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: inherit;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  .kb-search:focus { outline: none; border-color: rgba(232,54,93,0.4); }
+
+  .kb-list { display: flex; flex-direction: column; gap: 8px; }
+  .kb-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    transition: border-color 0.2s;
+  }
+  .kb-item:hover { border-color: var(--text3); }
+  .kb-item-q { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .kb-item-meta { font-size: 12px; color: var(--text3); }
+  .kb-del {
+    padding: 5px 8px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--text3);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .kb-del:hover { color: var(--accent); border-color: rgba(232,54,93,0.3); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 999;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-num { font-size: 26px; font-weight: 600; color: var(--accent2); }
+  .stat-label { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+  /* API KEY SETUP */
+  .setup-banner {
+    background: rgba(232,54,93,0.08);
+    border: 1px solid rgba(232,54,93,0.2);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .setup-banner.show { display: block; }
+  .setup-banner strong { color: var(--accent2); }
+
+  @media (max-width: 600px) {
+    main { padding: 1rem; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    مساعد دعم متجرة
+  </div>
+  <div class="header-badge">🤖 مدعوم بالذكاء الاصطناعي</div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('chat',this)">💬 البوت</button>
+  <button class="tab-btn" onclick="switchTab('kb',this)">📚 قاعدة المعرفة</button>
+  <button class="tab-btn" onclick="switchTab('stats',this)">📊 إحصائيات</button>
+  <button class="tab-btn" onclick="switchTab('settings',this)">⚙️ الإعدادات</button>
+</div>
+
+<main>
+
+<!-- CHAT -->
+<div id="panel-chat" class="panel active">
+  <div class="chat-wrap">
+    <div class="messages" id="messages">
+      <div class="msg bot">
+        <div class="avatar bot">م</div>
+        <div class="bubble">
+          أهلاً! أنا مساعد دعم متجرة الداخلي.<br>
+          اكتب استفسار التاجر وسأعطيك الخطوات الدقيقة فوراً لتشرحها له.
+          <div class="suggestions" id="suggestions">
+            <button class="sug-btn" onclick="quickAsk(this)">كيف أضيف منتج؟</button>
+            <button class="sug-btn" onclick="quickAsk(this)">كيف أفعّل كوبون؟</button>
+            <button class="sug-btn" onclick="quickAsk(this)">كيف أضيف طريقة دفع؟</button>
+            <button class="sug-btn" onclick="quickAsk(this)">كيف أغير حالة طلب؟</button>
+            <button class="sug-btn" onclick="quickAsk(this)">كيف أصدّر الطلبات؟</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input-area">
+      <div class="input-row">
+        <textarea id="chatInput" placeholder="اكتب استفسار التاجر هنا..." onkeydown="handleKey(event)" rows="1"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMsg()" title="إرسال">➤</button>
+      </div>
+      <p class="input-hint">اضغط Enter للإرسال، Shift+Enter لسطر جديد</p>
+    </div>
+  </div>
+</div>
+
+<!-- KB -->
+<div id="panel-kb" class="panel">
+  <div class="kb-header">
+    <h2>قاعدة المعرفة</h2>
+    <div class="kb-stats">إجمالي: <span id="kbCountDisplay">0</span> استفسار</div>
+  </div>
+
+  <div class="import-box">
+    <h3>إضافة استفسارات جديدة (دفعة واحدة)</h3>
+    <textarea id="bulkInput" placeholder="س: كيف أضيف تصنيف؟&#10;ج: من القائمة الجانبية...&#10;&#10;س: كيف أربط دومين؟&#10;ج: من الإعدادات..."></textarea>
+    <div class="import-actions">
+      <button class="btn-primary" onclick="bulkImport()">استيراد</button>
+      <button class="btn-secondary" onclick="clearBulk()">مسح</button>
+      <span id="importMsg" style="font-size:12px;color:var(--green)"></span>
+    </div>
+  </div>
+
+  <input type="text" class="kb-search" id="kbSearch" placeholder="ابحث في قاعدة المعرفة..." oninput="renderKBList()" />
+
+  <div class="kb-list" id="kbList"></div>
+</div>
+
+<!-- STATS -->
+<div id="panel-stats" class="panel">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num" id="s1">0</div>
+      <div class="stat-label">في قاعدة المعرفة</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="s2">0</div>
+      <div class="stat-label">أسئلة هذه الجلسة</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="s3">0</div>
+      <div class="stat-label">إجابات تم نسخها</div>
+    </div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;">
+    <h3 style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--text2)">آخر الأسئلة في الجلسة</h3>
+    <div id="recentQ" style="font-size:13px;color:var(--text3)">لا توجد أسئلة بعد.</div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="panel-settings" class="panel">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem;">
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:4px;">مفتاح Anthropic API</h3>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:12px;">مطلوب لتشغيل البوت الذكي. يُحفظ في المتصفح فقط ولا يُرسل لأي خادم.</p>
+    <div style="display:flex;gap:8px;">
+      <input type="password" id="apiKeyInput" placeholder="sk-ant-..." style="flex:1;padding:10px 14px;font-size:13px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;" />
+      <button class="btn-primary" onclick="saveApiKey()">حفظ</button>
+    </div>
+    <p id="apiStatus" style="font-size:12px;margin-top:8px;color:var(--text3)"></p>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px;">بيانات التطبيق</h3>
+    <button class="btn-secondary" onclick="clearAllKB()" style="margin-left:8px;">مسح قاعدة المعرفة</button>
+    <button class="btn-secondary" onclick="exportKB()">تصدير JSON</button>
+  </div>
+</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== DATA ======
+const DEFAULT_KB = [{"id": 1, "q": "كيف أغير اسم المتجر أو شعاره؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "عدّل حقل (اسم المتجر) واضغط (حفظ)", "لتغيير الشعار اضغط على أيقونة الحذف بجانب الشعار الحالي ثم ارفع الشعار الجديد", "نفس الطريقة لأيقونة التبويب (Favicon) والصورة الافتراضية للمنتجات", "اضغط (حفظ) من الأعلى"]}, {"id": 2, "q": "كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "انزل لأسفل الصفحة إلى قسم (حسابات التواصل الاجتماعي)", "ستجد حقول لـ: تويتر، انستقرام، فيسبوك، لينكد إن، سناب شات، واتس آب، تيك توك، معروف، iOS، أندرويد", "أدخل الروابط أو أرقام الحسابات في الحقول المناسبة ثم اضغط (حفظ)"]}, {"id": 3, "q": "كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "ابحث عن حقول (رقم السجل التجاري) و(سجل المستقلين) و(رقم توثيق منصة الأعمال)", "أدخل الأرقام في حقولها ثم اضغط (حفظ)"]}, {"id": 4, "q": "كيف أغير دولة المتجر أو مدينته وعنوانه؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "اختر الدولة من القائمة المنسدلة (الدولة) ثم اختر المدينة", "أدخل العنوان التفصيلي في حقل (العنوان) ثم اضغط (حفظ)"]}, {"id": 5, "q": "كيف أضيف لغة جديدة للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (اللغات)", "اضغط إضافة لغة واختر اللغة المطلوبة", "حدد اللغة الافتراضية ثم اضغط (حفظ)"]}, {"id": 6, "q": "كيف أضيف عملة جديدة للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (العملات)", "اضغط إضافة عملة واختر العملة المطلوبة", "حدد سعر الصرف إذا كان المتجر متعدد العملات ثم اضغط (حفظ)"]}, {"id": 7, "q": "كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (الدول)", "اضغط إضافة دولة واختر الدولة المطلوبة", "حدد طرق الدفع والشحن المتاحة لهذه الدولة ثم اضغط (حفظ)"]}, {"id": 8, "q": "كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (فريق الإدارة)", "اضغط إضافة موظف وأدخل بريده الإلكتروني وحدد صلاحياته", "سيصله إيميل دعوة لتفعيل حسابه", "لتعديل موظف موجود اضغط على اسمه وعدّل الصلاحيات ثم اضغط (حفظ)"]}, {"id": 9, "q": "كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (وضع المتجر)", "فعّل خيار (وضع الصيانة) واكتب الرسالة التي ستظهر للزوار", "اضغط (حفظ) — سيرى الزوار رسالة الصيانة فقط حتى تعيد تفعيل المتجر"]}, {"id": 10, "q": "كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (خيارات المنتجات)", "أضف كل خيار مع قيمه (مثال: اللون ← أحمر، أزرق) وحدد نوعه: قائمة منسدلة أو اختيار متعدد أو قيمة واحدة أو رفع ملف أو textarea", "بعدها ادخل على المنتج المطلوب من (الأقسام والمنتجات) وستجد تبويب (خيارات المنتج) في الأعلى", "أضف الخيار المناسب واختر القيم المتاحة لهذا المنتج تحديداً", "حدد الكمية لكل قيمة والزيادة على السعر الأساسي إن وجدت ثم احفظ"]}, {"id": 11, "q": "كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (عناوين المخزون)", "يمكنك إضافة مستودعات متعددة وتحديد الكميات لكل مستودع", "اضغط (حفظ) بعد الانتهاء"]}, {"id": 12, "q": "كيف أعدّل إعدادات ضريبة القيمة المضافة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (ضريبة القيمة المضافة)", "حدد نسبة الضريبة وهل تظهر مضمّنة في السعر أم منفصلة", "اضغط (حفظ)"]}, {"id": 13, "q": "كيف أضيف طريقة دفع جديدة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (طرق الدفع)", "ستجد جميع بوابات الدفع المتاحة (مدى، فيزا، Apple Pay، تابي، تمارا، إلخ)", "اضغط على البوابة المطلوبة وأدخل بيانات الربط (API Key وما يلزم)", "فعّلها ثم اضغط (حفظ)"]}, {"id": 14, "q": "كيف أربط المتجر بمنصة فاتورة (زاتكا)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (ربط منصة فاتورة)", "أدخل بيانات الربط المطلوبة من حساب زاتكا", "اضغط (حفظ) — ستُصدر الفواتير الإلكترونية تلقائياً"]}, {"id": 15, "q": "كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (الشحن والتوصيل)", "اختر شركة الشحن من القائمة أو أضف شحناً يدوياً", "أدخل بيانات الربط وتكاليف الشحن ثم اضغط (حفظ)"]}, {"id": 16, "q": "كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (حالات الطلبات)", "يمكنك تعديل اسم الحالة ولونها ورسالة الإشعار المرسلة للعميل", "لإضافة حالة جديدة اضغط (إضافة حالة) ثم اضغط (حفظ)"]}, {"id": 17, "q": "كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (إعدادات الفواتير)", "يمكنك تخصيص شكل الفاتورة والبيانات الظاهرة فيها", "اضغط (حفظ)"]}, {"id": 18, "q": "كيف أعدّل سياسة الإرجاع؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (سياسة الإرجاع)", "اكتب أو عدّل نص السياسة ثم اضغط (حفظ)"]}, {"id": 19, "q": "كيف أضبط أوقات التوصيل المتاحة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (أوقات التوصيل)", "حدد الأيام والساعات المتاحة للتوصيل ثم اضغط (حفظ)"]}, {"id": 20, "q": "كيف أفعّل المحفظة الإلكترونية للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (المحفظة)", "فعّل خيار المحفظة وحدد الإعدادات مثل الحد الأدنى للرصيد", "اضغط (حفظ)"]}, {"id": 21, "q": "كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (مرة تقليل الطلب الكيدية)", "فعّل الخاصية وحدد الإعدادات المناسبة ثم اضغط (حفظ)"]}, {"id": 22, "q": "كيف أفعّل التوصيات الذكية للمنتجات؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (التوصيات الذكية)", "فعّل الخاصية واختر مواضع الظهور: صفحة المنتج، سلة الشراء، الصفحة الرئيسية", "اضغط (حفظ)"]}, {"id": 23, "q": "كيف أضبط إعدادات التقييمات والمراجعات؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إعدادات التقييمات)", "حدد هل التقييمات تحتاج موافقة قبل النشر أم تنشر مباشرة", "فعّل أو أوقف خيار التقييمات بالكامل ثم اضغط (حفظ)"]}, {"id": 24, "q": "كيف أفعّل إشعارات التحويلات البنكية؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إشارات أحدث التحويلات)", "فعّل الخاصية وحدد طريقة الإشعار ثم اضغط (حفظ)"]}, {"id": 25, "q": "كيف أفعّل أو أعدّل توصيات السلة للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (توصيات السلة)", "أضف المنتجات التي تريد عرضها عند إضافة منتج للسلة", "اضغط (حفظ)"]}, {"id": 26, "q": "كيف أفعّل طريق الشحن الموحى به للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (طريق الشحن الموحى بها)", "فعّل الخاصية وحدد شركة الشحن المفضلة ثم اضغط (حفظ)"]}, {"id": 27, "q": "كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (تصميم المتجر)", "اختر قسم البنرات وأضغط إضافة بنر", "ارفع الصورة وأضف الرابط المرتبط بها ثم اضغط (حفظ)"]}, {"id": 28, "q": "كيف أفعّل كوبون خصم؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (شعارات البنر — أو أدوات التسويق)", "اضغط (قسائم التخفيض) ثم (إضافة جديد)", "أدخل كود الكوبون، نوع الخصم (نسبة أو مبلغ ثابت)، الحد الأدنى للطلب، وتاريخ الانتهاء", "اضغط (حفظ)"]}, {"id": 29, "q": "كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (الربط مع الخدمات الخارجية)", "ستجد قسم خدمات جوجل والبيكسلز", "اختر الخدمة المطلوبة (Search Console، Google Analytics، Facebook Pixel، إلخ)", "أدخل الكود أو بيانات الربط ثم اضغط (حفظ)"]}, {"id": 30, "q": "كيف أعدّل إعدادات SEO للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (إعدادات الـ SEO)", "عدّل العنوان الرئيسي للمتجر، الوصف، والكلمات المفتاحية", "اضغط (حفظ)"]}, {"id": 31, "q": "كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (الصفحات التعريفية)", "اختر الصفحة المطلوبة أو اضغط (إضافة صفحة جديدة)", "أدخل المحتوى باستخدام المحرر ثم اضغط (حفظ)"]}, {"id": 32, "q": "كيف أفعّل برنامج الشركاء أو نظام العمولة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (برنامج الشركاء)", "فعّل البرنامج وحدد نسبة العمولة ثم اضغط (حفظ)"]}, {"id": 33, "q": "كيف أعدّل إعادة توجيه الروابط القديمة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (إعادة توجيه الروابط)", "أضف الرابط القديم والرابط الجديد المطلوب توجيهه إليه", "اضغط (حفظ)"]}, {"id": 34, "q": "كيف أضبط إعدادات رسائل SMS للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إعدادات رسائل الـ SMS)", "أدخل بيانات مزود الـ SMS وحدد الرسائل التلقائية المطلوبة (تأكيد طلب، شحن، إلخ)", "اضغط (حفظ)"]}, {"id": 35, "q": "كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ API)", "ستجد مفاتيح الـ API الحالية — اضغط إنشاء مفتاح جديد أو احذف مفتاحاً قديماً", "استخدم المفتاح للربط مع الأنظمة الخارجية"]}, {"id": 36, "q": "كيف أضبط Webhooks للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ Webhooks)", "اضغط إضافة Webhook جديد وأدخل الرابط (URL) والحدث الذي يُطلقه", "اضغط (حفظ)"]}, {"id": 37, "q": "كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة بيانات النطاق الـ DNS)", "ستجد سجلات الـ DNS — عدّل السجلات المطلوبة ثم اضغط (حفظ)"]}, {"id": 38, "q": "كيف أفعّل إشعار "أبلغني عند التوافر" للمنتجات الناقصة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (أبلغي عند التوافر)", "فعّل الخاصية لتتيح للعملاء التسجيل لتلقي إشعار عند توافر المنتج", "اضغط (حفظ)"]}, {"id": 39, "q": "كيف أحذف ملفات الكاش لتحديث المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (حذف ملفات الكاش)", "اضغط زر (حذف الكاش) — ستظهر التغييرات الجديدة على المتجر فوراً"]}, {"id": 40, "q": "كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (مجموعات العملاء)", "اضغط إضافة مجموعة وحدد معايير التصنيف ثم اضغط (حفظ)"]}, {"id": 41, "q": "كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (تنبيهات البريد)", "اختر نوع الإشعار (تأكيد طلب، إلغاء، شحن، إلخ) وعدّل نص الرسالة", "اضغط (حفظ)"]}, {"id": 42, "q": "كيف أتابع سجل حركة المخزون؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (سجل المخزون)", "ستجد تاريخاً كاملاً لحركة المخزون (إضافة، بيع، إرجاع)", "يمكن تصفيته حسب المنتج أو التاريخ"]}, {"id": 43, "q": "كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "ستجد في الأعلى شرائط ملونة لكل حالة: بانتظار المراجعة، قيد التنفيذ، تم التنفيذ، قيد التوصيل، تم التوصيل، جاري التوصيل، قيد الاسترجاع، مسترجع، ملغي", "اضغط على أي شريط لتصفية الطلبات حسب تلك الحالة فقط", "للعودة لكل الطلبات اضغط على (الكل)"]}, {"id": 44, "q": "كيف أبحث عن طلب معين؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "في الأعلى يمين ستجد حقل بحث (ابحث برقم الطلب)", "أدخل رقم الطلب أو اسم العميل للوصول إليه مباشرة"]}, {"id": 45, "q": "كيف أضيف طلباً جديداً يدوياً؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "اضغط زر (إضافة طلب جديد +) في الأعلى يسار", "أدخل بيانات الطلب: العميل، المنتجات، طريقة الدفع، عنوان الشحن", "اضغط (حفظ)"]}, {"id": 46, "q": "كيف أصدّر قائمة الطلبات؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "اضغط زر (تصدير الطلبات) في الأعلى", "اختر نطاق التاريخ أو الفلتر المطلوب ثم اضغط تصدير", "سيُنزَّل ملف Excel بقائمة الطلبات"]}, {"id": 47, "q": "كيف أفتح تفاصيل طلب معين؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "ابحث عن الطلب بالرقم أو من القائمة", "اضغط على رقم الطلب (مثل #1452) لفتح صفحة التفاصيل الكاملة"]}, {"id": 48, "q": "كيف أغير حالة طلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في الأعلى ستجد زر الحالة الحالية (مثل: بانتظار المراجعة)", "اضغط عليه واختر الحالة الجديدة من القائمة", "ستُحفظ الحالة وقد يُرسَل إشعار تلقائي للعميل"]}, {"id": 49, "q": "كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في الأعلى يسار اضغط زر (الفاتورة)", "سيفتح نافذة معاينة الفاتورة — اضغط طباعة", "لبوليصة الشحن انزل لأسفل الصفحة في قسم (تفاصيل الشحن) واضغط (إصدار بوليصة الشحن)"]}, {"id": 50, "q": "كيف أُسند طلباً لموظف معين؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "اضغط على زر (ثلاث نقاط ...) في الأعلى يسار", "اختر (إسناد الطلب لموظف) وحدد الموظف المطلوب", "سيُسجَّل الإسناد في سجل الطلب"]}, {"id": 51, "q": "كيف أعرض قائمة تجهيز الطلبات؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "اضغط على زر (ثلاث نقاط ...) في الأعلى يسار", "اختر (قائمة تجهيز الطلب) لتظهر لك قائمة المنتجات المطلوب تجهيزها"]}, {"id": 52, "q": "كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم المنتجات ستجد زر (إعادة للمخزون)", "اضغط عليه لإعادة كمية المنتج تلقائياً للمخزون"]}, {"id": 53, "q": "كيف أرسل رابط الدفع للعميل مباشرة؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (طريقة الدفع) ستجد زر (نسخ رابط الدفع)", "اضغط عليه ثم أرسل الرابط للعميل عبر واتساب أو أي قناة أخرى"]}, {"id": 54, "q": "كيف أسترد مبلغ عميل (استرداد)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (طريقة الدفع) ستجد زر (استرداد المبلغ)", "اضغط عليه وحدد المبلغ المطلوب استرداده", "اضغط تأكيد — سيُعاد المبلغ للعميل"]}, {"id": 55, "q": "كيف أشارك سلة الطلب مع عميل آخر؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم المنتجات ستجد رابط (شارك رابط السلة نفسها مع عميل آخر)", "اضغط عليه لنسخ الرابط وإرساله لأي عميل آخر ليكمل نفس الطلب"]}, {"id": 56, "q": "كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد: اسمه، عدد طلباته الإجمالية، مجموع مشترياته، هل هو عميل متكرر", "ستجد أيضاً تنبيه إذا كان (أكثر من 3 طلبات في آخر 30 يوم) وأي كوبونات مستخدمة"]}, {"id": 57, "q": "كيف أعرف مصدر الطلب (من أين جاء العميل)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد (مصدر الطلب) يظهر فيه المصدر", "مثال: زيارة مباشرة، موقع إلكتروني، تطبيق، إلخ"]}, {"id": 58, "q": "كيف أضيف وسماً (Tag) لطلب معين؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (وسوم الطلبات)", "اختر وسماً موجوداً أو اكتب وسماً جديداً وأضفه", "يمكنك لاحقاً التصفية بالوسوم من قائمة الطلبات"]}, {"id": 59, "q": "كيف أرى سجل تحديثات الطلب وملاحظاته؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (سجل الطلب)", "ستجد كل التحديثات مرتبة بالتاريخ: متى تغيرت الحالة، ومن غيّرها، وأي ملاحظات أُضيفت"]}, {"id": 60, "q": "كيف أضيف ملاحظة داخلية على طلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (سجل الطلب) واضغط زر (أضف تحديث جديد)", "اكتب الملاحظة واختر هل تُرسَل للعميل أم داخلية فقط", "اضغط (حفظ)"]}, {"id": 61, "q": "كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (نظام المكافآت)", "ستجد عدد النقاط المكتسبة من هذا الطلب وهل هي معلقة أم مفعّلة", "النقاط تصبح نشطة بعد اكتمال الطلب لأحد حالات الاكتمال المحددة"]}, {"id": 62, "q": "كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (تفاصيل الشحن) ستجد: شركة الشحن، نوع الشحن، إجمالي الوزن، عدد القطع", "يمكنك من هنا أيضاً اضغط (إصدار بوليصة الشحن)"]}, {"id": 63, "q": "كيف أتواصل مع العميل مباشرة من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد رقم الجوال والبريد الإلكتروني", "اضغط على أيقونة واتساب بجانب الرقم لفتح محادثة مباشرة", "أو اضغط على البريد الإلكتروني لإرسال إيميل"]}, {"id": 64, "q": "كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) اضغط على (اطبع البطاقة لإرفاقها مع الطلب أثناء التغليف)", "ستفتح نافذة معاينة البطاقة — اضغط طباعة"]}, {"id": 65, "q": "ما معنى حالات الطلبات المختلفة؟", "steps": ["بانتظار المراجعة: الطلب وصل ولم يُراجَع بعد", "قيد التنفيذ: تمت المراجعة وبدأ التجهيز", "تم التنفيذ: جُهّز الطلب وجاهز للشحن", "قيد التوصيل: سُلّم لشركة الشحن", "تم التوصيل: وصل للعميل بنجاح", "جاري التوصيل: في الطريق للعميل", "قيد الاسترجاع: العميل طلب إرجاعه", "مسترجع: تم استلام المرتجع", "ملغي: أُلغي الطلب"]}, {"id": 66, "q": "كيف أضيف منتجاً جديداً للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الأقسام والمنتجات) ثم (المنتجات)", "اضغط (إضافة منتج جديد)", "أدخل اسم المنتج بالعربي والإنجليزي", "أضف وصف المنتج باستخدام المحرر (يدعم التنسيق والصور والجداول)", "أدخل السعر والكمية والوزن", "حدد القسم والماركة", "ارفع صورة المنتج الرئيسية والصور الإضافية (jpg, jpeg, png, gif — أقصى 7 ميجابايت، أفضل أبعاد 1000x1000px)", "اضغط (حفظ)"]}, {"id": 67, "q": "كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات) واضغط على المنتج أو (إضافة جديد)", "في الأعلى ستجد تبويبين: (العربية) و(English)", "اضغط تبويب (العربية) وأدخل الاسم والوصف بالعربي", "اضغط تبويب (English) وأدخل الاسم والوصف بالإنجليزي", "اضغط (حفظ)"]}, {"id": 68, "q": "كيف أضيف سعر المنتج وسعره شامل الضريبة؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "أدخل (السعر) — هذا السعر بدون ضريبة", "في يسار الحقل ستجد (السعر شامل الضريبة) يُحسب تلقائياً", "أدخل (سعر التكلفة) لحساب نسبة الربح تلقائياً", "حدد هل المنتج (خاضع للضريبة) أم (غير خاضع للضريبة) من الخيارين في الأعلى", "اضغط (حفظ)"]}, {"id": 69, "q": "كيف أضيف باركود أو SKU للمنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد في قسم (بيانات المخزون):", "حقل (SKU) — وحدة حفظ المخزون — أدخل الكود الداخلي للمنتج", "حقل (الباركود) — أدخل باركود المنتج إن وجد", "حقل (النوع / الموديل) — للمرجع الإضافي", "اضغط (حفظ)"]}, {"id": 70, "q": "كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "في قسم (بيانات المخزون) ستجد حقول (الأبعاد: الطول x العرض x الارتفاع)", "أدخل الأبعاد واختر وحدة القياس (Centimeter أو غيرها)", "هذه الأبعاد تُستخدم لحساب تكاليف الشحن تلقائياً", "اضغط (حفظ)"]}, {"id": 71, "q": "كيف أحدد نوع المنتج (شحن أو رقمي)؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "في قسم (بيانات إضافية للمنتج) ستجد (نوع المنتج)", "اختر (منتج قابل للشحن) للمنتجات المادية", "اختر (منتج غير قابل للشحن — رقمي) للمنتجات الرقمية كالملفات والدورات", "اضغط (حفظ)"]}, {"id": 72, "q": "كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد حقل (الحد الأدنى للكمية الممكن شرائها) — الافتراضي 1", "وحقل (أقصى كمية يمكن طلبها في الطلب الواحد) — اتركه 0 لعدم التحديد", "اضغط (حفظ)"]}, {"id": 73, "q": "كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد خيار (اختر حالة ظهور المنتج عندما تكون الكمية المخزون صفر)", "اختر: إخفاء المنتج، أو إظهاره كـ "غير متوفر"، أو السماح بالطلب رغم النفاذ", "اضغط (حفظ)"]}, {"id": 74, "q": "كيف أضيف خصماً على المنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (تخفيض على المنتج)", "أدخل سعر الخصم أو نسبته", "يمكن تحديد تاريخ بداية ونهاية للخصم", "اضغط (حفظ) — سيظهر السعر القديم مشطوباً والجديد على صفحة المنتج"]}, {"id": 75, "q": "كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟", "steps": ["افتح المنتج وانتقل لتبويب (تخفيض على الكمية)", "أضف شرائح الكمية والسعر المقابل لكل شريحة", "مثال: من 1 إلى 5 قطع بسعر عادي، من 6 قطع فأكثر بخصم 10%", "اضغط (حفظ)"]}, {"id": 76, "q": "كيف أضيف مواصفات للمنتج (جدول المواصفات)؟", "steps": ["افتح المنتج وانتقل لتبويب (المواصفات)", "أضف صفوف المواصفات: الاسم والقيمة (مثال: الوزن — 100 جرام، المادة — قطن)", "ستظهر هذه المواصفات في صفحة المنتج أمام العميل في جدول منظم", "اضغط (حفظ)"]}, {"id": 77, "q": "كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟", "steps": ["افتح المنتج وانتقل لتبويب (إعدادات تحسين محركات البحث)", "أدخل (عنوان الصفحة) — يظهر في نتائج جوجل", "أدخل (وصف الصفحة) — الملخص الظاهر تحت العنوان في جوجل", "أدخل (الكلمات المفتاحية) المناسبة للمنتج", "اضغط (حفظ)"]}, {"id": 78, "q": "كيف أضيف منتجات مقترحة مع المنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "ابحث عن حقل (منتجات مقترحة مع هذا المنتج)", "اكتب أول حرف من اسم المنتج لتظهر قائمة منسدلة للاختيار منها", "اختر المنتجات المقترحة وستظهر في صفحة المنتج كـ "قد يعجبك أيضاً"", "اضغط (حفظ)"]}, {"id": 79, "q": "كيف أغير حالة المنتج (منشور أو مخفي)؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "انزل لأسفل الصفحة وستجد حقل (الحالة)", "اختر (منشور) لإظهاره في المتجر", "اختر (مسودة) أو (مخفي) لإخفائه مؤقتاً دون حذفه", "اضغط (حفظ)"]}, {"id": 80, "q": "كيف أعاين المنتج على الموقع قبل نشره؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)", "اضغط زر (استعراض) في الأعلى", "سيفتح صفحة المنتج كما يراها العميل في نافذة جديدة"]}, {"id": 81, "q": "كيف أشارك رابط المنتج مباشرة؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)", "اضغط زر (مشاركة) في الأعلى", "سيُنسخ رابط المنتج — شاركه مباشرة مع العملاء أو على وسائل التواصل"]}, {"id": 82, "q": "كيف أضيف الملفات الرقمية لمنتج رقمي؟", "steps": ["افتح المنتج وتأكد أن نوعه (منتج غير قابل للشحن — رقمي) من تبويب (البيانات)", "ستجد في القائمة الجانبية للمنتجات قسم (الملفات الرقمية)", "ارفع الملف الرقمي وربطه بالمنتج", "بعد اكتمال الطلب يُرسَل الملف تلقائياً للعميل"]}];
+
+let KB = [];
+let sessionCount = 0;
+let copyCount = 0;
+let recentQ = [];
+let apiKey = '';
+
+// ====== INIT ======
+function init() {
+  // Load API key
+  apiKey = localStorage.getItem('matjara_apikey') || '';
+  if (apiKey) {
+    document.getElementById('apiKeyInput').value = apiKey;
+    document.getElementById('apiStatus').textContent = '✓ المفتاح محفوظ';
+    document.getElementById('apiStatus').style.color = 'var(--green)';
+  }
+
+  // Load KB from localStorage or use default
+  const saved = localStorage.getItem('matjara_kb_v2');
+  if (saved) {
+    try { KB = JSON.parse(saved); }
+    catch(e) { KB = [...DEFAULT_KB]; }
+  } else {
+    KB = [...DEFAULT_KB];
+    saveKB();
+  }
+
+  renderKBList();
+  updateStats();
+}
+
+function saveKB() {
+  localStorage.setItem('matjara_kb_v2', JSON.stringify(KB));
+  document.getElementById('kbCountDisplay').textContent = KB.length;
+  document.getElementById('s1').textContent = KB.length;
+}
+
+// ====== CHAT ======
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+}
+
+function quickAsk(btn) {
+  document.getElementById('chatInput').value = btn.textContent;
+  document.getElementById('suggestions').style.display = 'none';
+  sendMsg();
+}
+
+async function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+
+  sessionCount++;
+  recentQ.unshift(q);
+  if (recentQ.length > 15) recentQ.pop();
+  updateStats();
+
+  appendMsg('user', q);
+  const typId = appendTyping();
+
+  const kbText = KB.map(k => 'السؤال: ' + k.q + '\nالخطوات:\n' + k.steps.join('\n')).join('\n\n---\n\n');
+
+  const system = `أنت مساعد دعم فني داخلي لمنصة "متجرة" للتجارة الإلكترونية.
+مهمتك مساعدة موظفي الدعم على الإجابة على استفسارات التجار.
+
+قاعدة المعرفة:
+${kbText || 'فارغة — أضف محتوى من تبويب قاعدة المعرفة.'}
+
+تعليمات:
+- أجب بالعربية دائماً
+- قدّم الخطوات كقائمة مرقمة واضحة ومفصولة بسطر جديد لكل خطوة
+- إذا السؤال قريب من استفسار موجود، أجب منه مباشرة
+- إذا لم يكن في القاعدة قل ذلك واقترح إضافته
+- الرد جاهز للنسخ وإرساله للتاجر مباشرة
+- لا مقدمات طويلة، اذهب للخطوات فوراً
+- صغ الرد كأنك تخاطب التاجر مباشرة`;
+
+  try {
+    const currentKey = localStorage.getItem('matjara_apikey') || '';
+    if (!currentKey) {
+      removeTyping(typId);
+      appendMsg('bot', 'يرجى إدخال مفتاح Anthropic API من تبويب الإعدادات أولاً.');
+      return;
+    }
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': currentKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system,
+        messages: [{ role: 'user', content: q }]
+      })
+    });
+    const data = await res.json();
+    removeTyping(typId);
+
+    if (data.error) {
+      appendMsg('bot', 'خطأ: ' + (data.error.message || 'تحقق من مفتاح API'));
+      return;
+    }
+
+    const text = data.content?.find(b => b.type === 'text')?.text || 'لم أتمكن من الإجابة.';
+    appendMsg('bot', text, true);
+  } catch(e) {
+    removeTyping(typId);
+    appendMsg('bot', 'تعذّر الاتصال. تحقق من الاتصال بالإنترنت وصحة مفتاح API.');
+  }
+}
+
+function formatBotMsg(text) {
+  const lines = text.split('\n').filter(l => l.trim());
+  let html = '';
+  let inList = false;
+
+  for (const line of lines) {
+    const numMatch = line.match(/^(\d+)[\.،\-\)]\s+(.*)/);
+    if (numMatch) {
+      if (!inList) { html += '<div class="step-list">'; inList = true; }
+      html += `<div class="step"><div class="step-num">${numMatch[1]}</div><div>${numMatch[2]}</div></div>`;
+    } else {
+      if (inList) { html += '</div>'; inList = false; }
+      html += `<p style="margin-bottom:4px">${line}</p>`;
+    }
+  }
+  if (inList) html += '</div>';
+  return html;
+}
+
+function appendMsg(role, text, showCopy = false) {
+  const container = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+
+  const formatted = role === 'bot' ? formatBotMsg(text) : `<p>${text}</p>`;
+  const copyBtn = showCopy ? `<button class="copy-btn" onclick="copyReply(this)">📋 نسخ الرد للتاجر</button>` : '';
+  const avatarLabel = role === 'bot' ? 'م' : '👤';
+
+  div.innerHTML = `
+    ${role === 'bot' ? '<div class="avatar bot">' + avatarLabel + '</div>' : ''}
+    <div><div class="bubble">${formatted}${copyBtn}</div></div>
+    ${role === 'user' ? '<div class="avatar user">' + avatarLabel + '</div>' : ''}
+  `;
+  container.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+
+function copyReply(btn) {
+  const bubble = btn.closest('.bubble');
+  const text = bubble.innerText.replace('📋 نسخ الرد للتاجر', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    copyCount++;
+    updateStats();
+    showToast('تم نسخ الرد ✓');
+  });
+}
+
+let typingCounter = 0;
+function appendTyping() {
+  const id = 'typing-' + (++typingCounter);
+  const c = document.getElementById('messages');
+  const d = document.createElement('div');
+  d.className = 'msg bot'; d.id = id;
+  d.innerHTML = '<div class="avatar bot">م</div><div class="bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  c.appendChild(d);
+  d.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  return id;
+}
+function removeTyping(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+// ====== KB ======
+function renderKBList() {
+  const search = (document.getElementById('kbSearch')?.value || '').toLowerCase();
+  const filtered = KB.filter(k =>
+    !search || k.q.toLowerCase().includes(search) ||
+    k.steps.some(s => s.toLowerCase().includes(search))
+  );
+
+  const el = document.getElementById('kbList');
+  document.getElementById('kbCountDisplay').textContent = KB.length;
+
+  if (!filtered.length) {
+    el.innerHTML = '<p style="font-size:13px;color:var(--text3);padding:1rem 0">لا توجد نتائج.</p>';
+    return;
+  }
+
+  el.innerHTML = filtered.map(item => `
+    <div class="kb-item">
+      <div style="flex:1">
+        <div class="kb-item-q">${item.q}</div>
+        <div class="kb-item-meta">${item.steps.length} خطوات</div>
+      </div>
+      <button class="kb-del" onclick="deleteKB(${item.id})">حذف</button>
+    </div>
+  `).join('');
+}
+
+function deleteKB(id) {
+  KB = KB.filter(k => k.id !== id);
+  saveKB();
+  renderKBList();
+  updateStats();
+  showToast('تم الحذف');
+}
+
+function bulkImport() {
+  const raw = document.getElementById('bulkInput').value.trim();
+  if (!raw) return;
+  const blocks = raw.split(/\n(?=س:)/g);
+  let added = 0;
+  blocks.forEach(block => {
+    const qm = block.match(/^س:\s*(.+)/m);
+    const am = block.match(/^ج:\s*([\s\S]+)/m);
+    if (qm && am) {
+      const q = qm[1].trim();
+      const steps = am[1].trim().split('\n').map(s => s.trim()).filter(Boolean);
+      if (!KB.find(k => k.q === q)) {
+        KB.push({ id: Date.now() + Math.random(), q, steps });
+        added++;
+      }
+    }
+  });
+  if (added) {
+    saveKB(); renderKBList(); updateStats();
+    document.getElementById('bulkInput').value = '';
+    document.getElementById('importMsg').textContent = `✓ تمت إضافة ${added} استفسار`;
+    setTimeout(() => document.getElementById('importMsg').textContent = '', 3000);
+  } else {
+    document.getElementById('importMsg').textContent = 'تحقق من التنسيق (س: ... / ج: ...)';
+  }
+}
+
+function clearBulk() { document.getElementById('bulkInput').value = ''; }
+
+// ====== SETTINGS ======
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) return;
+  localStorage.setItem('matjara_apikey', key);
+  apiKey = key;
+  document.getElementById('apiStatus').textContent = '✓ تم الحفظ';
+  document.getElementById('apiStatus').style.color = 'var(--green)';
+  showToast('تم حفظ المفتاح ✓');
+}
+
+function clearAllKB() {
+  if (!confirm('هل أنت متأكد؟ سيتم حذف كل قاعدة المعرفة.')) return;
+  KB = [];
+  saveKB(); renderKBList(); updateStats();
+  showToast('تم مسح قاعدة المعرفة');
+}
+
+function exportKB() {
+  const blob = new Blob([JSON.stringify(KB, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'matjara_kb.json';
+  a.click();
+}
+
+// ====== STATS ======
+function updateStats() {
+  document.getElementById('s1').textContent = KB.length;
+  document.getElementById('s2').textContent = sessionCount;
+  document.getElementById('s3').textContent = copyCount;
+  const rq = document.getElementById('recentQ');
+  rq.innerHTML = recentQ.length
+    ? recentQ.map(q => `<div style="padding:7px 0;border-bottom:1px solid var(--border);color:var(--text2)">${q}</div>`).join('')
+    : '<span style="color:var(--text3)">لا توجد أسئلة بعد.</span>';
+}
+
+// ====== TABS ======
+function switchTab(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'kb') renderKBList();
+  if (name === 'stats') updateStats();
+}
+
+// ====== TOAST ======
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+init();
+</script>
+</body>
+</html>
