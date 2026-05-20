@@ -1,10 +1,10 @@
-<html lang="ar" dir="rtl"><head><style>body {transition: opacity ease-in 0.2s; } 
-body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
-</style>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مساعد دعم متجرة</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0f0f11;--sur:#18181c;--sur2:#222228;--bor:#2e2e38;--acc:#e8365d;--acc2:#ff6b8a;--tx:#f0f0f4;--tx2:#9090a0;--tx3:#60606e;--grn:#2dd4a0;--r:12px;--rs:8px}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -112,387 +112,39 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 <body>
 <header>
   <div class="logo"><div class="dot"></div>مساعد دعم متجرة</div>
-  <span style="font-size:12px;color:var(--tx3)" id="hdr-count">83 استفسار</span>
+  <span style="font-size:12px;color:var(--tx3)" id="hdr-count"></span>
 </header>
 
 <div class="tabs">
-  <button class="tab" onclick="switchTab('bot',this)">🔍 البحث</button>
-  <button class="tab active" onclick="switchTab('kb',this)">📚 قاعدة المعرفة</button>
+  <button class="tab active" onclick="switchTab('bot',this)">🔍 البحث</button>
+  <button class="tab" onclick="switchTab('kb',this)">📚 قاعدة المعرفة</button>
   <button class="tab" onclick="switchTab('stats',this)">📊 إحصائيات</button>
 </div>
 
 <main>
 
 <!-- BOT PANEL -->
-<div id="panel-bot" class="panel">
+<div id="panel-bot" class="panel active">
   <div class="search-wrap">
-    <input type="text" id="searchInp" placeholder="ابحث عن أي استفسار للتاجر..." oninput="onSearch()" autocomplete="off">
+    <input type="text" id="searchInp" placeholder="ابحث عن أي استفسار للتاجر..." oninput="onSearch()" autocomplete="off"/>
     <span class="search-icon">🔍</span>
     <button class="clear-btn" id="clearBtn" onclick="clearSearch()">×</button>
   </div>
 
   <!-- ANSWER VIEW -->
-  <div id="answer-view" class="" style="display: none;">
-    <button class="back-btn" onclick="showList()">← رجوع للقائمة</button>
+  <div id="answer-view">
+    <button class="back-btn" onclick="showList()">&#8592; رجوع للقائمة</button>
     <div class="answer-card">
-      <div class="answer-q" id="answer-q">كيف أضيف الملفات الرقمية لمنتج رقمي؟</div>
-      <div class="steps-list" id="answer-steps">
-    <div class="step">
-      <div class="snum">1</div>
-      <div class="step-text">افتح المنتج وتأكد أن نوعه <strong>(منتج غير قابل للشحن — رقمي)</strong> من تبويب <strong>(البيانات)</strong></div>
-    </div>
-    <div class="step">
-      <div class="snum">2</div>
-      <div class="step-text">ستجد في القائمة الجانبية للمنتجات قسم <strong>(الملفات الرقمية)</strong></div>
-    </div>
-    <div class="step">
-      <div class="snum">3</div>
-      <div class="step-text">ارفع الملف الرقمي وربطه بالمنتج</div>
-    </div>
-    <div class="step">
-      <div class="snum">4</div>
-      <div class="step-text">بعد اكتمال الطلب يُرسَل الملف تلقائياً للعميل</div>
-    </div></div>
+      <div class="answer-q" id="answer-q"></div>
+      <div class="steps-list" id="answer-steps"></div>
       <button class="copy-btn" onclick="copyAnswer()">📋 نسخ الرد للتاجر</button>
     </div>
   </div>
 
   <!-- LIST VIEW -->
-  <div id="list-view" style="display: block;">
-    <div class="list-header">عرض <span id="list-count">83</span> استفسار</div>
-    <div class="q-list" id="qList">
-    <div class="q-item" onclick="showAnswer(1)">
-      <span class="q-item-text">كيف أغير اسم المتجر أو شعاره؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(2)">
-      <span class="q-item-text">كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(3)">
-      <span class="q-item-text">كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(4)">
-      <span class="q-item-text">كيف أغير دولة المتجر أو مدينته وعنوانه؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(5)">
-      <span class="q-item-text">كيف أضيف لغة جديدة للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(6)">
-      <span class="q-item-text">كيف أضيف عملة جديدة للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(7)">
-      <span class="q-item-text">كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(8)">
-      <span class="q-item-text">كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(9)">
-      <span class="q-item-text">كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(10)">
-      <span class="q-item-text">كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(11)">
-      <span class="q-item-text">كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(12)">
-      <span class="q-item-text">كيف أعدّل إعدادات ضريبة القيمة المضافة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(13)">
-      <span class="q-item-text">كيف أضيف طريقة دفع جديدة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(14)">
-      <span class="q-item-text">كيف أربط المتجر بمنصة فاتورة (زاتكا)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(15)">
-      <span class="q-item-text">كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(16)">
-      <span class="q-item-text">كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(17)">
-      <span class="q-item-text">كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(18)">
-      <span class="q-item-text">كيف أعدّل سياسة الإرجاع؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(19)">
-      <span class="q-item-text">كيف أضبط أوقات التوصيل المتاحة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(20)">
-      <span class="q-item-text">كيف أفعّل المحفظة الإلكترونية للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(21)">
-      <span class="q-item-text">كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(22)">
-      <span class="q-item-text">كيف أفعّل التوصيات الذكية للمنتجات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(23)">
-      <span class="q-item-text">كيف أضبط إعدادات التقييمات والمراجعات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(24)">
-      <span class="q-item-text">كيف أفعّل إشعارات التحويلات البنكية؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(25)">
-      <span class="q-item-text">كيف أفعّل أو أعدّل توصيات السلة للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(26)">
-      <span class="q-item-text">كيف أفعّل طريق الشحن الموحى به للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(27)">
-      <span class="q-item-text">كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(28)">
-      <span class="q-item-text">كيف أفعّل كوبون خصم؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(29)">
-      <span class="q-item-text">كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(30)">
-      <span class="q-item-text">كيف أعدّل إعدادات SEO للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(31)">
-      <span class="q-item-text">كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(32)">
-      <span class="q-item-text">كيف أفعّل برنامج الشركاء أو نظام العمولة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(33)">
-      <span class="q-item-text">كيف أعدّل إعادة توجيه الروابط القديمة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(34)">
-      <span class="q-item-text">كيف أضبط إعدادات رسائل SMS للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(35)">
-      <span class="q-item-text">كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(36)">
-      <span class="q-item-text">كيف أضبط Webhooks للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(37)">
-      <span class="q-item-text">كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(38)">
-      <span class="q-item-text">كيف أفعّل إشعار "أبلغني عند التوافر" للمنتجات الناقصة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(39)">
-      <span class="q-item-text">كيف أحذف ملفات الكاش لتحديث المتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(40)">
-      <span class="q-item-text">كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(41)">
-      <span class="q-item-text">كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(42)">
-      <span class="q-item-text">كيف أتابع سجل حركة المخزون؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(43)">
-      <span class="q-item-text">كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(44)">
-      <span class="q-item-text">كيف أبحث عن طلب معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(45)">
-      <span class="q-item-text">كيف أضيف طلباً جديداً يدوياً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(46)">
-      <span class="q-item-text">كيف أصدّر قائمة الطلبات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(47)">
-      <span class="q-item-text">كيف أفتح تفاصيل طلب معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(48)">
-      <span class="q-item-text">كيف أغير حالة طلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(49)">
-      <span class="q-item-text">كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(50)">
-      <span class="q-item-text">كيف أُسند طلباً لموظف معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(51)">
-      <span class="q-item-text">كيف أعرض قائمة تجهيز الطلبات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(52)">
-      <span class="q-item-text">كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(53)">
-      <span class="q-item-text">كيف أرسل رابط الدفع للعميل مباشرة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(54)">
-      <span class="q-item-text">كيف أسترد مبلغ عميل (استرداد)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(55)">
-      <span class="q-item-text">كيف أشارك سلة الطلب مع عميل آخر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(56)">
-      <span class="q-item-text">كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(57)">
-      <span class="q-item-text">كيف أعرف مصدر الطلب (من أين جاء العميل)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(58)">
-      <span class="q-item-text">كيف أضيف وسماً (Tag) لطلب معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(59)">
-      <span class="q-item-text">كيف أرى سجل تحديثات الطلب وملاحظاته؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(60)">
-      <span class="q-item-text">كيف أضيف ملاحظة داخلية على طلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(61)">
-      <span class="q-item-text">كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(62)">
-      <span class="q-item-text">كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(63)">
-      <span class="q-item-text">كيف أتواصل مع العميل مباشرة من داخل الطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(64)">
-      <span class="q-item-text">كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(65)">
-      <span class="q-item-text">ما معنى حالات الطلبات المختلفة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(66)">
-      <span class="q-item-text">كيف أضيف منتجاً جديداً للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(67)">
-      <span class="q-item-text">كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(68)">
-      <span class="q-item-text">كيف أضيف سعر المنتج وسعره شامل الضريبة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(69)">
-      <span class="q-item-text">كيف أضيف باركود أو SKU للمنتج؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(70)">
-      <span class="q-item-text">كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(71)">
-      <span class="q-item-text">كيف أحدد نوع المنتج (شحن أو رقمي)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(72)">
-      <span class="q-item-text">كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(73)">
-      <span class="q-item-text">كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(74)">
-      <span class="q-item-text">كيف أضيف خصماً على المنتج؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(75)">
-      <span class="q-item-text">كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(76)">
-      <span class="q-item-text">كيف أضيف مواصفات للمنتج (جدول المواصفات)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(77)">
-      <span class="q-item-text">كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(78)">
-      <span class="q-item-text">كيف أضيف منتجات مقترحة مع المنتج؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(79)">
-      <span class="q-item-text">كيف أغير حالة المنتج (منشور أو مخفي)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(80)">
-      <span class="q-item-text">كيف أعاين المنتج على الموقع قبل نشره؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(81)">
-      <span class="q-item-text">كيف أشارك رابط المنتج مباشرة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(82)">
-      <span class="q-item-text">كيف أضيف الملفات الرقمية لمنتج رقمي؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(1779281522294.7524)">
-      <span class="q-item-text">كيف افعل ايميلات متجري المرتبطة بالدومين (مثال : info@matjtrah.com)</span>
-      <span class="q-arrow">›</span>
-    </div></div>
+  <div id="list-view">
+    <div class="list-header">عرض <span id="list-count">0</span> استفسار</div>
+    <div class="q-list" id="qList"></div>
     <div class="no-match" id="noMatch" style="display:none">
       <strong>لا توجد نتائج مطابقة</strong>
       جرّب كلمة مختلفة أو أضف الاستفسار من تبويب قاعدة المعرفة
@@ -501,7 +153,7 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 </div>
 
 <!-- KB PANEL -->
-<div id="panel-kb" class="panel active">
+<div id="panel-kb" class="panel">
   <div class="export-bar">
     <div>
       <strong>⬇️ تصدير وتحديث للفريق</strong>
@@ -511,854 +163,19 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
   </div>
 
   <div style="display:flex;align-items:center;justify-content:space-between">
-    <div class="kb-count">الإجمالي: <span id="kbCount">83</span> استفسار</div>
+    <div class="kb-count">الإجمالي: <span id="kbCount">0</span> استفسار</div>
     <button class="btn-p" onclick="openAdd()" style="padding:7px 14px;font-size:12px">+ إضافة جديد</button>
   </div>
 
   <div class="kb-search-wrap">
-    <input type="text" id="kbSrch" placeholder="ابحث للتعديل أو الحذف..." oninput="renderKB()">
+    <input type="text" id="kbSrch" placeholder="ابحث للتعديل أو الحذف..." oninput="renderKB()"/>
   </div>
 
-  <div class="kb-list" id="kbList">
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير اسم المتجر أو شعاره؟</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(1)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(1)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(2)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(2)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(3)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(3)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير دولة المتجر أو مدينته وعنوانه؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(4)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(4)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف لغة جديدة للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(5)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(5)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف عملة جديدة للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(6)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(6)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(7)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(7)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(8)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(8)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(9)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(9)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(10)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(10)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(11)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(11)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعدادات ضريبة القيمة المضافة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(12)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(12)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف طريقة دفع جديدة؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(13)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(13)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أربط المتجر بمنصة فاتورة (زاتكا)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(14)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(14)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(15)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(15)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(16)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(16)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(17)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(17)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل سياسة الإرجاع؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(18)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(18)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط أوقات التوصيل المتاحة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(19)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(19)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل المحفظة الإلكترونية للعملاء؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(20)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(20)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(21)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(21)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل التوصيات الذكية للمنتجات؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(22)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(22)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط إعدادات التقييمات والمراجعات؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(23)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(23)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل إشعارات التحويلات البنكية؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(24)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(24)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل أو أعدّل توصيات السلة للعملاء؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(25)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(25)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل طريق الشحن الموحى به للعملاء؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(26)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(26)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(27)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(27)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل كوبون خصم؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(28)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(28)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(29)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(29)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعدادات SEO للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(30)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(30)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(31)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(31)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل برنامج الشركاء أو نظام العمولة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(32)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(32)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعادة توجيه الروابط القديمة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(33)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(33)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط إعدادات رسائل SMS للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(34)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(34)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(35)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(35)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط Webhooks للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(36)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(36)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(37)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(37)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل إشعار "أبلغني عند التوافر" للمنتجات الناقصة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(38)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(38)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحذف ملفات الكاش لتحديث المتجر؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(39)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(39)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(40)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(40)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(41)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(41)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أتابع سجل حركة المخزون؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(42)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(42)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(43)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(43)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أبحث عن طلب معين؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(44)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(44)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف طلباً جديداً يدوياً؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(45)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(45)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أصدّر قائمة الطلبات؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(46)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(46)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفتح تفاصيل طلب معين؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(47)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(47)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير حالة طلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(48)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(48)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(49)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(49)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أُسند طلباً لموظف معين؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(50)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(50)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرض قائمة تجهيز الطلبات؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(51)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(51)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(52)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(52)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أرسل رابط الدفع للعميل مباشرة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(53)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(53)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أسترد مبلغ عميل (استرداد)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(54)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(54)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أشارك سلة الطلب مع عميل آخر؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(55)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(55)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(56)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(56)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرف مصدر الطلب (من أين جاء العميل)؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(57)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(57)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف وسماً (Tag) لطلب معين؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(58)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(58)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أرى سجل تحديثات الطلب وملاحظاته؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(59)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(59)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف ملاحظة داخلية على طلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(60)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(60)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(61)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(61)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(62)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(62)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أتواصل مع العميل مباشرة من داخل الطلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(63)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(63)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(64)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(64)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">ما معنى حالات الطلبات المختلفة؟</div>
-        <div class="kb-item-meta">9 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(65)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(65)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف منتجاً جديداً للمتجر؟</div>
-        <div class="kb-item-meta">8 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(66)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(66)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(67)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(67)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف سعر المنتج وسعره شامل الضريبة؟</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(68)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(68)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف باركود أو SKU للمنتج؟</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(69)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(69)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(70)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(70)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد نوع المنتج (شحن أو رقمي)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(71)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(71)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(72)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(72)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(73)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(73)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف خصماً على المنتج؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(74)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(74)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(75)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(75)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف مواصفات للمنتج (جدول المواصفات)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(76)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(76)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(77)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(77)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف منتجات مقترحة مع المنتج؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(78)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(78)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير حالة المنتج (منشور أو مخفي)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(79)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(79)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعاين المنتج على الموقع قبل نشره؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(80)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(80)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أشارك رابط المنتج مباشرة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(81)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(81)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف الملفات الرقمية لمنتج رقمي؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(82)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(82)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف افعل ايميلات متجري المرتبطة بالدومين (مثال : info@matjtrah.com)</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(1779281522294.7524)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(1779281522294.7524)">🗑</button>
-      </div>
-    </div></div>
+  <div class="kb-list" id="kbList"></div>
 
   <div class="import-box">
     <h3>استيراد دفعة واحدة بالتنسيق:</h3>
-    <textarea id="bulkIn" placeholder="س: كيف أضيف تصنيف؟
-ج: من القائمة الجانبية...
-الخطوة الثانية...
-
-س: كيف أربط دومين؟
-ج: من الإعدادات..."></textarea>
+    <textarea id="bulkIn" placeholder="س: كيف أضيف تصنيف؟&#10;ج: من القائمة الجانبية...&#10;الخطوة الثانية...&#10;&#10;س: كيف أربط دومين؟&#10;ج: من الإعدادات..."></textarea>
     <div class="imp-row">
       <button class="btn-p" onclick="bulkImport()">استيراد</button>
       <button class="btn-s" onclick="document.getElementById('bulkIn').value=''">مسح</button>
@@ -1370,13 +187,13 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 <!-- STATS PANEL -->
 <div id="panel-stats" class="panel">
   <div class="stats-grid">
-    <div class="stat"><div class="stat-n" id="s1">83</div><div class="stat-l">في قاعدة المعرفة</div></div>
-    <div class="stat"><div class="stat-n" id="s2">1</div><div class="stat-l">أسئلة هذه الجلسة</div></div>
+    <div class="stat"><div class="stat-n" id="s1">0</div><div class="stat-l">في قاعدة المعرفة</div></div>
+    <div class="stat"><div class="stat-n" id="s2">0</div><div class="stat-l">أسئلة هذه الجلسة</div></div>
     <div class="stat"><div class="stat-n" id="s3">0</div><div class="stat-l">ردود تم نسخها</div></div>
   </div>
   <div style="background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:1.2rem">
     <div style="font-size:13px;font-weight:500;color:var(--tx2);margin-bottom:10px">آخر الأسئلة</div>
-    <div id="recentQ" style="font-size:13px;color:var(--tx3)"><div style="padding:6px 0;border-bottom:1px solid var(--bor);color:var(--tx2)">كيف أضيف الملفات الرقمية لمنتج رقمي؟</div></div>
+    <div id="recentQ" style="font-size:13px;color:var(--tx3)">لا توجد أسئلة بعد.</div>
   </div>
 </div>
 
@@ -1385,14 +202,12 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 <!-- MODAL -->
 <div class="modal-ov" id="modal">
   <div class="modal">
-    <h3 id="modalTitle">إضافة استفسار جديد</h3>
-    <input type="hidden" id="editId" value="">
+    <h3 id="modalTitle">إضافة استفسار</h3>
+    <input type="hidden" id="editId"/>
     <label>سؤال التاجر</label>
-    <input type="text" id="editQ" placeholder="مثال: كيف أضيف تصنيف جديد؟">
+    <input type="text" id="editQ" placeholder="مثال: كيف أضيف تصنيف جديد؟"/>
     <label>الخطوات — كل خطوة في سطر مستقل</label>
-    <textarea id="editSteps" placeholder="من القائمة الجانبية اضغط على...
-ثم اختر...
-اضغط حفظ"></textarea>
+    <textarea id="editSteps" placeholder="من القائمة الجانبية اضغط على...&#10;ثم اختر...&#10;اضغط حفظ"></textarea>
     <div class="modal-acts">
       <button class="btn-s" onclick="closeModal()">إلغاء</button>
       <button class="btn-p" onclick="saveEdit()">حفظ</button>
@@ -1400,10 +215,10 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
   </div>
 </div>
 
-<div class="toast" id="toast">تمت الإضافة ✓</div>
+<div class="toast" id="toast"></div>
 
 <script>
-const DEFAULT_KB = [{"id":1,"q":"كيف أغير اسم المتجر أو شعاره؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","عدّل حقل (اسم المتجر) واضغط (حفظ)","لتغيير الشعار اضغط على أيقونة الحذف بجانب الشعار الحالي ثم ارفع الشعار الجديد","نفس الطريقة لأيقونة التبويب (Favicon) والصورة الافتراضية للمنتجات","اضغط (حفظ) من الأعلى"]},{"id":2,"q":"كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","انزل لأسفل الصفحة إلى قسم (حسابات التواصل الاجتماعي)","ستجد حقول لـ: تويتر، انستقرام، فيسبوك، لينكد إن، سناب شات، واتس آب، تيك توك، معروف، iOS، أندرويد","أدخل الروابط أو أرقام الحسابات في الحقول المناسبة ثم اضغط (حفظ)"]},{"id":3,"q":"كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","ابحث عن حقول (رقم السجل التجاري) و(سجل المستقلين) و(رقم توثيق منصة الأعمال)","أدخل الأرقام في حقولها ثم اضغط (حفظ)"]},{"id":4,"q":"كيف أغير دولة المتجر أو مدينته وعنوانه؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","اختر الدولة من القائمة المنسدلة (الدولة) ثم اختر المدينة","أدخل العنوان التفصيلي في حقل (العنوان) ثم اضغط (حفظ)"]},{"id":5,"q":"كيف أضيف لغة جديدة للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (اللغات)","اضغط إضافة لغة واختر اللغة المطلوبة","حدد اللغة الافتراضية ثم اضغط (حفظ)"]},{"id":6,"q":"كيف أضيف عملة جديدة للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (العملات)","اضغط إضافة عملة واختر العملة المطلوبة","حدد سعر الصرف إذا كان المتجر متعدد العملات ثم اضغط (حفظ)"]},{"id":7,"q":"كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (الدول)","اضغط إضافة دولة واختر الدولة المطلوبة","حدد طرق الدفع والشحن المتاحة لهذه الدولة ثم اضغط (حفظ)"]},{"id":8,"q":"كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (فريق الإدارة)","اضغط إضافة موظف وأدخل بريده الإلكتروني وحدد صلاحياته","سيصله إيميل دعوة لتفعيل حسابه","لتعديل موظف موجود اضغط على اسمه وعدّل الصلاحيات ثم اضغط (حفظ)"]},{"id":9,"q":"كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (وضع المتجر)","فعّل خيار (وضع الصيانة) واكتب الرسالة التي ستظهر للزوار","اضغط (حفظ) — سيرى الزوار رسالة الصيانة فقط حتى تعيد تفعيل المتجر"]},{"id":10,"q":"كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟","steps":["من القائمة الجانبية افتح (الأقسام والمنتجات) ثم اضغط على (خيارات المنتجات)","أضف كل خيار مع قيمه (مثال: اللون ← أحمر، أزرق) وحدد نوعه: قائمة منسدلة أو اختيار متعدد أو قيمة واحدة أو رفع ملف أو textarea","ادخل على المنتج المطلوب من (الأقسام والمنتجات) وستجد تبويب (خيارات المنتج) في الأعلى","أضف الخيار المناسب واختر القيم المتاحة لهذا المنتج تحديداً","حدد الكمية لكل قيمة والزيادة على السعر الأساسي إن وجدت ثم احفظ"]},{"id":11,"q":"كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (المنتجات والتسعير) ثم اختر (عناوين المخزون)","يمكنك إضافة مستودعات متعددة وتحديد الكميات لكل مستودع","اضغط (حفظ) بعد الانتهاء"]},{"id":12,"q":"كيف أعدّل إعدادات ضريبة القيمة المضافة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (المنتجات والتسعير) ثم اختر (ضريبة القيمة المضافة)","حدد نسبة الضريبة وهل تظهر مضمّنة في السعر أم منفصلة","اضغط (حفظ)"]},{"id":13,"q":"كيف أضيف طريقة دفع جديدة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (طرق الدفع)","ستجد جميع بوابات الدفع المتاحة (مدى، فيزا، Apple Pay، تابي، تمارا، إلخ)","اضغط على البوابة المطلوبة وأدخل بيانات الربط (API Key وما يلزم)","فعّلها ثم اضغط (حفظ)"]},{"id":14,"q":"كيف أربط المتجر بمنصة فاتورة (زاتكا)؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (ربط منصة فاتورة)","أدخل بيانات الربط المطلوبة من حساب زاتكا","اضغط (حفظ) — ستُصدر الفواتير الإلكترونية تلقائياً"]},{"id":15,"q":"كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (الشحن والتوصيل)","اختر شركة الشحن من القائمة أو أضف شحناً يدوياً","أدخل بيانات الربط وتكاليف الشحن ثم اضغط (حفظ)"]},{"id":16,"q":"كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (حالات الطلبات)","يمكنك تعديل اسم الحالة ولونها ورسالة الإشعار المرسلة للعميل","لإضافة حالة جديدة اضغط (إضافة حالة) ثم اضغط (حفظ)"]},{"id":17,"q":"كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (إعدادات الفواتير)","يمكنك تخصيص شكل الفاتورة والبيانات الظاهرة فيها","اضغط (حفظ)"]},{"id":18,"q":"كيف أعدّل سياسة الإرجاع؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (سياسة الإرجاع)","اكتب أو عدّل نص السياسة ثم اضغط (حفظ)"]},{"id":19,"q":"كيف أضبط أوقات التوصيل المتاحة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (أوقات التوصيل)","حدد الأيام والساعات المتاحة للتوصيل ثم اضغط (حفظ)"]},{"id":20,"q":"كيف أفعّل المحفظة الإلكترونية للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (المحفظة)","فعّل خيار المحفظة وحدد الإعدادات مثل الحد الأدنى للرصيد","اضغط (حفظ)"]},{"id":21,"q":"كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (مرة تقليل الطلب الكيدية)","فعّل الخاصية وحدد الإعدادات المناسبة ثم اضغط (حفظ)"]},{"id":22,"q":"كيف أفعّل التوصيات الذكية للمنتجات؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (التوصيات الذكية)","فعّل الخاصية واختر مواضع الظهور: صفحة المنتج، سلة الشراء، الصفحة الرئيسية","اضغط (حفظ)"]},{"id":23,"q":"كيف أضبط إعدادات التقييمات والمراجعات؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إعدادات التقييمات)","حدد هل التقييمات تحتاج موافقة قبل النشر أم تنشر مباشرة","فعّل أو أوقف خيار التقييمات بالكامل ثم اضغط (حفظ)"]},{"id":24,"q":"كيف أفعّل إشعارات التحويلات البنكية؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إشارات أحدث التحويلات)","فعّل الخاصية وحدد طريقة الإشعار ثم اضغط (حفظ)"]},{"id":25,"q":"كيف أفعّل أو أعدّل توصيات السلة للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (توصيات السلة)","أضف المنتجات التي تريد عرضها عند إضافة منتج للسلة","اضغط (حفظ)"]},{"id":26,"q":"كيف أفعّل طريق الشحن الموحى به للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (طريق الشحن الموحى بها)","فعّل الخاصية وحدد شركة الشحن المفضلة ثم اضغط (حفظ)"]},{"id":27,"q":"كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (تصميم المتجر)","اختر قسم البنرات وأضغط إضافة بنر","ارفع الصورة وأضف الرابط المرتبط بها ثم اضغط (حفظ)"]},{"id":28,"q":"كيف أفعّل كوبون خصم؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (شعارات البنر — أو أدوات التسويق)","اضغط (قسائم التخفيض) ثم (إضافة جديد)","أدخل كود الكوبون، نوع الخصم (نسبة أو مبلغ ثابت)، الحد الأدنى للطلب، وتاريخ الانتهاء","اضغط (حفظ)"]},{"id":29,"q":"كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (الربط مع الخدمات الخارجية)","ستجد قسم خدمات جوجل والبيكسلز","اختر الخدمة المطلوبة (Search Console، Google Analytics، Facebook Pixel، إلخ)","أدخل الكود أو بيانات الربط ثم اضغط (حفظ)"]},{"id":30,"q":"كيف أعدّل إعدادات SEO للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (إعدادات الـ SEO)","عدّل العنوان الرئيسي للمتجر، الوصف، والكلمات المفتاحية","اضغط (حفظ)"]},{"id":31,"q":"كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (الصفحات التعريفية)","اختر الصفحة المطلوبة أو اضغط (إضافة صفحة جديدة)","أدخل المحتوى باستخدام المحرر ثم اضغط (حفظ)"]},{"id":32,"q":"كيف أفعّل برنامج الشركاء أو نظام العمولة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (برنامج الشركاء)","فعّل البرنامج وحدد نسبة العمولة ثم اضغط (حفظ)"]},{"id":33,"q":"كيف أعدّل إعادة توجيه الروابط القديمة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (إعادة توجيه الروابط)","أضف الرابط القديم والرابط الجديد المطلوب توجيهه إليه","اضغط (حفظ)"]},{"id":34,"q":"كيف أضبط إعدادات رسائل SMS للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إعدادات رسائل الـ SMS)","أدخل بيانات مزود الـ SMS وحدد الرسائل التلقائية المطلوبة (تأكيد طلب، شحن، إلخ)","اضغط (حفظ)"]},{"id":35,"q":"كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ API)","ستجد مفاتيح الـ API الحالية — اضغط إنشاء مفتاح جديد أو احذف مفتاحاً قديماً","استخدم المفتاح للربط مع الأنظمة الخارجية"]},{"id":36,"q":"كيف أضبط Webhooks للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ Webhooks)","اضغط إضافة Webhook جديد وأدخل الرابط (URL) والحدث الذي يُطلقه","اضغط (حفظ)"]},{"id":37,"q":"كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة بيانات النطاق الـ DNS)","ستجد سجلات الـ DNS — عدّل السجلات المطلوبة ثم اضغط (حفظ)"]},{"id":38,"q":"كيف أفعّل إشعار \"أبلغني عند التوافر\" للمنتجات الناقصة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (أبلغي عند التوافر)","فعّل الخاصية لتتيح للعملاء التسجيل لتلقي إشعار عند توافر المنتج","اضغط (حفظ)"]},{"id":39,"q":"كيف أحذف ملفات الكاش لتحديث المتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (حذف ملفات الكاش)","اضغط زر (حذف الكاش) — ستظهر التغييرات الجديدة على المتجر فوراً"]},{"id":40,"q":"كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (مجموعات العملاء)","اضغط إضافة مجموعة وحدد معايير التصنيف ثم اضغط (حفظ)"]},{"id":41,"q":"كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (تنبيهات البريد)","اختر نوع الإشعار (تأكيد طلب، إلغاء، شحن، إلخ) وعدّل نص الرسالة","اضغط (حفظ)"]},{"id":42,"q":"كيف أتابع سجل حركة المخزون؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (سجل المخزون)","ستجد تاريخاً كاملاً لحركة المخزون (إضافة، بيع، إرجاع)","يمكن تصفيته حسب المنتج أو التاريخ"]},{"id":43,"q":"كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","ستجد في الأعلى شرائط ملونة لكل حالة: بانتظار المراجعة، قيد التنفيذ، تم التنفيذ، قيد التوصيل، تم التوصيل، جاري التوصيل، قيد الاسترجاع، مسترجع، ملغي","اضغط على أي شريط لتصفية الطلبات حسب تلك الحالة فقط","للعودة لكل الطلبات اضغط على (الكل)"]},{"id":44,"q":"كيف أبحث عن طلب معين؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","في الأعلى يمين ستجد حقل بحث (ابحث برقم الطلب)","أدخل رقم الطلب أو اسم العميل للوصول إليه مباشرة"]},{"id":45,"q":"كيف أضيف طلباً جديداً يدوياً؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","اضغط زر (إضافة طلب جديد +) في الأعلى يسار","أدخل بيانات الطلب: العميل، المنتجات، طريقة الدفع، عنوان الشحن","اضغط (حفظ)"]},{"id":46,"q":"كيف أصدّر قائمة الطلبات؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","اضغط زر (تصدير الطلبات) في الأعلى","اختر نطاق التاريخ أو الفلتر المطلوب ثم اضغط تصدير","سيُنزَّل ملف Excel بقائمة الطلبات"]},{"id":47,"q":"كيف أفتح تفاصيل طلب معين؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","ابحث عن الطلب بالرقم أو من القائمة","اضغط على رقم الطلب (مثل #1452) لفتح صفحة التفاصيل الكاملة"]},{"id":48,"q":"كيف أغير حالة طلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في الأعلى ستجد زر الحالة الحالية (مثل: بانتظار المراجعة)","اضغط عليه واختر الحالة الجديدة من القائمة","ستُحفظ الحالة وقد يُرسَل إشعار تلقائي للعميل"]},{"id":49,"q":"كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في الأعلى يسار اضغط زر (الفاتورة)","سيفتح نافذة معاينة الفاتورة — اضغط طباعة","لبوليصة الشحن انزل لأسفل الصفحة في قسم (تفاصيل الشحن) واضغط (إصدار بوليصة الشحن)"]},{"id":50,"q":"كيف أُسند طلباً لموظف معين؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","اضغط على زر (ثلاث نقاط ...) في الأعلى يسار","اختر (إسناد الطلب لموظف) وحدد الموظف المطلوب","سيُسجَّل الإسناد في سجل الطلب"]},{"id":51,"q":"كيف أعرض قائمة تجهيز الطلبات؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","اضغط على زر (ثلاث نقاط ...) في الأعلى يسار","اختر (قائمة تجهيز الطلب) لتظهر لك قائمة المنتجات المطلوب تجهيزها"]},{"id":52,"q":"كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم المنتجات ستجد زر (إعادة للمخزون)","اضغط عليه لإعادة كمية المنتج تلقائياً للمخزون"]},{"id":53,"q":"كيف أرسل رابط الدفع للعميل مباشرة؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (طريقة الدفع) ستجد زر (نسخ رابط الدفع)","اضغط عليه ثم أرسل الرابط للعميل عبر واتساب أو أي قناة أخرى"]},{"id":54,"q":"كيف أسترد مبلغ عميل (استرداد)؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (طريقة الدفع) ستجد زر (استرداد المبلغ)","اضغط عليه وحدد المبلغ المطلوب استرداده","اضغط تأكيد — سيُعاد المبلغ للعميل"]},{"id":55,"q":"كيف أشارك سلة الطلب مع عميل آخر؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم المنتجات ستجد رابط (شارك رابط السلة نفسها مع عميل آخر)","اضغط عليه لنسخ الرابط وإرساله لأي عميل آخر ليكمل نفس الطلب"]},{"id":56,"q":"كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) ستجد: اسمه، عدد طلباته الإجمالية، مجموع مشترياته، هل هو عميل متكرر","ستجد أيضاً تنبيه إذا كان (أكثر من 3 طلبات في آخر 30 يوم) وأي كوبونات مستخدمة"]},{"id":57,"q":"كيف أعرف مصدر الطلب (من أين جاء العميل)؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) ستجد (مصدر الطلب) يظهر فيه المصدر","مثال: زيارة مباشرة، موقع إلكتروني، تطبيق، إلخ"]},{"id":58,"q":"كيف أضيف وسماً (Tag) لطلب معين؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (وسوم الطلبات)","اختر وسماً موجوداً أو اكتب وسماً جديداً وأضفه","يمكنك لاحقاً التصفية بالوسوم من قائمة الطلبات"]},{"id":59,"q":"كيف أرى سجل تحديثات الطلب وملاحظاته؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (سجل الطلب)","ستجد كل التحديثات مرتبة بالتاريخ: متى تغيرت الحالة، ومن غيّرها، وأي ملاحظات أُضيفت"]},{"id":60,"q":"كيف أضيف ملاحظة داخلية على طلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (سجل الطلب) واضغط زر (أضف تحديث جديد)","اكتب الملاحظة واختر هل تُرسَل للعميل أم داخلية فقط","اضغط (حفظ)"]},{"id":61,"q":"كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (نظام المكافآت)","ستجد عدد النقاط المكتسبة من هذا الطلب وهل هي معلقة أم مفعّلة","النقاط تصبح نشطة بعد اكتمال الطلب لأحد حالات الاكتمال المحددة"]},{"id":62,"q":"كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (تفاصيل الشحن) ستجد: شركة الشحن، نوع الشحن، إجمالي الوزن، عدد القطع","يمكنك من هنا أيضاً اضغط (إصدار بوليصة الشحن)"]},{"id":63,"q":"كيف أتواصل مع العميل مباشرة من داخل الطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) ستجد رقم الجوال والبريد الإلكتروني","اضغط على أيقونة واتساب بجانب الرقم لفتح محادثة مباشرة","أو اضغط على البريد الإلكتروني لإرسال إيميل"]},{"id":64,"q":"كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) اضغط على (اطبع البطاقة لإرفاقها مع الطلب أثناء التغليف)","ستفتح نافذة معاينة البطاقة — اضغط طباعة"]},{"id":65,"q":"ما معنى حالات الطلبات المختلفة؟","steps":["بانتظار المراجعة: الطلب وصل ولم يُراجَع بعد","قيد التنفيذ: تمت المراجعة وبدأ التجهيز","تم التنفيذ: جُهّز الطلب وجاهز للشحن","قيد التوصيل: سُلّم لشركة الشحن","تم التوصيل: وصل للعميل بنجاح","جاري التوصيل: في الطريق للعميل","قيد الاسترجاع: العميل طلب إرجاعه","مسترجع: تم استلام المرتجع","ملغي: أُلغي الطلب"]},{"id":66,"q":"كيف أضيف منتجاً جديداً للمتجر؟","steps":["من القائمة الجانبية اضغط على (الأقسام والمنتجات) ثم (المنتجات)","اضغط (إضافة منتج جديد)","أدخل اسم المنتج بالعربي والإنجليزي","أضف وصف المنتج باستخدام المحرر (يدعم التنسيق والصور والجداول)","أدخل السعر والكمية والوزن","حدد القسم والماركة","ارفع صورة المنتج الرئيسية والصور الإضافية (jpg, jpeg, png, gif — أقصى 7 ميجابايت، أفضل أبعاد 1000x1000px)","اضغط (حفظ)"]},{"id":67,"q":"كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟","steps":["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات) واضغط على المنتج أو (إضافة جديد)","في الأعلى ستجد تبويبين: (العربية) و(English)","اضغط تبويب (العربية) وأدخل الاسم والوصف بالعربي","اضغط تبويب (English) وأدخل الاسم والوصف بالإنجليزي","اضغط (حفظ)"]},{"id":68,"q":"كيف أضيف سعر المنتج وسعره شامل الضريبة؟","steps":["افتح المنتج وانتقل لتبويب (عام)","أدخل (السعر) — هذا السعر بدون ضريبة","في يسار الحقل ستجد (السعر شامل الضريبة) يُحسب تلقائياً","أدخل (سعر التكلفة) لحساب نسبة الربح تلقائياً","حدد هل المنتج (خاضع للضريبة) أم (غير خاضع للضريبة) من الخيارين في الأعلى","اضغط (حفظ)"]},{"id":69,"q":"كيف أضيف باركود أو SKU للمنتج؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","ستجد في قسم (بيانات المخزون):","حقل (SKU) — وحدة حفظ المخزون — أدخل الكود الداخلي للمنتج","حقل (الباركود) — أدخل باركود المنتج إن وجد","حقل (النوع / الموديل) — للمرجع الإضافي","اضغط (حفظ)"]},{"id":70,"q":"كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","في قسم (بيانات المخزون) ستجد حقول (الأبعاد: الطول x العرض x الارتفاع)","أدخل الأبعاد واختر وحدة القياس (Centimeter أو غيرها)","هذه الأبعاد تُستخدم لحساب تكاليف الشحن تلقائياً","اضغط (حفظ)"]},{"id":71,"q":"كيف أحدد نوع المنتج (شحن أو رقمي)؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","في قسم (بيانات إضافية للمنتج) ستجد (نوع المنتج)","اختر (منتج قابل للشحن) للمنتجات المادية","اختر (منتج غير قابل للشحن — رقمي) للمنتجات الرقمية كالملفات والدورات","اضغط (حفظ)"]},{"id":72,"q":"كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","ستجد حقل (الحد الأدنى للكمية الممكن شرائها) — الافتراضي 1","وحقل (أقصى كمية يمكن طلبها في الطلب الواحد) — اتركه 0 لعدم التحديد","اضغط (حفظ)"]},{"id":73,"q":"كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","ستجد خيار (اختر حالة ظهور المنتج عندما تكون الكمية المخزون صفر)","اختر: إخفاء المنتج، أو إظهاره كـ \"غير متوفر\"، أو السماح بالطلب رغم النفاذ","اضغط (حفظ)"]},{"id":74,"q":"كيف أضيف خصماً على المنتج؟","steps":["افتح المنتج وانتقل لتبويب (تخفيض على المنتج)","أدخل سعر الخصم أو نسبته","يمكن تحديد تاريخ بداية ونهاية للخصم","اضغط (حفظ) — سيظهر السعر القديم مشطوباً والجديد على صفحة المنتج"]},{"id":75,"q":"كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟","steps":["افتح المنتج وانتقل لتبويب (تخفيض على الكمية)","أضف شرائح الكمية والسعر المقابل لكل شريحة","مثال: من 1 إلى 5 قطع بسعر عادي، من 6 قطع فأكثر بخصم 10%","اضغط (حفظ)"]},{"id":76,"q":"كيف أضيف مواصفات للمنتج (جدول المواصفات)؟","steps":["افتح المنتج وانتقل لتبويب (المواصفات)","أضف صفوف المواصفات: الاسم والقيمة (مثال: الوزن — 100 جرام، المادة — قطن)","ستظهر هذه المواصفات في صفحة المنتج أمام العميل في جدول منظم","اضغط (حفظ)"]},{"id":77,"q":"كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟","steps":["افتح المنتج وانتقل لتبويب (إعدادات تحسين محركات البحث)","أدخل (عنوان الصفحة) — يظهر في نتائج جوجل","أدخل (وصف الصفحة) — الملخص الظاهر تحت العنوان في جوجل","أدخل (الكلمات المفتاحية) المناسبة للمنتج","اضغط (حفظ)"]},{"id":78,"q":"كيف أضيف منتجات مقترحة مع المنتج؟","steps":["افتح المنتج وانتقل لتبويب (عام)","ابحث عن حقل (منتجات مقترحة مع هذا المنتج)","اكتب أول حرف من اسم المنتج لتظهر قائمة منسدلة للاختيار منها","اختر المنتجات المقترحة وستظهر في صفحة المنتج كـ \"قد يعجبك أيضاً\"","اضغط (حفظ)"]},{"id":79,"q":"كيف أغير حالة المنتج (منشور أو مخفي)؟","steps":["افتح المنتج وانتقل لتبويب (عام)","انزل لأسفل الصفحة وستجد حقل (الحالة)","اختر (منشور) لإظهاره في المتجر","اختر (مسودة) أو (مخفي) لإخفائه مؤقتاً دون حذفه","اضغط (حفظ)"]},{"id":80,"q":"كيف أعاين المنتج على الموقع قبل نشره؟","steps":["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)","اضغط زر (استعراض) في الأعلى","سيفتح صفحة المنتج كما يراها العميل في نافذة جديدة"]},{"id":81,"q":"كيف أشارك رابط المنتج مباشرة؟","steps":["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)","اضغط زر (مشاركة) في الأعلى","سيُنسخ رابط المنتج — شاركه مباشرة مع العملاء أو على وسائل التواصل"]},{"id":82,"q":"كيف أضيف الملفات الرقمية لمنتج رقمي؟","steps":["افتح المنتج وتأكد أن نوعه (منتج غير قابل للشحن — رقمي) من تبويب (البيانات)","ستجد في القائمة الجانبية للمنتجات قسم (الملفات الرقمية)","ارفع الملف الرقمي وربطه بالمنتج","بعد اكتمال الطلب يُرسَل الملف تلقائياً للعميل"]},{"id":1779281522294.7524,"q":"كيف افعل ايميلات متجري المرتبطة بالدومين (مثال : info@matjtrah.com)","steps":["منلوحة تحكم الايميلات نجلب قيم DNS  الخاصة بتشغيل الايميلات وغالبا تكون عدة قيم من توع MX-TXT-SPF-DKIM","ممكن او تزيد وممكن ان تكون اقل","ثم بعد ذلك من القائمة الجانبية في لوحة التحكم ندخل على الاعدادات","ثم ندخل الى ادارة بيانات النطاق","ونضيف القيم كل واحدة حسب نوعها ونضغط حفظ","بعد اضافة كل القيم ننتظر ما يقارب ساعه ونجرب ارسال ايميل للتاجر وهو يجرب ان يرسل من طرفه ونتاكد من عمل الايميلات في الارسال والاستقبال"]}];
+const DEFAULT_KB = [{"id": 1, "q": "كيف أغير اسم المتجر أو شعاره؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "عدّل حقل (اسم المتجر) واضغط (حفظ)", "لتغيير الشعار اضغط على أيقونة الحذف بجانب الشعار الحالي ثم ارفع الشعار الجديد", "نفس الطريقة لأيقونة التبويب (Favicon) والصورة الافتراضية للمنتجات", "اضغط (حفظ) من الأعلى"]}, {"id": 2, "q": "كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "انزل لأسفل الصفحة إلى قسم (حسابات التواصل الاجتماعي)", "ستجد حقول لـ: تويتر، انستقرام، فيسبوك، لينكد إن، سناب شات، واتس آب، تيك توك، معروف، iOS، أندرويد", "أدخل الروابط أو أرقام الحسابات في الحقول المناسبة ثم اضغط (حفظ)"]}, {"id": 3, "q": "كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "ابحث عن حقول (رقم السجل التجاري) و(سجل المستقلين) و(رقم توثيق منصة الأعمال)", "أدخل الأرقام في حقولها ثم اضغط (حفظ)"]}, {"id": 4, "q": "كيف أغير دولة المتجر أو مدينته وعنوانه؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "اختر الدولة من القائمة المنسدلة (الدولة) ثم اختر المدينة", "أدخل العنوان التفصيلي في حقل (العنوان) ثم اضغط (حفظ)"]}, {"id": 5, "q": "كيف أضيف لغة جديدة للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (اللغات)", "اضغط إضافة لغة واختر اللغة المطلوبة", "حدد اللغة الافتراضية ثم اضغط (حفظ)"]}, {"id": 6, "q": "كيف أضيف عملة جديدة للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (العملات)", "اضغط إضافة عملة واختر العملة المطلوبة", "حدد سعر الصرف إذا كان المتجر متعدد العملات ثم اضغط (حفظ)"]}, {"id": 7, "q": "كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (الدول)", "اضغط إضافة دولة واختر الدولة المطلوبة", "حدد طرق الدفع والشحن المتاحة لهذه الدولة ثم اضغط (حفظ)"]}, {"id": 8, "q": "كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (فريق الإدارة)", "اضغط إضافة موظف وأدخل بريده الإلكتروني وحدد صلاحياته", "سيصله إيميل دعوة لتفعيل حسابه", "لتعديل موظف موجود اضغط على اسمه وعدّل الصلاحيات ثم اضغط (حفظ)"]}, {"id": 9, "q": "كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (وضع المتجر)", "فعّل خيار (وضع الصيانة) واكتب الرسالة التي ستظهر للزوار", "اضغط (حفظ) — سيرى الزوار رسالة الصيانة فقط حتى تعيد تفعيل المتجر"]}, {"id": 10, "q": "كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟", "steps": ["من القائمة الجانبية افتح (الأقسام والمنتجات) ثم اضغط على (خيارات المنتجات)", "أضف كل خيار مع قيمه (مثال: اللون ← أحمر، أزرق) وحدد نوعه: قائمة منسدلة أو اختيار متعدد أو قيمة واحدة أو رفع ملف أو textarea", "ادخل على المنتج المطلوب من (الأقسام والمنتجات) وستجد تبويب (خيارات المنتج) في الأعلى", "أضف الخيار المناسب واختر القيم المتاحة لهذا المنتج تحديداً", "حدد الكمية لكل قيمة والزيادة على السعر الأساسي إن وجدت ثم احفظ"]}, {"id": 11, "q": "كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (عناوين المخزون)", "يمكنك إضافة مستودعات متعددة وتحديد الكميات لكل مستودع", "اضغط (حفظ) بعد الانتهاء"]}, {"id": 12, "q": "كيف أعدّل إعدادات ضريبة القيمة المضافة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (ضريبة القيمة المضافة)", "حدد نسبة الضريبة وهل تظهر مضمّنة في السعر أم منفصلة", "اضغط (حفظ)"]}, {"id": 13, "q": "كيف أضيف طريقة دفع جديدة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (طرق الدفع)", "ستجد جميع بوابات الدفع المتاحة (مدى، فيزا، Apple Pay، تابي، تمارا، إلخ)", "اضغط على البوابة المطلوبة وأدخل بيانات الربط (API Key وما يلزم)", "فعّلها ثم اضغط (حفظ)"]}, {"id": 14, "q": "كيف أربط المتجر بمنصة فاتورة (زاتكا)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (ربط منصة فاتورة)", "أدخل بيانات الربط المطلوبة من حساب زاتكا", "اضغط (حفظ) — ستُصدر الفواتير الإلكترونية تلقائياً"]}, {"id": 15, "q": "كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (الشحن والتوصيل)", "اختر شركة الشحن من القائمة أو أضف شحناً يدوياً", "أدخل بيانات الربط وتكاليف الشحن ثم اضغط (حفظ)"]}, {"id": 16, "q": "كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (حالات الطلبات)", "يمكنك تعديل اسم الحالة ولونها ورسالة الإشعار المرسلة للعميل", "لإضافة حالة جديدة اضغط (إضافة حالة) ثم اضغط (حفظ)"]}, {"id": 17, "q": "كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (إعدادات الفواتير)", "يمكنك تخصيص شكل الفاتورة والبيانات الظاهرة فيها", "اضغط (حفظ)"]}, {"id": 18, "q": "كيف أعدّل سياسة الإرجاع؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (سياسة الإرجاع)", "اكتب أو عدّل نص السياسة ثم اضغط (حفظ)"]}, {"id": 19, "q": "كيف أضبط أوقات التوصيل المتاحة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (أوقات التوصيل)", "حدد الأيام والساعات المتاحة للتوصيل ثم اضغط (حفظ)"]}, {"id": 20, "q": "كيف أفعّل المحفظة الإلكترونية للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (المحفظة)", "فعّل خيار المحفظة وحدد الإعدادات مثل الحد الأدنى للرصيد", "اضغط (حفظ)"]}, {"id": 21, "q": "كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (مرة تقليل الطلب الكيدية)", "فعّل الخاصية وحدد الإعدادات المناسبة ثم اضغط (حفظ)"]}, {"id": 22, "q": "كيف أفعّل التوصيات الذكية للمنتجات؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (التوصيات الذكية)", "فعّل الخاصية واختر مواضع الظهور: صفحة المنتج، سلة الشراء، الصفحة الرئيسية", "اضغط (حفظ)"]}, {"id": 23, "q": "كيف أضبط إعدادات التقييمات والمراجعات؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إعدادات التقييمات)", "حدد هل التقييمات تحتاج موافقة قبل النشر أم تنشر مباشرة", "فعّل أو أوقف خيار التقييمات بالكامل ثم اضغط (حفظ)"]}, {"id": 24, "q": "كيف أفعّل إشعارات التحويلات البنكية؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إشارات أحدث التحويلات)", "فعّل الخاصية وحدد طريقة الإشعار ثم اضغط (حفظ)"]}, {"id": 25, "q": "كيف أفعّل أو أعدّل توصيات السلة للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (توصيات السلة)", "أضف المنتجات التي تريد عرضها عند إضافة منتج للسلة", "اضغط (حفظ)"]}, {"id": 26, "q": "كيف أفعّل طريق الشحن الموحى به للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (طريق الشحن الموحى بها)", "فعّل الخاصية وحدد شركة الشحن المفضلة ثم اضغط (حفظ)"]}, {"id": 27, "q": "كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (تصميم المتجر)", "اختر قسم البنرات وأضغط إضافة بنر", "ارفع الصورة وأضف الرابط المرتبط بها ثم اضغط (حفظ)"]}, {"id": 28, "q": "كيف أفعّل كوبون خصم؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (شعارات البنر — أو أدوات التسويق)", "اضغط (قسائم التخفيض) ثم (إضافة جديد)", "أدخل كود الكوبون، نوع الخصم (نسبة أو مبلغ ثابت)، الحد الأدنى للطلب، وتاريخ الانتهاء", "اضغط (حفظ)"]}, {"id": 29, "q": "كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (الربط مع الخدمات الخارجية)", "ستجد قسم خدمات جوجل والبيكسلز", "اختر الخدمة المطلوبة (Search Console، Google Analytics، Facebook Pixel، إلخ)", "أدخل الكود أو بيانات الربط ثم اضغط (حفظ)"]}, {"id": 30, "q": "كيف أعدّل إعدادات SEO للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (إعدادات الـ SEO)", "عدّل العنوان الرئيسي للمتجر، الوصف، والكلمات المفتاحية", "اضغط (حفظ)"]}, {"id": 31, "q": "كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (الصفحات التعريفية)", "اختر الصفحة المطلوبة أو اضغط (إضافة صفحة جديدة)", "أدخل المحتوى باستخدام المحرر ثم اضغط (حفظ)"]}, {"id": 32, "q": "كيف أفعّل برنامج الشركاء أو نظام العمولة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (برنامج الشركاء)", "فعّل البرنامج وحدد نسبة العمولة ثم اضغط (حفظ)"]}, {"id": 33, "q": "كيف أعدّل إعادة توجيه الروابط القديمة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (إعادة توجيه الروابط)", "أضف الرابط القديم والرابط الجديد المطلوب توجيهه إليه", "اضغط (حفظ)"]}, {"id": 34, "q": "كيف أضبط إعدادات رسائل SMS للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إعدادات رسائل الـ SMS)", "أدخل بيانات مزود الـ SMS وحدد الرسائل التلقائية المطلوبة (تأكيد طلب، شحن، إلخ)", "اضغط (حفظ)"]}, {"id": 35, "q": "كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ API)", "ستجد مفاتيح الـ API الحالية — اضغط إنشاء مفتاح جديد أو احذف مفتاحاً قديماً", "استخدم المفتاح للربط مع الأنظمة الخارجية"]}, {"id": 36, "q": "كيف أضبط Webhooks للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ Webhooks)", "اضغط إضافة Webhook جديد وأدخل الرابط (URL) والحدث الذي يُطلقه", "اضغط (حفظ)"]}, {"id": 37, "q": "كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة بيانات النطاق الـ DNS)", "ستجد سجلات الـ DNS — عدّل السجلات المطلوبة ثم اضغط (حفظ)"]}, {"id": 38, "q": "كيف أفعّل إشعار \"أبلغني عند التوافر\" للمنتجات الناقصة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (أبلغي عند التوافر)", "فعّل الخاصية لتتيح للعملاء التسجيل لتلقي إشعار عند توافر المنتج", "اضغط (حفظ)"]}, {"id": 39, "q": "كيف أحذف ملفات الكاش لتحديث المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (حذف ملفات الكاش)", "اضغط زر (حذف الكاش) — ستظهر التغييرات الجديدة على المتجر فوراً"]}, {"id": 40, "q": "كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (مجموعات العملاء)", "اضغط إضافة مجموعة وحدد معايير التصنيف ثم اضغط (حفظ)"]}, {"id": 41, "q": "كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (تنبيهات البريد)", "اختر نوع الإشعار (تأكيد طلب، إلغاء، شحن، إلخ) وعدّل نص الرسالة", "اضغط (حفظ)"]}, {"id": 42, "q": "كيف أتابع سجل حركة المخزون؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (سجل المخزون)", "ستجد تاريخاً كاملاً لحركة المخزون (إضافة، بيع، إرجاع)", "يمكن تصفيته حسب المنتج أو التاريخ"]}, {"id": 43, "q": "كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "ستجد في الأعلى شرائط ملونة لكل حالة: بانتظار المراجعة، قيد التنفيذ، تم التنفيذ، قيد التوصيل، تم التوصيل، جاري التوصيل، قيد الاسترجاع، مسترجع، ملغي", "اضغط على أي شريط لتصفية الطلبات حسب تلك الحالة فقط", "للعودة لكل الطلبات اضغط على (الكل)"]}, {"id": 44, "q": "كيف أبحث عن طلب معين؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "في الأعلى يمين ستجد حقل بحث (ابحث برقم الطلب)", "أدخل رقم الطلب أو اسم العميل للوصول إليه مباشرة"]}, {"id": 45, "q": "كيف أضيف طلباً جديداً يدوياً؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "اضغط زر (إضافة طلب جديد +) في الأعلى يسار", "أدخل بيانات الطلب: العميل، المنتجات، طريقة الدفع، عنوان الشحن", "اضغط (حفظ)"]}, {"id": 46, "q": "كيف أصدّر قائمة الطلبات؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "اضغط زر (تصدير الطلبات) في الأعلى", "اختر نطاق التاريخ أو الفلتر المطلوب ثم اضغط تصدير", "سيُنزَّل ملف Excel بقائمة الطلبات"]}, {"id": 47, "q": "كيف أفتح تفاصيل طلب معين؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "ابحث عن الطلب بالرقم أو من القائمة", "اضغط على رقم الطلب (مثل #1452) لفتح صفحة التفاصيل الكاملة"]}, {"id": 48, "q": "كيف أغير حالة طلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في الأعلى ستجد زر الحالة الحالية (مثل: بانتظار المراجعة)", "اضغط عليه واختر الحالة الجديدة من القائمة", "ستُحفظ الحالة وقد يُرسَل إشعار تلقائي للعميل"]}, {"id": 49, "q": "كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في الأعلى يسار اضغط زر (الفاتورة)", "سيفتح نافذة معاينة الفاتورة — اضغط طباعة", "لبوليصة الشحن انزل لأسفل الصفحة في قسم (تفاصيل الشحن) واضغط (إصدار بوليصة الشحن)"]}, {"id": 50, "q": "كيف أُسند طلباً لموظف معين؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "اضغط على زر (ثلاث نقاط ...) في الأعلى يسار", "اختر (إسناد الطلب لموظف) وحدد الموظف المطلوب", "سيُسجَّل الإسناد في سجل الطلب"]}, {"id": 51, "q": "كيف أعرض قائمة تجهيز الطلبات؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "اضغط على زر (ثلاث نقاط ...) في الأعلى يسار", "اختر (قائمة تجهيز الطلب) لتظهر لك قائمة المنتجات المطلوب تجهيزها"]}, {"id": 52, "q": "كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم المنتجات ستجد زر (إعادة للمخزون)", "اضغط عليه لإعادة كمية المنتج تلقائياً للمخزون"]}, {"id": 53, "q": "كيف أرسل رابط الدفع للعميل مباشرة؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (طريقة الدفع) ستجد زر (نسخ رابط الدفع)", "اضغط عليه ثم أرسل الرابط للعميل عبر واتساب أو أي قناة أخرى"]}, {"id": 54, "q": "كيف أسترد مبلغ عميل (استرداد)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (طريقة الدفع) ستجد زر (استرداد المبلغ)", "اضغط عليه وحدد المبلغ المطلوب استرداده", "اضغط تأكيد — سيُعاد المبلغ للعميل"]}, {"id": 55, "q": "كيف أشارك سلة الطلب مع عميل آخر؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم المنتجات ستجد رابط (شارك رابط السلة نفسها مع عميل آخر)", "اضغط عليه لنسخ الرابط وإرساله لأي عميل آخر ليكمل نفس الطلب"]}, {"id": 56, "q": "كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد: اسمه، عدد طلباته الإجمالية، مجموع مشترياته، هل هو عميل متكرر", "ستجد أيضاً تنبيه إذا كان (أكثر من 3 طلبات في آخر 30 يوم) وأي كوبونات مستخدمة"]}, {"id": 57, "q": "كيف أعرف مصدر الطلب (من أين جاء العميل)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد (مصدر الطلب) يظهر فيه المصدر", "مثال: زيارة مباشرة، موقع إلكتروني، تطبيق، إلخ"]}, {"id": 58, "q": "كيف أضيف وسماً (Tag) لطلب معين؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (وسوم الطلبات)", "اختر وسماً موجوداً أو اكتب وسماً جديداً وأضفه", "يمكنك لاحقاً التصفية بالوسوم من قائمة الطلبات"]}, {"id": 59, "q": "كيف أرى سجل تحديثات الطلب وملاحظاته؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (سجل الطلب)", "ستجد كل التحديثات مرتبة بالتاريخ: متى تغيرت الحالة، ومن غيّرها، وأي ملاحظات أُضيفت"]}, {"id": 60, "q": "كيف أضيف ملاحظة داخلية على طلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (سجل الطلب) واضغط زر (أضف تحديث جديد)", "اكتب الملاحظة واختر هل تُرسَل للعميل أم داخلية فقط", "اضغط (حفظ)"]}, {"id": 61, "q": "كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (نظام المكافآت)", "ستجد عدد النقاط المكتسبة من هذا الطلب وهل هي معلقة أم مفعّلة", "النقاط تصبح نشطة بعد اكتمال الطلب لأحد حالات الاكتمال المحددة"]}, {"id": 62, "q": "كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (تفاصيل الشحن) ستجد: شركة الشحن، نوع الشحن، إجمالي الوزن، عدد القطع", "يمكنك من هنا أيضاً اضغط (إصدار بوليصة الشحن)"]}, {"id": 63, "q": "كيف أتواصل مع العميل مباشرة من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد رقم الجوال والبريد الإلكتروني", "اضغط على أيقونة واتساب بجانب الرقم لفتح محادثة مباشرة", "أو اضغط على البريد الإلكتروني لإرسال إيميل"]}, {"id": 64, "q": "كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) اضغط على (اطبع البطاقة لإرفاقها مع الطلب أثناء التغليف)", "ستفتح نافذة معاينة البطاقة — اضغط طباعة"]}, {"id": 65, "q": "ما معنى حالات الطلبات المختلفة؟", "steps": ["بانتظار المراجعة: الطلب وصل ولم يُراجَع بعد", "قيد التنفيذ: تمت المراجعة وبدأ التجهيز", "تم التنفيذ: جُهّز الطلب وجاهز للشحن", "قيد التوصيل: سُلّم لشركة الشحن", "تم التوصيل: وصل للعميل بنجاح", "جاري التوصيل: في الطريق للعميل", "قيد الاسترجاع: العميل طلب إرجاعه", "مسترجع: تم استلام المرتجع", "ملغي: أُلغي الطلب"]}, {"id": 66, "q": "كيف أضيف منتجاً جديداً للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الأقسام والمنتجات) ثم (المنتجات)", "اضغط (إضافة منتج جديد)", "أدخل اسم المنتج بالعربي والإنجليزي", "أضف وصف المنتج باستخدام المحرر (يدعم التنسيق والصور والجداول)", "أدخل السعر والكمية والوزن", "حدد القسم والماركة", "ارفع صورة المنتج الرئيسية والصور الإضافية (jpg, jpeg, png, gif — أقصى 7 ميجابايت، أفضل أبعاد 1000x1000px)", "اضغط (حفظ)"]}, {"id": 67, "q": "كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات) واضغط على المنتج أو (إضافة جديد)", "في الأعلى ستجد تبويبين: (العربية) و(English)", "اضغط تبويب (العربية) وأدخل الاسم والوصف بالعربي", "اضغط تبويب (English) وأدخل الاسم والوصف بالإنجليزي", "اضغط (حفظ)"]}, {"id": 68, "q": "كيف أضيف سعر المنتج وسعره شامل الضريبة؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "أدخل (السعر) — هذا السعر بدون ضريبة", "في يسار الحقل ستجد (السعر شامل الضريبة) يُحسب تلقائياً", "أدخل (سعر التكلفة) لحساب نسبة الربح تلقائياً", "حدد هل المنتج (خاضع للضريبة) أم (غير خاضع للضريبة) من الخيارين في الأعلى", "اضغط (حفظ)"]}, {"id": 69, "q": "كيف أضيف باركود أو SKU للمنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد في قسم (بيانات المخزون):", "حقل (SKU) — وحدة حفظ المخزون — أدخل الكود الداخلي للمنتج", "حقل (الباركود) — أدخل باركود المنتج إن وجد", "حقل (النوع / الموديل) — للمرجع الإضافي", "اضغط (حفظ)"]}, {"id": 70, "q": "كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "في قسم (بيانات المخزون) ستجد حقول (الأبعاد: الطول x العرض x الارتفاع)", "أدخل الأبعاد واختر وحدة القياس (Centimeter أو غيرها)", "هذه الأبعاد تُستخدم لحساب تكاليف الشحن تلقائياً", "اضغط (حفظ)"]}, {"id": 71, "q": "كيف أحدد نوع المنتج (شحن أو رقمي)؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "في قسم (بيانات إضافية للمنتج) ستجد (نوع المنتج)", "اختر (منتج قابل للشحن) للمنتجات المادية", "اختر (منتج غير قابل للشحن — رقمي) للمنتجات الرقمية كالملفات والدورات", "اضغط (حفظ)"]}, {"id": 72, "q": "كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد حقل (الحد الأدنى للكمية الممكن شرائها) — الافتراضي 1", "وحقل (أقصى كمية يمكن طلبها في الطلب الواحد) — اتركه 0 لعدم التحديد", "اضغط (حفظ)"]}, {"id": 73, "q": "كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد خيار (اختر حالة ظهور المنتج عندما تكون الكمية المخزون صفر)", "اختر: إخفاء المنتج، أو إظهاره كـ \"غير متوفر\"، أو السماح بالطلب رغم النفاذ", "اضغط (حفظ)"]}, {"id": 74, "q": "كيف أضيف خصماً على المنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (تخفيض على المنتج)", "أدخل سعر الخصم أو نسبته", "يمكن تحديد تاريخ بداية ونهاية للخصم", "اضغط (حفظ) — سيظهر السعر القديم مشطوباً والجديد على صفحة المنتج"]}, {"id": 75, "q": "كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟", "steps": ["افتح المنتج وانتقل لتبويب (تخفيض على الكمية)", "أضف شرائح الكمية والسعر المقابل لكل شريحة", "مثال: من 1 إلى 5 قطع بسعر عادي، من 6 قطع فأكثر بخصم 10%", "اضغط (حفظ)"]}, {"id": 76, "q": "كيف أضيف مواصفات للمنتج (جدول المواصفات)؟", "steps": ["افتح المنتج وانتقل لتبويب (المواصفات)", "أضف صفوف المواصفات: الاسم والقيمة (مثال: الوزن — 100 جرام، المادة — قطن)", "ستظهر هذه المواصفات في صفحة المنتج أمام العميل في جدول منظم", "اضغط (حفظ)"]}, {"id": 77, "q": "كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟", "steps": ["افتح المنتج وانتقل لتبويب (إعدادات تحسين محركات البحث)", "أدخل (عنوان الصفحة) — يظهر في نتائج جوجل", "أدخل (وصف الصفحة) — الملخص الظاهر تحت العنوان في جوجل", "أدخل (الكلمات المفتاحية) المناسبة للمنتج", "اضغط (حفظ)"]}, {"id": 78, "q": "كيف أضيف منتجات مقترحة مع المنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "ابحث عن حقل (منتجات مقترحة مع هذا المنتج)", "اكتب أول حرف من اسم المنتج لتظهر قائمة منسدلة للاختيار منها", "اختر المنتجات المقترحة وستظهر في صفحة المنتج كـ \"قد يعجبك أيضاً\"", "اضغط (حفظ)"]}, {"id": 79, "q": "كيف أغير حالة المنتج (منشور أو مخفي)؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "انزل لأسفل الصفحة وستجد حقل (الحالة)", "اختر (منشور) لإظهاره في المتجر", "اختر (مسودة) أو (مخفي) لإخفائه مؤقتاً دون حذفه", "اضغط (حفظ)"]}, {"id": 80, "q": "كيف أعاين المنتج على الموقع قبل نشره؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)", "اضغط زر (استعراض) في الأعلى", "سيفتح صفحة المنتج كما يراها العميل في نافذة جديدة"]}, {"id": 81, "q": "كيف أشارك رابط المنتج مباشرة؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)", "اضغط زر (مشاركة) في الأعلى", "سيُنسخ رابط المنتج — شاركه مباشرة مع العملاء أو على وسائل التواصل"]}, {"id": 82, "q": "كيف أضيف الملفات الرقمية لمنتج رقمي؟", "steps": ["افتح المنتج وتأكد أن نوعه (منتج غير قابل للشحن — رقمي) من تبويب (البيانات)", "ستجد في القائمة الجانبية للمنتجات قسم (الملفات الرقمية)", "ارفع الملف الرقمي وربطه بالمنتج", "بعد اكتمال الطلب يُرسَل الملف تلقائياً للعميل"]}];
 
 let KB=[], sessCount=0, copyCount=0, recentQ=[], currentItem=null;
 
@@ -1616,15 +431,35 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 
 // ── EXPORT ──
 function exportHTML(){
-  const kbJson=JSON.stringify(KB,null,0);
-  const doc=document.documentElement.outerHTML;
-  const updated=doc.replace(/const DEFAULT_KB = \[.*?\];/s,'const DEFAULT_KB = '+kbJson+';');
-  const blob=new Blob([updated],{type:'text/html;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='index.html';
-  a.click();
-  showToast('تم تنزيل index.html ✓ ارفعه على GitHub');
+  // Build fresh HTML with current KB embedded as DEFAULT_KB
+  const kbJson = JSON.stringify(KB, null, 0);
+
+  // Get full page source, replace DEFAULT_KB with current KB
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', window.location.href, false);
+  try {
+    xhr.send();
+    let src = xhr.responseText;
+    // Replace the DEFAULT_KB array with current KB
+    src = src.replace(/const DEFAULT_KB = \[[\s\S]*?\];/, 'const DEFAULT_KB = ' + kbJson + ';');
+    // Also clear localStorage key so new visitors get fresh DEFAULT_KB
+    const blob = new Blob([src], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    a.click();
+    showToast('تم تنزيل index.html ✓ ارفعه على GitHub');
+  } catch(e) {
+    // Fallback: use outerHTML (works locally, may not catch all changes on GitHub)
+    let src = '<!DOCTYPE html>' + document.documentElement.outerHTML;
+    src = src.replace(/const DEFAULT_KB = \[[\s\S]*?\];/, 'const DEFAULT_KB = ' + kbJson + ';');
+    const blob = new Blob([src], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    a.click();
+    showToast('تم تنزيل index.html ✓ ارفعه على GitHub');
+  }
 }
 
 // ── STATS ──
@@ -1657,6 +492,5 @@ function showToast(msg){
 
 init();
 </script>
-
-
-<veepn-lock-screen><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body><text-blaze-app-reference style="display: contents !important;" role="none"></text-blaze-app-reference></html>
+</body>
+</html>
