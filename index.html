@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -200,7 +201,7 @@ var sessCount = 0, copyCount = 0, recentQ = [], currentItem = null;
 
 // ── LOAD ──
 // Try to fetch kb.json from same directory
-fetch('kb.json')
+fetch('kb.json?v=' + Date.now())
   .then(function(r){ return r.json(); })
   .then(function(data){
     KB = data;
