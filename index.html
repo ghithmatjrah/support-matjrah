@@ -1,35 +1,32 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مساعد دعم متجرة</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0f0f11;--sur:#18181c;--sur2:#222228;--bor:#2e2e38;--acc:#e8365d;--acc2:#ff6b8a;--tx:#f0f0f4;--tx2:#9090a0;--tx3:#60606e;--grn:#2dd4a0;--r:12px;--rs:8px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;display:flex;flex-direction:column}
-/* HEADER */
 header{padding:.9rem 1.4rem;border-bottom:1px solid var(--bor);display:flex;align-items:center;justify-content:space-between;background:var(--sur);position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600}
 .dot{width:9px;height:9px;background:var(--acc);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-/* TABS */
 .tabs{display:flex;border-bottom:1px solid var(--bor);background:var(--sur);padding:0 1.4rem;overflow-x:auto}
 .tab{padding:11px 16px;font-size:13px;color:var(--tx3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;flex-shrink:0}
 .tab:hover{color:var(--tx2)}.tab.active{color:var(--tx);border-bottom-color:var(--acc)}
-/* MAIN */
 main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 .panel{display:none}.panel.active{display:flex;flex-direction:column}
-/* ── BOT PANEL ── */
 #panel-bot{gap:0}
-/* Search bar */
 .search-wrap{position:relative;margin-bottom:1rem}
 .search-wrap input{width:100%;padding:12px 44px 12px 14px;font-size:14px;background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);color:var(--tx);font-family:inherit;transition:border-color .2s}
 .search-wrap input:focus{outline:none;border-color:rgba(232,54,93,.5)}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--tx3);font-size:16px;pointer-events:none}
-.clear-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--tx3);cursor:pointer;font-size:18px;padding:2px 6px;display:none}
+.clear-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--tx3);cursor:pointer;font-size:20px;padding:2px 6px;display:none;line-height:1}
 .clear-btn.show{display:block}
-/* Answer view */
-#answer-view{display:none;flex-direction:column;gap:0}
+#answer-view{display:none;flex-direction:column}
 #answer-view.show{display:flex}
 .back-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;font-size:13px;background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);color:var(--tx2);cursor:pointer;font-family:inherit;margin-bottom:1rem;transition:all .2s;width:fit-content}
 .back-btn:hover{color:var(--tx);border-color:var(--tx3)}
@@ -39,12 +36,10 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 .step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--sur2);border-radius:var(--rs);border:1px solid var(--bor)}
 .snum{min-width:26px;height:26px;background:rgba(232,54,93,.15);color:var(--acc2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;margin-top:1px}
 .step-text{font-size:13px;line-height:1.65;color:var(--tx)}
-.step-text strong{color:var(--tx);font-weight:500}
+.step-text b{color:var(--tx);font-weight:500}
 .copy-btn{margin-top:1rem;padding:9px 18px;font-size:13px;background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rs);color:var(--tx2);cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
 .copy-btn:hover{color:var(--tx);border-color:var(--acc)}
-/* Questions list */
-#list-view{}
-.list-header{font-size:12px;color:var(--tx3);margin-bottom:.7rem;padding-right:2px}
+.list-header{font-size:12px;color:var(--tx3);margin-bottom:.7rem}
 .list-header span{color:var(--acc2);font-weight:500}
 .q-list{display:flex;flex-direction:column;gap:6px}
 .q-item{padding:12px 14px;background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -53,17 +48,14 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 .q-arrow{color:var(--tx3);font-size:18px;flex-shrink:0}
 .no-match{padding:1.5rem;text-align:center;color:var(--tx3);font-size:14px;background:var(--sur);border-radius:var(--r);border:1px solid var(--bor)}
 .no-match strong{color:var(--tx2);display:block;margin-bottom:4px}
-/* ── KB PANEL ── */
 #panel-kb{gap:1rem}
 .export-bar{background:var(--sur);border:1px solid rgba(232,54,93,.2);border-radius:var(--r);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.export-bar div strong{color:var(--tx);font-size:14px;display:block;margin-bottom:2px}
-.export-bar div p{color:var(--tx3);font-size:12px}
+.export-bar strong{color:var(--tx);font-size:14px;display:block;margin-bottom:2px}
+.export-bar p{color:var(--tx3);font-size:12px}
 .kb-toolbar{display:flex;align-items:center;justify-content:space-between}
-.kb-toolbar h2{font-size:15px;font-weight:600}
 .kb-count{font-size:13px;color:var(--tx3)}.kb-count span{color:var(--acc2);font-weight:600}
-.kb-search-wrap{position:relative}
-.kb-search-wrap input{width:100%;padding:9px 14px;font-size:13px;background:var(--sur);border:1px solid var(--bor);border-radius:var(--rs);color:var(--tx);font-family:inherit}
-.kb-search-wrap input:focus{outline:none;border-color:rgba(232,54,93,.4)}
+.kb-search-inp{width:100%;padding:9px 14px;font-size:13px;background:var(--sur);border:1px solid var(--bor);border-radius:var(--rs);color:var(--tx);font-family:inherit}
+.kb-search-inp:focus{outline:none;border-color:rgba(232,54,93,.4)}
 .kb-list{display:flex;flex-direction:column;gap:6px}
 .kb-item{background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:11px 13px;display:flex;align-items:center;gap:10px;transition:border-color .2s}
 .kb-item:hover{border-color:var(--tx3)}
@@ -74,18 +66,15 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 .btn-edit:hover{color:var(--grn);border-color:rgba(45,212,160,.3)}
 .btn-del{padding:5px 10px;font-size:12px;background:none;border:1px solid transparent;border-radius:6px;color:var(--tx3);cursor:pointer;font-family:inherit;transition:all .2s}
 .btn-del:hover{color:var(--acc);border-color:rgba(232,54,93,.3)}
-/* IMPORT BOX */
 .import-box{background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:1.1rem}
 .import-box h3{font-size:13px;font-weight:500;color:var(--tx2);margin-bottom:8px}
 .import-box textarea{width:100%;min-height:100px;padding:9px 12px;font-size:12px;background:var(--bg);border:1px solid var(--bor);border-radius:var(--rs);color:var(--tx);font-family:monospace;resize:vertical;line-height:1.6;direction:rtl}
 .import-box textarea:focus{outline:none;border-color:rgba(232,54,93,.4)}
 .imp-row{display:flex;align-items:center;gap:8px;margin-top:8px}
-/* BUTTONS */
 .btn-p{padding:8px 18px;font-size:13px;background:var(--acc);border:none;border-radius:var(--rs);color:#fff;cursor:pointer;font-family:inherit;font-weight:500;transition:background .2s}
 .btn-p:hover{background:var(--acc2)}
 .btn-s{padding:8px 14px;font-size:13px;background:var(--sur2);border:1px solid var(--bor);border-radius:var(--rs);color:var(--tx2);cursor:pointer;font-family:inherit;transition:all .2s}
 .btn-s:hover{color:var(--tx);border-color:var(--tx3)}
-/* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:200;padding:1rem}
 .modal-ov.open{display:flex}
 .modal{background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:1.4rem;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
@@ -95,13 +84,11 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 .modal textarea{min-height:150px;resize:vertical;line-height:1.6}
 .modal input:focus,.modal textarea:focus{outline:none;border-color:rgba(232,54,93,.4)}
 .modal-acts{display:flex;gap:8px;margin-top:1.2rem;justify-content:flex-end}
-/* STATS */
 #panel-stats{gap:1rem}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .stat{background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:14px;text-align:center}
 .stat-n{font-size:24px;font-weight:600;color:var(--acc2)}
 .stat-l{font-size:12px;color:var(--tx3);margin-top:3px}
-/* TOAST */
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sur2);border:1px solid var(--bor);border-radius:var(--r);padding:9px 18px;font-size:13px;color:var(--tx);opacity:0;transition:all .3s;z-index:999;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:600px){main{padding:.9rem}.stats-grid{grid-template-columns:repeat(2,1fr)}}
@@ -110,384 +97,38 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
 <body>
 <header>
   <div class="logo"><div class="dot"></div>مساعد دعم متجرة</div>
-  <span style="font-size:12px;color:var(--tx3)" id="hdr-count">84 استفسار</span>
+  <span style="font-size:12px;color:var(--tx3)" id="hdr-count"></span>
 </header>
-
 <div class="tabs">
-  <button class="tab" onclick="switchTab('bot',this)">🔍 البحث</button>
-  <button class="tab active" onclick="switchTab('kb',this)">📚 قاعدة المعرفة</button>
+  <button class="tab active" onclick="switchTab('bot',this)">🔍 البحث</button>
+  <button class="tab" onclick="switchTab('kb',this)">📚 قاعدة المعرفة</button>
   <button class="tab" onclick="switchTab('stats',this)">📊 إحصائيات</button>
 </div>
-
 <main>
-
-<!-- BOT PANEL -->
-<div id="panel-bot" class="panel">
+<div id="panel-bot" class="panel active">
   <div class="search-wrap">
-    <input type="text" id="searchInp" placeholder="ابحث عن أي استفسار للتاجر..." oninput="onSearch()" autocomplete="off">
+    <input type="text" id="searchInp" placeholder="ابحث عن أي استفسار للتاجر..." oninput="onSearch()" autocomplete="off"/>
     <span class="search-icon">🔍</span>
     <button class="clear-btn" id="clearBtn" onclick="clearSearch()">×</button>
   </div>
-
-  <!-- ANSWER VIEW -->
   <div id="answer-view">
-    <button class="back-btn" onclick="showList()">← رجوع للقائمة</button>
+    <button class="back-btn" onclick="showList()">&#8592; رجوع للقائمة</button>
     <div class="answer-card">
       <div class="answer-q" id="answer-q"></div>
       <div class="steps-list" id="answer-steps"></div>
       <button class="copy-btn" onclick="copyAnswer()">📋 نسخ الرد للتاجر</button>
     </div>
   </div>
-
-  <!-- LIST VIEW -->
   <div id="list-view">
-    <div class="list-header">عرض <span id="list-count">84</span> استفسار</div>
-    <div class="q-list" id="qList">
-    <div class="q-item" onclick="showAnswer(1)">
-      <span class="q-item-text">كيف أغير اسم المتجر أو شعاره؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(2)">
-      <span class="q-item-text">كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(3)">
-      <span class="q-item-text">كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(4)">
-      <span class="q-item-text">كيف أغير دولة المتجر أو مدينته وعنوانه؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(5)">
-      <span class="q-item-text">كيف أضيف لغة جديدة للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(6)">
-      <span class="q-item-text">كيف أضيف عملة جديدة للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(7)">
-      <span class="q-item-text">كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(8)">
-      <span class="q-item-text">كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(9)">
-      <span class="q-item-text">كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(10)">
-      <span class="q-item-text">كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(11)">
-      <span class="q-item-text">كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(12)">
-      <span class="q-item-text">كيف أعدّل إعدادات ضريبة القيمة المضافة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(13)">
-      <span class="q-item-text">كيف أضيف طريقة دفع جديدة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(14)">
-      <span class="q-item-text">كيف أربط المتجر بمنصة فاتورة (زاتكا)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(15)">
-      <span class="q-item-text">كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(16)">
-      <span class="q-item-text">كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(17)">
-      <span class="q-item-text">كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(18)">
-      <span class="q-item-text">كيف أعدّل سياسة الإرجاع؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(19)">
-      <span class="q-item-text">كيف أضبط أوقات التوصيل المتاحة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(20)">
-      <span class="q-item-text">كيف أفعّل المحفظة الإلكترونية للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(21)">
-      <span class="q-item-text">كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(22)">
-      <span class="q-item-text">كيف أفعّل التوصيات الذكية للمنتجات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(23)">
-      <span class="q-item-text">كيف أضبط إعدادات التقييمات والمراجعات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(24)">
-      <span class="q-item-text">كيف أفعّل إشعارات التحويلات البنكية؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(25)">
-      <span class="q-item-text">كيف أفعّل أو أعدّل توصيات السلة للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(26)">
-      <span class="q-item-text">كيف أفعّل طريق الشحن الموحى به للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(27)">
-      <span class="q-item-text">كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(28)">
-      <span class="q-item-text">كيف أفعّل كوبون خصم؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(29)">
-      <span class="q-item-text">كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(30)">
-      <span class="q-item-text">كيف أعدّل إعدادات SEO للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(31)">
-      <span class="q-item-text">كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(32)">
-      <span class="q-item-text">كيف أفعّل برنامج الشركاء أو نظام العمولة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(33)">
-      <span class="q-item-text">كيف أعدّل إعادة توجيه الروابط القديمة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(34)">
-      <span class="q-item-text">كيف أضبط إعدادات رسائل SMS للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(35)">
-      <span class="q-item-text">كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(36)">
-      <span class="q-item-text">كيف أضبط Webhooks للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(37)">
-      <span class="q-item-text">كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(38)">
-      <span class="q-item-text">كيف أفعّل إشعار "أبلغني عند التوافر" للمنتجات الناقصة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(39)">
-      <span class="q-item-text">كيف أحذف ملفات الكاش لتحديث المتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(40)">
-      <span class="q-item-text">كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(41)">
-      <span class="q-item-text">كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(42)">
-      <span class="q-item-text">كيف أتابع سجل حركة المخزون؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(43)">
-      <span class="q-item-text">كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(44)">
-      <span class="q-item-text">كيف أبحث عن طلب معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(45)">
-      <span class="q-item-text">كيف أضيف طلباً جديداً يدوياً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(46)">
-      <span class="q-item-text">كيف أصدّر قائمة الطلبات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(47)">
-      <span class="q-item-text">كيف أفتح تفاصيل طلب معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(48)">
-      <span class="q-item-text">كيف أغير حالة طلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(49)">
-      <span class="q-item-text">كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(50)">
-      <span class="q-item-text">كيف أُسند طلباً لموظف معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(51)">
-      <span class="q-item-text">كيف أعرض قائمة تجهيز الطلبات؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(52)">
-      <span class="q-item-text">كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(53)">
-      <span class="q-item-text">كيف أرسل رابط الدفع للعميل مباشرة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(54)">
-      <span class="q-item-text">كيف أسترد مبلغ عميل (استرداد)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(55)">
-      <span class="q-item-text">كيف أشارك سلة الطلب مع عميل آخر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(56)">
-      <span class="q-item-text">كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(57)">
-      <span class="q-item-text">كيف أعرف مصدر الطلب (من أين جاء العميل)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(58)">
-      <span class="q-item-text">كيف أضيف وسماً (Tag) لطلب معين؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(59)">
-      <span class="q-item-text">كيف أرى سجل تحديثات الطلب وملاحظاته؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(60)">
-      <span class="q-item-text">كيف أضيف ملاحظة داخلية على طلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(61)">
-      <span class="q-item-text">كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(62)">
-      <span class="q-item-text">كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(63)">
-      <span class="q-item-text">كيف أتواصل مع العميل مباشرة من داخل الطلب؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(64)">
-      <span class="q-item-text">كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(65)">
-      <span class="q-item-text">ما معنى حالات الطلبات المختلفة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(66)">
-      <span class="q-item-text">كيف أضيف منتجاً جديداً للمتجر؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(67)">
-      <span class="q-item-text">كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(68)">
-      <span class="q-item-text">كيف أضيف سعر المنتج وسعره شامل الضريبة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(69)">
-      <span class="q-item-text">كيف أضيف باركود أو SKU للمنتج؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(70)">
-      <span class="q-item-text">كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(71)">
-      <span class="q-item-text">كيف أحدد نوع المنتج (شحن أو رقمي)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(72)">
-      <span class="q-item-text">كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(73)">
-      <span class="q-item-text">كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(74)">
-      <span class="q-item-text">كيف أضيف خصماً على المنتج؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(75)">
-      <span class="q-item-text">كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(76)">
-      <span class="q-item-text">كيف أضيف مواصفات للمنتج (جدول المواصفات)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(77)">
-      <span class="q-item-text">كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(78)">
-      <span class="q-item-text">كيف أضيف منتجات مقترحة مع المنتج؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(79)">
-      <span class="q-item-text">كيف أغير حالة المنتج (منشور أو مخفي)؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(80)">
-      <span class="q-item-text">كيف أعاين المنتج على الموقع قبل نشره؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(81)">
-      <span class="q-item-text">كيف أشارك رابط المنتج مباشرة؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(82)">
-      <span class="q-item-text">كيف أضيف الملفات الرقمية لمنتج رقمي؟</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(1779281522294.7524)">
-      <span class="q-item-text">كيف افعل ايميلات متجري المرتبطة بالدومين (مثال : info@matjtrah.com)</span>
-      <span class="q-arrow">›</span>
-    </div>
-    <div class="q-item" onclick="showAnswer(1779307996958.8865)">
-      <span class="q-item-text">كيف اعرف المدفوعات والتسويات الخاصة ببوابة االدفع؟</span>
-      <span class="q-arrow">›</span>
-    </div></div>
+    <div class="list-header">عرض <span id="list-count">0</span> استفسار</div>
+    <div class="q-list" id="qList"></div>
     <div class="no-match" id="noMatch" style="display:none">
       <strong>لا توجد نتائج مطابقة</strong>
       جرّب كلمة مختلفة أو أضف الاستفسار من تبويب قاعدة المعرفة
     </div>
   </div>
 </div>
-
-<!-- KB PANEL -->
-<div id="panel-kb" class="panel active">
+<div id="panel-kb" class="panel">
   <div class="export-bar">
     <div>
       <strong>⬇️ تصدير وتحديث للفريق</strong>
@@ -495,866 +136,15 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
     </div>
     <button class="btn-p" onclick="exportHTML()">تصدير index.html</button>
   </div>
-
-  <div style="display:flex;align-items:center;justify-content:space-between">
-    <div class="kb-count">الإجمالي: <span id="kbCount">84</span> استفسار</div>
+  <div class="kb-toolbar">
+    <div class="kb-count">الإجمالي: <span id="kbCount">0</span> استفسار</div>
     <button class="btn-p" onclick="openAdd()" style="padding:7px 14px;font-size:12px">+ إضافة جديد</button>
   </div>
-
-  <div class="kb-search-wrap">
-    <input type="text" id="kbSrch" placeholder="ابحث للتعديل أو الحذف..." oninput="renderKB()">
-  </div>
-
-  <div class="kb-list" id="kbList">
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير اسم المتجر أو شعاره؟</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(1)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(1)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(2)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(2)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(3)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(3)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير دولة المتجر أو مدينته وعنوانه؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(4)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(4)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف لغة جديدة للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(5)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(5)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف عملة جديدة للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(6)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(6)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(7)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(7)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(8)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(8)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(9)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(9)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(10)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(10)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(11)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(11)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعدادات ضريبة القيمة المضافة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(12)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(12)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف طريقة دفع جديدة؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(13)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(13)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أربط المتجر بمنصة فاتورة (زاتكا)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(14)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(14)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(15)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(15)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(16)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(16)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(17)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(17)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل سياسة الإرجاع؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(18)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(18)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط أوقات التوصيل المتاحة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(19)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(19)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل المحفظة الإلكترونية للعملاء؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(20)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(20)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(21)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(21)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل التوصيات الذكية للمنتجات؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(22)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(22)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط إعدادات التقييمات والمراجعات؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(23)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(23)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل إشعارات التحويلات البنكية؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(24)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(24)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل أو أعدّل توصيات السلة للعملاء؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(25)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(25)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل طريق الشحن الموحى به للعملاء؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(26)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(26)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(27)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(27)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل كوبون خصم؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(28)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(28)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(29)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(29)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعدادات SEO للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(30)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(30)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(31)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(31)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل برنامج الشركاء أو نظام العمولة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(32)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(32)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعادة توجيه الروابط القديمة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(33)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(33)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط إعدادات رسائل SMS للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(34)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(34)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(35)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(35)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضبط Webhooks للمتجر؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(36)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(36)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(37)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(37)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفعّل إشعار "أبلغني عند التوافر" للمنتجات الناقصة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(38)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(38)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحذف ملفات الكاش لتحديث المتجر؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(39)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(39)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(40)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(40)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(41)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(41)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أتابع سجل حركة المخزون؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(42)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(42)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(43)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(43)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أبحث عن طلب معين؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(44)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(44)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف طلباً جديداً يدوياً؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(45)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(45)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أصدّر قائمة الطلبات؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(46)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(46)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أفتح تفاصيل طلب معين؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(47)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(47)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير حالة طلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(48)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(48)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(49)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(49)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أُسند طلباً لموظف معين؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(50)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(50)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرض قائمة تجهيز الطلبات؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(51)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(51)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(52)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(52)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أرسل رابط الدفع للعميل مباشرة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(53)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(53)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أسترد مبلغ عميل (استرداد)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(54)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(54)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أشارك سلة الطلب مع عميل آخر؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(55)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(55)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(56)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(56)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرف مصدر الطلب (من أين جاء العميل)؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(57)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(57)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف وسماً (Tag) لطلب معين؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(58)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(58)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أرى سجل تحديثات الطلب وملاحظاته؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(59)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(59)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف ملاحظة داخلية على طلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(60)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(60)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(61)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(61)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(62)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(62)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أتواصل مع العميل مباشرة من داخل الطلب؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(63)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(63)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(64)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(64)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">ما معنى حالات الطلبات المختلفة؟</div>
-        <div class="kb-item-meta">9 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(65)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(65)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف منتجاً جديداً للمتجر؟</div>
-        <div class="kb-item-meta">8 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(66)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(66)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(67)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(67)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف سعر المنتج وسعره شامل الضريبة؟</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(68)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(68)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف باركود أو SKU للمنتج؟</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(69)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(69)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(70)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(70)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد نوع المنتج (شحن أو رقمي)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(71)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(71)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(72)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(72)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(73)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(73)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف خصماً على المنتج؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(74)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(74)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(75)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(75)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف مواصفات للمنتج (جدول المواصفات)؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(76)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(76)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(77)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(77)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف منتجات مقترحة مع المنتج؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(78)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(78)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أغير حالة المنتج (منشور أو مخفي)؟</div>
-        <div class="kb-item-meta">5 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(79)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(79)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أعاين المنتج على الموقع قبل نشره؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(80)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(80)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أشارك رابط المنتج مباشرة؟</div>
-        <div class="kb-item-meta">3 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(81)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(81)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف أضيف الملفات الرقمية لمنتج رقمي؟</div>
-        <div class="kb-item-meta">4 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(82)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(82)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف افعل ايميلات متجري المرتبطة بالدومين (مثال : info@matjtrah.com)</div>
-        <div class="kb-item-meta">6 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(1779281522294.7524)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(1779281522294.7524)">🗑</button>
-      </div>
-    </div>
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">كيف اعرف المدفوعات والتسويات الخاصة ببوابة االدفع؟</div>
-        <div class="kb-item-meta">1 خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(1779307996958.8865)">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(1779307996958.8865)">🗑</button>
-      </div>
-    </div></div>
-
+  <input type="text" class="kb-search-inp" id="kbSrch" placeholder="ابحث للتعديل أو الحذف..." oninput="renderKB()"/>
+  <div class="kb-list" id="kbList"></div>
   <div class="import-box">
-    <h3>استيراد دفعة واحدة بالتنسيق:</h3>
-    <textarea id="bulkIn" placeholder="س: كيف أضيف تصنيف؟
-ج: من القائمة الجانبية...
-الخطوة الثانية...
-
-س: كيف أربط دومين؟
-ج: من الإعدادات..."></textarea>
+    <h3>استيراد دفعة واحدة:</h3>
+    <textarea id="bulkIn" placeholder="س: كيف أضيف تصنيف؟&#10;ج: من القائمة الجانبية...&#10;الخطوة الثانية...&#10;&#10;س: سؤال آخر؟&#10;ج: الإجابة..."></textarea>
     <div class="imp-row">
       <button class="btn-p" onclick="bulkImport()">استيراد</button>
       <button class="btn-s" onclick="document.getElementById('bulkIn').value=''">مسح</button>
@@ -1362,316 +152,59 @@ main{flex:1;max-width:740px;margin:0 auto;width:100%;padding:1.2rem}
     </div>
   </div>
 </div>
-
-<!-- STATS PANEL -->
 <div id="panel-stats" class="panel">
   <div class="stats-grid">
-    <div class="stat"><div class="stat-n" id="s1">84</div><div class="stat-l">في قاعدة المعرفة</div></div>
+    <div class="stat"><div class="stat-n" id="s1">0</div><div class="stat-l">في قاعدة المعرفة</div></div>
     <div class="stat"><div class="stat-n" id="s2">0</div><div class="stat-l">أسئلة هذه الجلسة</div></div>
     <div class="stat"><div class="stat-n" id="s3">0</div><div class="stat-l">ردود تم نسخها</div></div>
   </div>
   <div style="background:var(--sur);border:1px solid var(--bor);border-radius:var(--r);padding:1.2rem">
     <div style="font-size:13px;font-weight:500;color:var(--tx2);margin-bottom:10px">آخر الأسئلة</div>
-    <div id="recentQ" style="font-size:13px;color:var(--tx3)"><span>لا توجد أسئلة بعد.</span></div>
+    <div id="recentQ" style="font-size:13px;color:var(--tx3)">لا توجد أسئلة بعد.</div>
   </div>
 </div>
-
 </main>
-
-<!-- MODAL -->
 <div class="modal-ov" id="modal">
   <div class="modal">
-    <h3 id="modalTitle">إضافة استفسار جديد</h3>
-    <input type="hidden" id="editId" value="">
+    <h3 id="modalTitle">إضافة استفسار</h3>
+    <input type="hidden" id="editId"/>
     <label>سؤال التاجر</label>
-    <input type="text" id="editQ" placeholder="مثال: كيف أضيف تصنيف جديد؟">
+    <input type="text" id="editQ" placeholder="مثال: كيف أضيف تصنيف جديد؟"/>
     <label>الخطوات — كل خطوة في سطر مستقل</label>
-    <textarea id="editSteps" placeholder="من القائمة الجانبية اضغط على...
-ثم اختر...
-اضغط حفظ"></textarea>
+    <textarea id="editSteps" placeholder="من القائمة الجانبية اضغط على...&#10;ثم اختر...&#10;اضغط حفظ"></textarea>
     <div class="modal-acts">
       <button class="btn-s" onclick="closeModal()">إلغاء</button>
       <button class="btn-p" onclick="saveEdit()">حفظ</button>
     </div>
   </div>
 </div>
-
-<div class="toast" id="toast">تمت الإضافة ✓</div>
-
+<div class="toast" id="toast"></div>
 <script>
-const DEFAULT_KB = [{"id":1,"q":"كيف أغير اسم المتجر أو شعاره؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","عدّل حقل (اسم المتجر) واضغط (حفظ)","لتغيير الشعار اضغط على أيقونة الحذف بجانب الشعار الحالي ثم ارفع الشعار الجديد","نفس الطريقة لأيقونة التبويب (Favicon) والصورة الافتراضية للمنتجات","اضغط (حفظ) من الأعلى"]},{"id":2,"q":"كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","انزل لأسفل الصفحة إلى قسم (حسابات التواصل الاجتماعي)","ستجد حقول لـ: تويتر، انستقرام، فيسبوك، لينكد إن، سناب شات، واتس آب، تيك توك، معروف، iOS، أندرويد","أدخل الروابط أو أرقام الحسابات في الحقول المناسبة ثم اضغط (حفظ)"]},{"id":3,"q":"كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","ابحث عن حقول (رقم السجل التجاري) و(سجل المستقلين) و(رقم توثيق منصة الأعمال)","أدخل الأرقام في حقولها ثم اضغط (حفظ)"]},{"id":4,"q":"كيف أغير دولة المتجر أو مدينته وعنوانه؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)","اختر الدولة من القائمة المنسدلة (الدولة) ثم اختر المدينة","أدخل العنوان التفصيلي في حقل (العنوان) ثم اضغط (حفظ)"]},{"id":5,"q":"كيف أضيف لغة جديدة للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (اللغات)","اضغط إضافة لغة واختر اللغة المطلوبة","حدد اللغة الافتراضية ثم اضغط (حفظ)"]},{"id":6,"q":"كيف أضيف عملة جديدة للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (العملات)","اضغط إضافة عملة واختر العملة المطلوبة","حدد سعر الصرف إذا كان المتجر متعدد العملات ثم اضغط (حفظ)"]},{"id":7,"q":"كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (الدول)","اضغط إضافة دولة واختر الدولة المطلوبة","حدد طرق الدفع والشحن المتاحة لهذه الدولة ثم اضغط (حفظ)"]},{"id":8,"q":"كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (فريق الإدارة)","اضغط إضافة موظف وأدخل بريده الإلكتروني وحدد صلاحياته","سيصله إيميل دعوة لتفعيل حسابه","لتعديل موظف موجود اضغط على اسمه وعدّل الصلاحيات ثم اضغط (حفظ)"]},{"id":9,"q":"كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تأسيس المتجر) ثم اختر (وضع المتجر)","فعّل خيار (وضع الصيانة) واكتب الرسالة التي ستظهر للزوار","اضغط (حفظ) — سيرى الزوار رسالة الصيانة فقط حتى تعيد تفعيل المتجر"]},{"id":10,"q":"كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟","steps":["من القائمة الجانبية افتح (الأقسام والمنتجات) ثم اضغط على (خيارات المنتجات)","أضف كل خيار مع قيمه (مثال: اللون ← أحمر، أزرق) وحدد نوعه: قائمة منسدلة أو اختيار متعدد أو قيمة واحدة أو رفع ملف أو textarea","ادخل على المنتج المطلوب من (الأقسام والمنتجات) وستجد تبويب (خيارات المنتج) في الأعلى","أضف الخيار المناسب واختر القيم المتاحة لهذا المنتج تحديداً","حدد الكمية لكل قيمة والزيادة على السعر الأساسي إن وجدت ثم احفظ"]},{"id":11,"q":"كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (المنتجات والتسعير) ثم اختر (عناوين المخزون)","يمكنك إضافة مستودعات متعددة وتحديد الكميات لكل مستودع","اضغط (حفظ) بعد الانتهاء"]},{"id":12,"q":"كيف أعدّل إعدادات ضريبة القيمة المضافة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (المنتجات والتسعير) ثم اختر (ضريبة القيمة المضافة)","حدد نسبة الضريبة وهل تظهر مضمّنة في السعر أم منفصلة","اضغط (حفظ)"]},{"id":13,"q":"كيف أضيف طريقة دفع جديدة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (طرق الدفع)","ستجد جميع بوابات الدفع المتاحة (مدى، فيزا، Apple Pay، تابي، تمارا، إلخ)","اضغط على البوابة المطلوبة وأدخل بيانات الربط (API Key وما يلزم)","فعّلها ثم اضغط (حفظ)"]},{"id":14,"q":"كيف أربط المتجر بمنصة فاتورة (زاتكا)؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (ربط منصة فاتورة)","أدخل بيانات الربط المطلوبة من حساب زاتكا","اضغط (حفظ) — ستُصدر الفواتير الإلكترونية تلقائياً"]},{"id":15,"q":"كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (الشحن والتوصيل)","اختر شركة الشحن من القائمة أو أضف شحناً يدوياً","أدخل بيانات الربط وتكاليف الشحن ثم اضغط (حفظ)"]},{"id":16,"q":"كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (حالات الطلبات)","يمكنك تعديل اسم الحالة ولونها ورسالة الإشعار المرسلة للعميل","لإضافة حالة جديدة اضغط (إضافة حالة) ثم اضغط (حفظ)"]},{"id":17,"q":"كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (إعدادات الفواتير)","يمكنك تخصيص شكل الفاتورة والبيانات الظاهرة فيها","اضغط (حفظ)"]},{"id":18,"q":"كيف أعدّل سياسة الإرجاع؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (سياسة الإرجاع)","اكتب أو عدّل نص السياسة ثم اضغط (حفظ)"]},{"id":19,"q":"كيف أضبط أوقات التوصيل المتاحة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (أوقات التوصيل)","حدد الأيام والساعات المتاحة للتوصيل ثم اضغط (حفظ)"]},{"id":20,"q":"كيف أفعّل المحفظة الإلكترونية للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (المحفظة)","فعّل خيار المحفظة وحدد الإعدادات مثل الحد الأدنى للرصيد","اضغط (حفظ)"]},{"id":21,"q":"كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (مرة تقليل الطلب الكيدية)","فعّل الخاصية وحدد الإعدادات المناسبة ثم اضغط (حفظ)"]},{"id":22,"q":"كيف أفعّل التوصيات الذكية للمنتجات؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (التوصيات الذكية)","فعّل الخاصية واختر مواضع الظهور: صفحة المنتج، سلة الشراء، الصفحة الرئيسية","اضغط (حفظ)"]},{"id":23,"q":"كيف أضبط إعدادات التقييمات والمراجعات؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إعدادات التقييمات)","حدد هل التقييمات تحتاج موافقة قبل النشر أم تنشر مباشرة","فعّل أو أوقف خيار التقييمات بالكامل ثم اضغط (حفظ)"]},{"id":24,"q":"كيف أفعّل إشعارات التحويلات البنكية؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إشارات أحدث التحويلات)","فعّل الخاصية وحدد طريقة الإشعار ثم اضغط (حفظ)"]},{"id":25,"q":"كيف أفعّل أو أعدّل توصيات السلة للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (توصيات السلة)","أضف المنتجات التي تريد عرضها عند إضافة منتج للسلة","اضغط (حفظ)"]},{"id":26,"q":"كيف أفعّل طريق الشحن الموحى به للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (ولاء وتجربة العميل) ثم اختر (طريق الشحن الموحى بها)","فعّل الخاصية وحدد شركة الشحن المفضلة ثم اضغط (حفظ)"]},{"id":27,"q":"كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (تصميم المتجر)","اختر قسم البنرات وأضغط إضافة بنر","ارفع الصورة وأضف الرابط المرتبط بها ثم اضغط (حفظ)"]},{"id":28,"q":"كيف أفعّل كوبون خصم؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (شعارات البنر — أو أدوات التسويق)","اضغط (قسائم التخفيض) ثم (إضافة جديد)","أدخل كود الكوبون، نوع الخصم (نسبة أو مبلغ ثابت)، الحد الأدنى للطلب، وتاريخ الانتهاء","اضغط (حفظ)"]},{"id":29,"q":"كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (الربط مع الخدمات الخارجية)","ستجد قسم خدمات جوجل والبيكسلز","اختر الخدمة المطلوبة (Search Console، Google Analytics، Facebook Pixel، إلخ)","أدخل الكود أو بيانات الربط ثم اضغط (حفظ)"]},{"id":30,"q":"كيف أعدّل إعدادات SEO للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (إعدادات الـ SEO)","عدّل العنوان الرئيسي للمتجر، الوصف، والكلمات المفتاحية","اضغط (حفظ)"]},{"id":31,"q":"كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (الصفحات التعريفية)","اختر الصفحة المطلوبة أو اضغط (إضافة صفحة جديدة)","أدخل المحتوى باستخدام المحرر ثم اضغط (حفظ)"]},{"id":32,"q":"كيف أفعّل برنامج الشركاء أو نظام العمولة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (برنامج الشركاء)","فعّل البرنامج وحدد نسبة العمولة ثم اضغط (حفظ)"]},{"id":33,"q":"كيف أعدّل إعادة توجيه الروابط القديمة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (التسويق والمحتوى) ثم اختر (إعادة توجيه الروابط)","أضف الرابط القديم والرابط الجديد المطلوب توجيهه إليه","اضغط (حفظ)"]},{"id":34,"q":"كيف أضبط إعدادات رسائل SMS للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إعدادات رسائل الـ SMS)","أدخل بيانات مزود الـ SMS وحدد الرسائل التلقائية المطلوبة (تأكيد طلب، شحن، إلخ)","اضغط (حفظ)"]},{"id":35,"q":"كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ API)","ستجد مفاتيح الـ API الحالية — اضغط إنشاء مفتاح جديد أو احذف مفتاحاً قديماً","استخدم المفتاح للربط مع الأنظمة الخارجية"]},{"id":36,"q":"كيف أضبط Webhooks للمتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ Webhooks)","اضغط إضافة Webhook جديد وأدخل الرابط (URL) والحدث الذي يُطلقه","اضغط (حفظ)"]},{"id":37,"q":"كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة بيانات النطاق الـ DNS)","ستجد سجلات الـ DNS — عدّل السجلات المطلوبة ثم اضغط (حفظ)"]},{"id":38,"q":"كيف أفعّل إشعار \"أبلغني عند التوافر\" للمنتجات الناقصة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (أبلغي عند التوافر)","فعّل الخاصية لتتيح للعملاء التسجيل لتلقي إشعار عند توافر المنتج","اضغط (حفظ)"]},{"id":39,"q":"كيف أحذف ملفات الكاش لتحديث المتجر؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (حذف ملفات الكاش)","اضغط زر (حذف الكاش) — ستظهر التغييرات الجديدة على المتجر فوراً"]},{"id":40,"q":"كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (مجموعات العملاء)","اضغط إضافة مجموعة وحدد معايير التصنيف ثم اضغط (حفظ)"]},{"id":41,"q":"كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (تنبيهات البريد)","اختر نوع الإشعار (تأكيد طلب، إلغاء، شحن، إلخ) وعدّل نص الرسالة","اضغط (حفظ)"]},{"id":42,"q":"كيف أتابع سجل حركة المخزون؟","steps":["من القائمة الجانبية اضغط على (الإعدادات)","انتقل لقسم (الخدمات التقنية) ثم اختر (سجل المخزون)","ستجد تاريخاً كاملاً لحركة المخزون (إضافة، بيع، إرجاع)","يمكن تصفيته حسب المنتج أو التاريخ"]},{"id":43,"q":"كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","ستجد في الأعلى شرائط ملونة لكل حالة: بانتظار المراجعة، قيد التنفيذ، تم التنفيذ، قيد التوصيل، تم التوصيل، جاري التوصيل، قيد الاسترجاع، مسترجع، ملغي","اضغط على أي شريط لتصفية الطلبات حسب تلك الحالة فقط","للعودة لكل الطلبات اضغط على (الكل)"]},{"id":44,"q":"كيف أبحث عن طلب معين؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","في الأعلى يمين ستجد حقل بحث (ابحث برقم الطلب)","أدخل رقم الطلب أو اسم العميل للوصول إليه مباشرة"]},{"id":45,"q":"كيف أضيف طلباً جديداً يدوياً؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","اضغط زر (إضافة طلب جديد +) في الأعلى يسار","أدخل بيانات الطلب: العميل، المنتجات، طريقة الدفع، عنوان الشحن","اضغط (حفظ)"]},{"id":46,"q":"كيف أصدّر قائمة الطلبات؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","اضغط زر (تصدير الطلبات) في الأعلى","اختر نطاق التاريخ أو الفلتر المطلوب ثم اضغط تصدير","سيُنزَّل ملف Excel بقائمة الطلبات"]},{"id":47,"q":"كيف أفتح تفاصيل طلب معين؟","steps":["من القائمة الجانبية اضغط على (الطلبات)","ابحث عن الطلب بالرقم أو من القائمة","اضغط على رقم الطلب (مثل #1452) لفتح صفحة التفاصيل الكاملة"]},{"id":48,"q":"كيف أغير حالة طلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في الأعلى ستجد زر الحالة الحالية (مثل: بانتظار المراجعة)","اضغط عليه واختر الحالة الجديدة من القائمة","ستُحفظ الحالة وقد يُرسَل إشعار تلقائي للعميل"]},{"id":49,"q":"كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في الأعلى يسار اضغط زر (الفاتورة)","سيفتح نافذة معاينة الفاتورة — اضغط طباعة","لبوليصة الشحن انزل لأسفل الصفحة في قسم (تفاصيل الشحن) واضغط (إصدار بوليصة الشحن)"]},{"id":50,"q":"كيف أُسند طلباً لموظف معين؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","اضغط على زر (ثلاث نقاط ...) في الأعلى يسار","اختر (إسناد الطلب لموظف) وحدد الموظف المطلوب","سيُسجَّل الإسناد في سجل الطلب"]},{"id":51,"q":"كيف أعرض قائمة تجهيز الطلبات؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","اضغط على زر (ثلاث نقاط ...) في الأعلى يسار","اختر (قائمة تجهيز الطلب) لتظهر لك قائمة المنتجات المطلوب تجهيزها"]},{"id":52,"q":"كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم المنتجات ستجد زر (إعادة للمخزون)","اضغط عليه لإعادة كمية المنتج تلقائياً للمخزون"]},{"id":53,"q":"كيف أرسل رابط الدفع للعميل مباشرة؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (طريقة الدفع) ستجد زر (نسخ رابط الدفع)","اضغط عليه ثم أرسل الرابط للعميل عبر واتساب أو أي قناة أخرى"]},{"id":54,"q":"كيف أسترد مبلغ عميل (استرداد)؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (طريقة الدفع) ستجد زر (استرداد المبلغ)","اضغط عليه وحدد المبلغ المطلوب استرداده","اضغط تأكيد — سيُعاد المبلغ للعميل"]},{"id":55,"q":"كيف أشارك سلة الطلب مع عميل آخر؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم المنتجات ستجد رابط (شارك رابط السلة نفسها مع عميل آخر)","اضغط عليه لنسخ الرابط وإرساله لأي عميل آخر ليكمل نفس الطلب"]},{"id":56,"q":"كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) ستجد: اسمه، عدد طلباته الإجمالية، مجموع مشترياته، هل هو عميل متكرر","ستجد أيضاً تنبيه إذا كان (أكثر من 3 طلبات في آخر 30 يوم) وأي كوبونات مستخدمة"]},{"id":57,"q":"كيف أعرف مصدر الطلب (من أين جاء العميل)؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) ستجد (مصدر الطلب) يظهر فيه المصدر","مثال: زيارة مباشرة، موقع إلكتروني، تطبيق، إلخ"]},{"id":58,"q":"كيف أضيف وسماً (Tag) لطلب معين؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (وسوم الطلبات)","اختر وسماً موجوداً أو اكتب وسماً جديداً وأضفه","يمكنك لاحقاً التصفية بالوسوم من قائمة الطلبات"]},{"id":59,"q":"كيف أرى سجل تحديثات الطلب وملاحظاته؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (سجل الطلب)","ستجد كل التحديثات مرتبة بالتاريخ: متى تغيرت الحالة، ومن غيّرها، وأي ملاحظات أُضيفت"]},{"id":60,"q":"كيف أضيف ملاحظة داخلية على طلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (سجل الطلب) واضغط زر (أضف تحديث جديد)","اكتب الملاحظة واختر هل تُرسَل للعميل أم داخلية فقط","اضغط (حفظ)"]},{"id":61,"q":"كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (نظام المكافآت)","ستجد عدد النقاط المكتسبة من هذا الطلب وهل هي معلقة أم مفعّلة","النقاط تصبح نشطة بعد اكتمال الطلب لأحد حالات الاكتمال المحددة"]},{"id":62,"q":"كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","انزل لقسم (تفاصيل الشحن) ستجد: شركة الشحن، نوع الشحن، إجمالي الوزن، عدد القطع","يمكنك من هنا أيضاً اضغط (إصدار بوليصة الشحن)"]},{"id":63,"q":"كيف أتواصل مع العميل مباشرة من داخل الطلب؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) ستجد رقم الجوال والبريد الإلكتروني","اضغط على أيقونة واتساب بجانب الرقم لفتح محادثة مباشرة","أو اضغط على البريد الإلكتروني لإرسال إيميل"]},{"id":64,"q":"كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟","steps":["افتح الطلب من (الطلبات) ثم اضغط على رقمه","في قسم (تفاصيل العميل) اضغط على (اطبع البطاقة لإرفاقها مع الطلب أثناء التغليف)","ستفتح نافذة معاينة البطاقة — اضغط طباعة"]},{"id":65,"q":"ما معنى حالات الطلبات المختلفة؟","steps":["بانتظار المراجعة: الطلب وصل ولم يُراجَع بعد","قيد التنفيذ: تمت المراجعة وبدأ التجهيز","تم التنفيذ: جُهّز الطلب وجاهز للشحن","قيد التوصيل: سُلّم لشركة الشحن","تم التوصيل: وصل للعميل بنجاح","جاري التوصيل: في الطريق للعميل","قيد الاسترجاع: العميل طلب إرجاعه","مسترجع: تم استلام المرتجع","ملغي: أُلغي الطلب"]},{"id":66,"q":"كيف أضيف منتجاً جديداً للمتجر؟","steps":["من القائمة الجانبية اضغط على (الأقسام والمنتجات) ثم (المنتجات)","اضغط (إضافة منتج جديد)","أدخل اسم المنتج بالعربي والإنجليزي","أضف وصف المنتج باستخدام المحرر (يدعم التنسيق والصور والجداول)","أدخل السعر والكمية والوزن","حدد القسم والماركة","ارفع صورة المنتج الرئيسية والصور الإضافية (jpg, jpeg, png, gif — أقصى 7 ميجابايت، أفضل أبعاد 1000x1000px)","اضغط (حفظ)"]},{"id":67,"q":"كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟","steps":["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات) واضغط على المنتج أو (إضافة جديد)","في الأعلى ستجد تبويبين: (العربية) و(English)","اضغط تبويب (العربية) وأدخل الاسم والوصف بالعربي","اضغط تبويب (English) وأدخل الاسم والوصف بالإنجليزي","اضغط (حفظ)"]},{"id":68,"q":"كيف أضيف سعر المنتج وسعره شامل الضريبة؟","steps":["افتح المنتج وانتقل لتبويب (عام)","أدخل (السعر) — هذا السعر بدون ضريبة","في يسار الحقل ستجد (السعر شامل الضريبة) يُحسب تلقائياً","أدخل (سعر التكلفة) لحساب نسبة الربح تلقائياً","حدد هل المنتج (خاضع للضريبة) أم (غير خاضع للضريبة) من الخيارين في الأعلى","اضغط (حفظ)"]},{"id":69,"q":"كيف أضيف باركود أو SKU للمنتج؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","ستجد في قسم (بيانات المخزون):","حقل (SKU) — وحدة حفظ المخزون — أدخل الكود الداخلي للمنتج","حقل (الباركود) — أدخل باركود المنتج إن وجد","حقل (النوع / الموديل) — للمرجع الإضافي","اضغط (حفظ)"]},{"id":70,"q":"كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","في قسم (بيانات المخزون) ستجد حقول (الأبعاد: الطول x العرض x الارتفاع)","أدخل الأبعاد واختر وحدة القياس (Centimeter أو غيرها)","هذه الأبعاد تُستخدم لحساب تكاليف الشحن تلقائياً","اضغط (حفظ)"]},{"id":71,"q":"كيف أحدد نوع المنتج (شحن أو رقمي)؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","في قسم (بيانات إضافية للمنتج) ستجد (نوع المنتج)","اختر (منتج قابل للشحن) للمنتجات المادية","اختر (منتج غير قابل للشحن — رقمي) للمنتجات الرقمية كالملفات والدورات","اضغط (حفظ)"]},{"id":72,"q":"كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","ستجد حقل (الحد الأدنى للكمية الممكن شرائها) — الافتراضي 1","وحقل (أقصى كمية يمكن طلبها في الطلب الواحد) — اتركه 0 لعدم التحديد","اضغط (حفظ)"]},{"id":73,"q":"كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟","steps":["افتح المنتج وانتقل لتبويب (البيانات)","ستجد خيار (اختر حالة ظهور المنتج عندما تكون الكمية المخزون صفر)","اختر: إخفاء المنتج، أو إظهاره كـ \"غير متوفر\"، أو السماح بالطلب رغم النفاذ","اضغط (حفظ)"]},{"id":74,"q":"كيف أضيف خصماً على المنتج؟","steps":["افتح المنتج وانتقل لتبويب (تخفيض على المنتج)","أدخل سعر الخصم أو نسبته","يمكن تحديد تاريخ بداية ونهاية للخصم","اضغط (حفظ) — سيظهر السعر القديم مشطوباً والجديد على صفحة المنتج"]},{"id":75,"q":"كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟","steps":["افتح المنتج وانتقل لتبويب (تخفيض على الكمية)","أضف شرائح الكمية والسعر المقابل لكل شريحة","مثال: من 1 إلى 5 قطع بسعر عادي، من 6 قطع فأكثر بخصم 10%","اضغط (حفظ)"]},{"id":76,"q":"كيف أضيف مواصفات للمنتج (جدول المواصفات)؟","steps":["افتح المنتج وانتقل لتبويب (المواصفات)","أضف صفوف المواصفات: الاسم والقيمة (مثال: الوزن — 100 جرام، المادة — قطن)","ستظهر هذه المواصفات في صفحة المنتج أمام العميل في جدول منظم","اضغط (حفظ)"]},{"id":77,"q":"كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟","steps":["افتح المنتج وانتقل لتبويب (إعدادات تحسين محركات البحث)","أدخل (عنوان الصفحة) — يظهر في نتائج جوجل","أدخل (وصف الصفحة) — الملخص الظاهر تحت العنوان في جوجل","أدخل (الكلمات المفتاحية) المناسبة للمنتج","اضغط (حفظ)"]},{"id":78,"q":"كيف أضيف منتجات مقترحة مع المنتج؟","steps":["افتح المنتج وانتقل لتبويب (عام)","ابحث عن حقل (منتجات مقترحة مع هذا المنتج)","اكتب أول حرف من اسم المنتج لتظهر قائمة منسدلة للاختيار منها","اختر المنتجات المقترحة وستظهر في صفحة المنتج كـ \"قد يعجبك أيضاً\"","اضغط (حفظ)"]},{"id":79,"q":"كيف أغير حالة المنتج (منشور أو مخفي)؟","steps":["افتح المنتج وانتقل لتبويب (عام)","انزل لأسفل الصفحة وستجد حقل (الحالة)","اختر (منشور) لإظهاره في المتجر","اختر (مسودة) أو (مخفي) لإخفائه مؤقتاً دون حذفه","اضغط (حفظ)"]},{"id":80,"q":"كيف أعاين المنتج على الموقع قبل نشره؟","steps":["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)","اضغط زر (استعراض) في الأعلى","سيفتح صفحة المنتج كما يراها العميل في نافذة جديدة"]},{"id":81,"q":"كيف أشارك رابط المنتج مباشرة؟","steps":["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)","اضغط زر (مشاركة) في الأعلى","سيُنسخ رابط المنتج — شاركه مباشرة مع العملاء أو على وسائل التواصل"]},{"id":82,"q":"كيف أضيف الملفات الرقمية لمنتج رقمي؟","steps":["افتح المنتج وتأكد أن نوعه (منتج غير قابل للشحن — رقمي) من تبويب (البيانات)","ستجد في القائمة الجانبية للمنتجات قسم (الملفات الرقمية)","ارفع الملف الرقمي وربطه بالمنتج","بعد اكتمال الطلب يُرسَل الملف تلقائياً للعميل"]},{"id":1779281522294.7524,"q":"كيف افعل ايميلات متجري المرتبطة بالدومين (مثال : info@matjtrah.com)","steps":["منلوحة تحكم الايميلات نجلب قيم DNS  الخاصة بتشغيل الايميلات وغالبا تكون عدة قيم من توع MX-TXT-SPF-DKIM","ممكن او تزيد وممكن ان تكون اقل","ثم بعد ذلك من القائمة الجانبية في لوحة التحكم ندخل على الاعدادات","ثم ندخل الى ادارة بيانات النطاق","ونضيف القيم كل واحدة حسب نوعها ونضغط حفظ","بعد اضافة كل القيم ننتظر ما يقارب ساعه ونجرب ارسال ايميل للتاجر وهو يجرب ان يرسل من طرفه ونتاكد من عمل الايميلات في الارسال والاستقبال"]},{"id":1779307996958.8865,"q":"كيف اعرف المدفوعات والتسويات الخاصة ببوابة االدفع؟","steps":["من القائمة الجانبية ندخل على المدفوعات ومنها نستطيع عرض عمليات الدفع في المتجر والتسويات و الفواتير"]}];
-
-let KB=[], sessCount=0, copyCount=0, recentQ=[], currentItem=null;
-
-// ── INIT ──
-function init(){
-  const saved=localStorage.getItem('matjara_kb_v4');
-  if(saved){try{KB=JSON.parse(saved)}catch(e){KB=DEFAULT_KB.map(x=>({...x}))}}
-  else{KB=DEFAULT_KB.map(x=>({...x}));saveKB()}
-  renderList(KB);
-  renderKB();
-  updateStats();
-}
-
-function saveKB(){
-  localStorage.setItem('matjara_kb_v4',JSON.stringify(KB));
-  const c=document.getElementById('kbCount');
-  if(c)c.textContent=KB.length;
-  document.getElementById('s1').textContent=KB.length;
-  document.getElementById('hdr-count').textContent=KB.length+' استفسار';
-}
-
-// ── SEARCH ──
-function onSearch(){
-  const q=document.getElementById('searchInp').value.trim();
-  document.getElementById('clearBtn').classList.toggle('show',q.length>0);
-  showList();
-  if(!q){renderList(KB);return}
-  const results=search(q);
-  renderList(results);
-}
-
-function clearSearch(){
-  document.getElementById('searchInp').value='';
-  document.getElementById('clearBtn').classList.remove('show');
-  showList();
-  renderList(KB);
-}
-
-function search(query){
-  const q=query.toLowerCase().trim();
-  if(!q)return KB;
-  const tokens=q.split(/\s+/).filter(t=>t.length>1);
-  const synonyms={
-    'اضافة':['أضيف','اضف','إضافة','اضافه'],
-    'تعديل':['أعدل','تغيير','أغير','تعديل'],
-    'ربط':['أربط','تفعيل','اتصال','تفعل'],
-    'كوبون':['خصم','قسيمة','تخفيض'],
-    'طلب':['اوردر','order'],
-    'شحن':['توصيل','delivery'],
-    'دفع':['payment','بوابة'],
-    'seo':['سيو','محركات البحث'],
-    'منتج':['سلعة','بضاعة','مادة'],
-    'صورة':['شعار','لوغو','صور'],
-    'موظف':['مستخدم','صلاحية','فريق'],
-    'ضريبة':['vat','قيمة مضافة','زاتكا']
-  };
-
-  const scored=KB.map(item=>{
-    const hay=(item.q+' '+item.steps.join(' ')).toLowerCase();
-    let score=0;
-    if(hay.includes(q))score+=100;
-    if(item.q.toLowerCase().includes(q))score+=50;
-    tokens.forEach(t=>{
-      if(t.length<2)return;
-      if(item.q.toLowerCase().includes(t))score+=25;
-      else if(hay.includes(t))score+=10;
-    });
-    Object.values(synonyms).forEach(grp=>{
-      const hit=grp.some(s=>q.includes(s)||tokens.some(t=>s.includes(t)));
-      if(hit&&grp.some(s=>hay.includes(s)))score+=12;
-    });
-    return{item,score};
-  });
-
-  // Only return results with meaningful score
-  return scored.filter(x=>x.score>=10).sort((a,b)=>b.score-a.score).map(x=>x.item);
-}
-
-// ── LIST VIEW ──
-function renderList(items){
-  const el=document.getElementById('qList');
-  const nm=document.getElementById('noMatch');
-  const lc=document.getElementById('list-count');
-  lc.textContent=items.length;
-  if(!items.length){
-    el.innerHTML='';nm.style.display='block';return;
-  }
-  nm.style.display='none';
-  el.innerHTML=items.map(item=>`
-    <div class="q-item" onclick="showAnswer(${JSON.stringify(item.id)})">
-      <span class="q-item-text">${item.q}</span>
-      <span class="q-arrow">›</span>
-    </div>`).join('');
-}
-
-function showAnswer(id){
-  const item=KB.find(k=>k.id===id);
-  if(!item)return;
-  currentItem=item;
-  sessCount++;recentQ.unshift(item.q);if(recentQ.length>20)recentQ.pop();
-  updateStats();
-
-  document.getElementById('answer-q').textContent=item.q;
-  document.getElementById('answer-steps').innerHTML=item.steps.map((s,i)=>`
-    <div class="step">
-      <div class="snum">${i+1}</div>
-      <div class="step-text">${s.replace(/\(([^)]+)\)/g,'<strong>($1)</strong>')}</div>
-    </div>`).join('');
-
-  document.getElementById('list-view').style.display='none';
-  document.getElementById('answer-view').style.display='flex';
-  document.getElementById('answer-view').classList.add('show');
-  window.scrollTo(0,0);
-}
-
-function showList(){
-  document.getElementById('answer-view').style.display='none';
-  document.getElementById('answer-view').classList.remove('show');
-  document.getElementById('list-view').style.display='block';
-  currentItem=null;
-}
-
-function copyAnswer(){
-  if(!currentItem)return;
-  const text=currentItem.q+'\n\n'+currentItem.steps.map((s,i)=>`${i+1}. ${s}`).join('\n');
-  navigator.clipboard.writeText(text).then(()=>{copyCount++;updateStats();showToast('تم نسخ الرد ✓')});
-}
-
-// ── KB ──
-function renderKB(){
-  const srch=(document.getElementById('kbSrch')?.value||'').toLowerCase();
-  const filtered=KB.filter(k=>!srch||k.q.toLowerCase().includes(srch)||k.steps.some(s=>s.toLowerCase().includes(srch)));
-  if(document.getElementById('kbCount'))document.getElementById('kbCount').textContent=KB.length;
-  const el=document.getElementById('kbList');
-  if(!filtered.length){el.innerHTML='<p style="font-size:13px;color:var(--tx3);padding:.8rem 0">لا توجد نتائج.</p>';return}
-  el.innerHTML=filtered.map(item=>`
-    <div class="kb-item">
-      <div style="flex:1">
-        <div class="kb-item-q">${item.q}</div>
-        <div class="kb-item-meta">${item.steps.length} خطوات</div>
-      </div>
-      <div class="kb-actions">
-        <button class="btn-edit" onclick="openEdit(${JSON.stringify(item.id)})">✏️ تعديل</button>
-        <button class="btn-del" onclick="delItem(${JSON.stringify(item.id)})">🗑</button>
-      </div>
-    </div>`).join('');
-}
-
-function delItem(id){
-  if(!confirm('حذف هذا الاستفسار؟'))return;
-  KB=KB.filter(k=>k.id!==id);saveKB();renderKB();updateStats();showToast('تم الحذف');
-}
-
-function bulkImport(){
-  const raw=document.getElementById('bulkIn').value.trim();if(!raw)return;
-  const blocks=raw.split(/\n(?=س:)/g);let added=0;
-  blocks.forEach(block=>{
-    const qm=block.match(/^س:\s*(.+)/m);const am=block.match(/^ج:\s*([\s\S]+)/m);
-    if(qm&&am){
-      const q=qm[1].trim();
-      const steps=am[1].trim().split('\n').map(s=>s.trim()).filter(Boolean);
-      if(!KB.find(k=>k.q===q)){KB.push({id:Date.now()+Math.random(),q,steps});added++}
-    }
-  });
-  if(added){saveKB();renderKB();renderList(KB);updateStats();document.getElementById('bulkIn').value='';
-    const m=document.getElementById('impMsg');m.textContent=`✓ تمت إضافة ${added} استفسار`;
-    setTimeout(()=>m.textContent='',3000);
-  }else document.getElementById('impMsg').textContent='تحقق من التنسيق';
-}
-
-// ── MODAL ──
-function openAdd(){
-  document.getElementById('modalTitle').textContent='إضافة استفسار جديد';
-  document.getElementById('editId').value='';
-  document.getElementById('editQ').value='';
-  document.getElementById('editSteps').value='';
-  document.getElementById('modal').classList.add('open');
-  setTimeout(()=>document.getElementById('editQ').focus(),100);
-}
-
-function openEdit(id){
-  const item=KB.find(k=>k.id===id);if(!item)return;
-  document.getElementById('modalTitle').textContent='تعديل الاستفسار';
-  document.getElementById('editId').value=String(id);
-  document.getElementById('editQ').value=item.q;
-  document.getElementById('editSteps').value=item.steps.join('\n');
-  document.getElementById('modal').classList.add('open');
-  setTimeout(()=>document.getElementById('editQ').focus(),100);
-}
-
+const DEFAULT_KB=[{"id": 1, "q": "كيف أغير اسم المتجر أو شعاره؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "عدّل حقل (اسم المتجر) واضغط (حفظ)", "لتغيير الشعار اضغط على أيقونة الحذف بجانب الشعار الحالي ثم ارفع الشعار الجديد", "نفس الطريقة لأيقونة التبويب (Favicon) والصورة الافتراضية للمنتجات", "اضغط (حفظ) من الأعلى"]}, {"id": 2, "q": "كيف أضيف أو أعدّل بيانات التواصل الاجتماعي للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "انزل لأسفل الصفحة إلى قسم (حسابات التواصل الاجتماعي)", "ستجد حقول لـ: تويتر، انستقرام، فيسبوك، لينكد إن، سناب شات، واتس آب، تيك توك، معروف، iOS، أندرويد", "أدخل الروابط أو أرقام الحسابات في الحقول المناسبة ثم اضغط (حفظ)"]}, {"id": 3, "q": "كيف أضيف رقم السجل التجاري ورقم ضريبة القيمة المضافة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "ابحث عن حقول (رقم السجل التجاري) و(سجل المستقلين) و(رقم توثيق منصة الأعمال)", "أدخل الأرقام في حقولها ثم اضغط (حفظ)"]}, {"id": 4, "q": "كيف أغير دولة المتجر أو مدينته وعنوانه؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (بيانات المتجر)", "اختر الدولة من القائمة المنسدلة (الدولة) ثم اختر المدينة", "أدخل العنوان التفصيلي في حقل (العنوان) ثم اضغط (حفظ)"]}, {"id": 5, "q": "كيف أضيف لغة جديدة للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (اللغات)", "اضغط إضافة لغة واختر اللغة المطلوبة", "حدد اللغة الافتراضية ثم اضغط (حفظ)"]}, {"id": 6, "q": "كيف أضيف عملة جديدة للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (العملات)", "اضغط إضافة عملة واختر العملة المطلوبة", "حدد سعر الصرف إذا كان المتجر متعدد العملات ثم اضغط (حفظ)"]}, {"id": 7, "q": "كيف أضيف دولة شحن جديدة أو أعدّل مناطق التوصيل؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (الدول)", "اضغط إضافة دولة واختر الدولة المطلوبة", "حدد طرق الدفع والشحن المتاحة لهذه الدولة ثم اضغط (حفظ)"]}, {"id": 8, "q": "كيف أضيف موظفاً جديداً للداشبورد أو أعدّل صلاحياته؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (فريق الإدارة)", "اضغط إضافة موظف وأدخل بريده الإلكتروني وحدد صلاحياته", "سيصله إيميل دعوة لتفعيل حسابه", "لتعديل موظف موجود اضغط على اسمه وعدّل الصلاحيات ثم اضغط (حفظ)"]}, {"id": 9, "q": "كيف أوقف المتجر مؤقتاً أو أضع رسالة صيانة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تأسيس المتجر) ثم اختر (وضع المتجر)", "فعّل خيار (وضع الصيانة) واكتب الرسالة التي ستظهر للزوار", "اضغط (حفظ) — سيرى الزوار رسالة الصيانة فقط حتى تعيد تفعيل المتجر"]}, {"id": 10, "q": "كيف أضيف منتجاً مع خيارات (مقاسات، ألوان، إلخ)؟", "steps": ["من القائمة الجانبية افتح (الأقسام والمنتجات) ثم اضغط على (خيارات المنتجات)", "أضف كل خيار مع قيمه (مثال: اللون ← أحمر، أزرق) وحدد نوعه: قائمة منسدلة أو اختيار متعدد أو قيمة واحدة أو رفع ملف أو textarea", "ادخل على المنتج المطلوب من (الأقسام والمنتجات) وستجد تبويب (خيارات المنتج) في الأعلى", "أضف الخيار المناسب واختر القيم المتاحة لهذا المنتج تحديداً", "حدد الكمية لكل قيمة والزيادة على السعر الأساسي إن وجدت ثم احفظ"]}, {"id": 11, "q": "كيف أعدّل عناوين المخزون أو أضيف مستودعاً جديداً؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (عناوين المخزون)", "يمكنك إضافة مستودعات متعددة وتحديد الكميات لكل مستودع", "اضغط (حفظ) بعد الانتهاء"]}, {"id": 12, "q": "كيف أعدّل إعدادات ضريبة القيمة المضافة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (المنتجات والتسعير) ثم اختر (ضريبة القيمة المضافة)", "حدد نسبة الضريبة وهل تظهر مضمّنة في السعر أم منفصلة", "اضغط (حفظ)"]}, {"id": 13, "q": "كيف أضيف طريقة دفع جديدة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (طرق الدفع)", "ستجد جميع بوابات الدفع المتاحة (مدى، فيزا، Apple Pay، تابي، تمارا، إلخ)", "اضغط على البوابة المطلوبة وأدخل بيانات الربط (API Key وما يلزم)", "فعّلها ثم اضغط (حفظ)"]}, {"id": 14, "q": "كيف أربط المتجر بمنصة فاتورة (زاتكا)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (ربط منصة فاتورة)", "أدخل بيانات الربط المطلوبة من حساب زاتكا", "اضغط (حفظ) — ستُصدر الفواتير الإلكترونية تلقائياً"]}, {"id": 15, "q": "كيف أضيف شركة شحن أو أعدّل طرق التوصيل؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (الشحن والتوصيل)", "اختر شركة الشحن من القائمة أو أضف شحناً يدوياً", "أدخل بيانات الربط وتكاليف الشحن ثم اضغط (حفظ)"]}, {"id": 16, "q": "كيف أعدّل حالات الطلبات أو أضيف حالة جديدة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (حالات الطلبات)", "يمكنك تعديل اسم الحالة ولونها ورسالة الإشعار المرسلة للعميل", "لإضافة حالة جديدة اضغط (إضافة حالة) ثم اضغط (حفظ)"]}, {"id": 17, "q": "كيف أعدّل تصميم الفواتير أو البيانات الظاهرة فيها؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (إعدادات الفواتير)", "يمكنك تخصيص شكل الفاتورة والبيانات الظاهرة فيها", "اضغط (حفظ)"]}, {"id": 18, "q": "كيف أعدّل سياسة الإرجاع؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (سياسة الإرجاع)", "اكتب أو عدّل نص السياسة ثم اضغط (حفظ)"]}, {"id": 19, "q": "كيف أضبط أوقات التوصيل المتاحة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (أوقات التوصيل)", "حدد الأيام والساعات المتاحة للتوصيل ثم اضغط (حفظ)"]}, {"id": 20, "q": "كيف أفعّل المحفظة الإلكترونية للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (المحفظة)", "فعّل خيار المحفظة وحدد الإعدادات مثل الحد الأدنى للرصيد", "اضغط (حفظ)"]}, {"id": 21, "q": "كيف أفعّل خاصية مرة تقليل الطلب الكيدية (حماية الطلبات)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (تجهيز الطلبات والشحن) ثم اختر (مرة تقليل الطلب الكيدية)", "فعّل الخاصية وحدد الإعدادات المناسبة ثم اضغط (حفظ)"]}, {"id": 22, "q": "كيف أفعّل التوصيات الذكية للمنتجات؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (التوصيات الذكية)", "فعّل الخاصية واختر مواضع الظهور: صفحة المنتج، سلة الشراء، الصفحة الرئيسية", "اضغط (حفظ)"]}, {"id": 23, "q": "كيف أضبط إعدادات التقييمات والمراجعات؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إعدادات التقييمات)", "حدد هل التقييمات تحتاج موافقة قبل النشر أم تنشر مباشرة", "فعّل أو أوقف خيار التقييمات بالكامل ثم اضغط (حفظ)"]}, {"id": 24, "q": "كيف أفعّل إشعارات التحويلات البنكية؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (إشارات أحدث التحويلات)", "فعّل الخاصية وحدد طريقة الإشعار ثم اضغط (حفظ)"]}, {"id": 25, "q": "كيف أفعّل أو أعدّل توصيات السلة للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (توصيات السلة)", "أضف المنتجات التي تريد عرضها عند إضافة منتج للسلة", "اضغط (حفظ)"]}, {"id": 26, "q": "كيف أفعّل طريق الشحن الموحى به للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (ولاء وتجربة العميل) ثم اختر (طريق الشحن الموحى بها)", "فعّل الخاصية وحدد شركة الشحن المفضلة ثم اضغط (حفظ)"]}, {"id": 27, "q": "كيف أضيف بنر إعلاني أو أعدّل تصميم المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (تصميم المتجر)", "اختر قسم البنرات وأضغط إضافة بنر", "ارفع الصورة وأضف الرابط المرتبط بها ثم اضغط (حفظ)"]}, {"id": 28, "q": "كيف أفعّل كوبون خصم؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (شعارات البنر — أو أدوات التسويق)", "اضغط (قسائم التخفيض) ثم (إضافة جديد)", "أدخل كود الكوبون، نوع الخصم (نسبة أو مبلغ ثابت)، الحد الأدنى للطلب، وتاريخ الانتهاء", "اضغط (حفظ)"]}, {"id": 29, "q": "كيف أربط المتجر بسيرش كونسول جوجل أو أضيف بيكسل فيسبوك؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (الربط مع الخدمات الخارجية)", "ستجد قسم خدمات جوجل والبيكسلز", "اختر الخدمة المطلوبة (Search Console، Google Analytics، Facebook Pixel، إلخ)", "أدخل الكود أو بيانات الربط ثم اضغط (حفظ)"]}, {"id": 30, "q": "كيف أعدّل إعدادات SEO للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (إعدادات الـ SEO)", "عدّل العنوان الرئيسي للمتجر، الوصف، والكلمات المفتاحية", "اضغط (حفظ)"]}, {"id": 31, "q": "كيف أضيف أو أعدّل الصفحات التعريفية (من نحن، سياسة الخصوصية، إلخ)؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (الصفحات التعريفية)", "اختر الصفحة المطلوبة أو اضغط (إضافة صفحة جديدة)", "أدخل المحتوى باستخدام المحرر ثم اضغط (حفظ)"]}, {"id": 32, "q": "كيف أفعّل برنامج الشركاء أو نظام العمولة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (برنامج الشركاء)", "فعّل البرنامج وحدد نسبة العمولة ثم اضغط (حفظ)"]}, {"id": 33, "q": "كيف أعدّل إعادة توجيه الروابط القديمة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (التسويق والمحتوى) ثم اختر (إعادة توجيه الروابط)", "أضف الرابط القديم والرابط الجديد المطلوب توجيهه إليه", "اضغط (حفظ)"]}, {"id": 34, "q": "كيف أضبط إعدادات رسائل SMS للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إعدادات رسائل الـ SMS)", "أدخل بيانات مزود الـ SMS وحدد الرسائل التلقائية المطلوبة (تأكيد طلب، شحن، إلخ)", "اضغط (حفظ)"]}, {"id": 35, "q": "كيف أحصل على مفاتيح API للمتجر أو أنشئ مفتاحاً جديداً؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ API)", "ستجد مفاتيح الـ API الحالية — اضغط إنشاء مفتاح جديد أو احذف مفتاحاً قديماً", "استخدم المفتاح للربط مع الأنظمة الخارجية"]}, {"id": 36, "q": "كيف أضبط Webhooks للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة الـ Webhooks)", "اضغط إضافة Webhook جديد وأدخل الرابط (URL) والحدث الذي يُطلقه", "اضغط (حفظ)"]}, {"id": 37, "q": "كيف أعدّل إعدادات DNS أو أربط نطاق المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (إدارة بيانات النطاق الـ DNS)", "ستجد سجلات الـ DNS — عدّل السجلات المطلوبة ثم اضغط (حفظ)"]}, {"id": 38, "q": "كيف أفعّل إشعار \"أبلغني عند التوافر\" للمنتجات الناقصة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (أبلغي عند التوافر)", "فعّل الخاصية لتتيح للعملاء التسجيل لتلقي إشعار عند توافر المنتج", "اضغط (حفظ)"]}, {"id": 39, "q": "كيف أحذف ملفات الكاش لتحديث المتجر؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (حذف ملفات الكاش)", "اضغط زر (حذف الكاش) — ستظهر التغييرات الجديدة على المتجر فوراً"]}, {"id": 40, "q": "كيف أضيف مجموعة عملاء أو أعدّل شريحة معينة؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (مجموعات العملاء)", "اضغط إضافة مجموعة وحدد معايير التصنيف ثم اضغط (حفظ)"]}, {"id": 41, "q": "كيف أعدّل رسائل البريد الإلكتروني التلقائية المرسلة للعملاء؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (تنبيهات البريد)", "اختر نوع الإشعار (تأكيد طلب، إلغاء، شحن، إلخ) وعدّل نص الرسالة", "اضغط (حفظ)"]}, {"id": 42, "q": "كيف أتابع سجل حركة المخزون؟", "steps": ["من القائمة الجانبية اضغط على (الإعدادات)", "انتقل لقسم (الخدمات التقنية) ثم اختر (سجل المخزون)", "ستجد تاريخاً كاملاً لحركة المخزون (إضافة، بيع، إرجاع)", "يمكن تصفيته حسب المنتج أو التاريخ"]}, {"id": 43, "q": "كيف أعرض قائمة الطلبات وأصفيها حسب الحالة؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "ستجد في الأعلى شرائط ملونة لكل حالة: بانتظار المراجعة، قيد التنفيذ، تم التنفيذ، قيد التوصيل، تم التوصيل، جاري التوصيل، قيد الاسترجاع، مسترجع، ملغي", "اضغط على أي شريط لتصفية الطلبات حسب تلك الحالة فقط", "للعودة لكل الطلبات اضغط على (الكل)"]}, {"id": 44, "q": "كيف أبحث عن طلب معين؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "في الأعلى يمين ستجد حقل بحث (ابحث برقم الطلب)", "أدخل رقم الطلب أو اسم العميل للوصول إليه مباشرة"]}, {"id": 45, "q": "كيف أضيف طلباً جديداً يدوياً؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "اضغط زر (إضافة طلب جديد +) في الأعلى يسار", "أدخل بيانات الطلب: العميل، المنتجات، طريقة الدفع، عنوان الشحن", "اضغط (حفظ)"]}, {"id": 46, "q": "كيف أصدّر قائمة الطلبات؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "اضغط زر (تصدير الطلبات) في الأعلى", "اختر نطاق التاريخ أو الفلتر المطلوب ثم اضغط تصدير", "سيُنزَّل ملف Excel بقائمة الطلبات"]}, {"id": 47, "q": "كيف أفتح تفاصيل طلب معين؟", "steps": ["من القائمة الجانبية اضغط على (الطلبات)", "ابحث عن الطلب بالرقم أو من القائمة", "اضغط على رقم الطلب (مثل #1452) لفتح صفحة التفاصيل الكاملة"]}, {"id": 48, "q": "كيف أغير حالة طلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في الأعلى ستجد زر الحالة الحالية (مثل: بانتظار المراجعة)", "اضغط عليه واختر الحالة الجديدة من القائمة", "ستُحفظ الحالة وقد يُرسَل إشعار تلقائي للعميل"]}, {"id": 49, "q": "كيف أطبع الفاتورة أو بوليصة الشحن لطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في الأعلى يسار اضغط زر (الفاتورة)", "سيفتح نافذة معاينة الفاتورة — اضغط طباعة", "لبوليصة الشحن انزل لأسفل الصفحة في قسم (تفاصيل الشحن) واضغط (إصدار بوليصة الشحن)"]}, {"id": 50, "q": "كيف أُسند طلباً لموظف معين؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "اضغط على زر (ثلاث نقاط ...) في الأعلى يسار", "اختر (إسناد الطلب لموظف) وحدد الموظف المطلوب", "سيُسجَّل الإسناد في سجل الطلب"]}, {"id": 51, "q": "كيف أعرض قائمة تجهيز الطلبات؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "اضغط على زر (ثلاث نقاط ...) في الأعلى يسار", "اختر (قائمة تجهيز الطلب) لتظهر لك قائمة المنتجات المطلوب تجهيزها"]}, {"id": 52, "q": "كيف أُعيد منتجاً للمخزون من طلب ملغي أو مرتجع؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم المنتجات ستجد زر (إعادة للمخزون)", "اضغط عليه لإعادة كمية المنتج تلقائياً للمخزون"]}, {"id": 53, "q": "كيف أرسل رابط الدفع للعميل مباشرة؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (طريقة الدفع) ستجد زر (نسخ رابط الدفع)", "اضغط عليه ثم أرسل الرابط للعميل عبر واتساب أو أي قناة أخرى"]}, {"id": 54, "q": "كيف أسترد مبلغ عميل (استرداد)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (طريقة الدفع) ستجد زر (استرداد المبلغ)", "اضغط عليه وحدد المبلغ المطلوب استرداده", "اضغط تأكيد — سيُعاد المبلغ للعميل"]}, {"id": 55, "q": "كيف أشارك سلة الطلب مع عميل آخر؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم المنتجات ستجد رابط (شارك رابط السلة نفسها مع عميل آخر)", "اضغط عليه لنسخ الرابط وإرساله لأي عميل آخر ليكمل نفس الطلب"]}, {"id": 56, "q": "كيف أرى تفاصيل العميل وتاريخه الشرائي من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد: اسمه، عدد طلباته الإجمالية، مجموع مشترياته، هل هو عميل متكرر", "ستجد أيضاً تنبيه إذا كان (أكثر من 3 طلبات في آخر 30 يوم) وأي كوبونات مستخدمة"]}, {"id": 57, "q": "كيف أعرف مصدر الطلب (من أين جاء العميل)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد (مصدر الطلب) يظهر فيه المصدر", "مثال: زيارة مباشرة، موقع إلكتروني، تطبيق، إلخ"]}, {"id": 58, "q": "كيف أضيف وسماً (Tag) لطلب معين؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (وسوم الطلبات)", "اختر وسماً موجوداً أو اكتب وسماً جديداً وأضفه", "يمكنك لاحقاً التصفية بالوسوم من قائمة الطلبات"]}, {"id": 59, "q": "كيف أرى سجل تحديثات الطلب وملاحظاته؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (سجل الطلب)", "ستجد كل التحديثات مرتبة بالتاريخ: متى تغيرت الحالة، ومن غيّرها، وأي ملاحظات أُضيفت"]}, {"id": 60, "q": "كيف أضيف ملاحظة داخلية على طلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (سجل الطلب) واضغط زر (أضف تحديث جديد)", "اكتب الملاحظة واختر هل تُرسَل للعميل أم داخلية فقط", "اضغط (حفظ)"]}, {"id": 61, "q": "كيف أعرف نقاط المكافآت المعلقة لعميل من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (نظام المكافآت)", "ستجد عدد النقاط المكتسبة من هذا الطلب وهل هي معلقة أم مفعّلة", "النقاط تصبح نشطة بعد اكتمال الطلب لأحد حالات الاكتمال المحددة"]}, {"id": 62, "q": "كيف أتحقق من تفاصيل الشحن لطلب (الوزن، القطع، شركة الشحن)؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "انزل لقسم (تفاصيل الشحن) ستجد: شركة الشحن، نوع الشحن، إجمالي الوزن، عدد القطع", "يمكنك من هنا أيضاً اضغط (إصدار بوليصة الشحن)"]}, {"id": 63, "q": "كيف أتواصل مع العميل مباشرة من داخل الطلب؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) ستجد رقم الجوال والبريد الإلكتروني", "اضغط على أيقونة واتساب بجانب الرقم لفتح محادثة مباشرة", "أو اضغط على البريد الإلكتروني لإرسال إيميل"]}, {"id": 64, "q": "كيف أطبع بطاقة الإرفاق مع الطلب أثناء التغليف؟", "steps": ["افتح الطلب من (الطلبات) ثم اضغط على رقمه", "في قسم (تفاصيل العميل) اضغط على (اطبع البطاقة لإرفاقها مع الطلب أثناء التغليف)", "ستفتح نافذة معاينة البطاقة — اضغط طباعة"]}, {"id": 65, "q": "ما معنى حالات الطلبات المختلفة؟", "steps": ["بانتظار المراجعة: الطلب وصل ولم يُراجَع بعد", "قيد التنفيذ: تمت المراجعة وبدأ التجهيز", "تم التنفيذ: جُهّز الطلب وجاهز للشحن", "قيد التوصيل: سُلّم لشركة الشحن", "تم التوصيل: وصل للعميل بنجاح", "جاري التوصيل: في الطريق للعميل", "قيد الاسترجاع: العميل طلب إرجاعه", "مسترجع: تم استلام المرتجع", "ملغي: أُلغي الطلب"]}, {"id": 66, "q": "كيف أضيف منتجاً جديداً للمتجر؟", "steps": ["من القائمة الجانبية اضغط على (الأقسام والمنتجات) ثم (المنتجات)", "اضغط (إضافة منتج جديد)", "أدخل اسم المنتج بالعربي والإنجليزي", "أضف وصف المنتج باستخدام المحرر (يدعم التنسيق والصور والجداول)", "أدخل السعر والكمية والوزن", "حدد القسم والماركة", "ارفع صورة المنتج الرئيسية والصور الإضافية (jpg, jpeg, png, gif — أقصى 7 ميجابايت، أفضل أبعاد 1000x1000px)", "اضغط (حفظ)"]}, {"id": 67, "q": "كيف أضيف اسم المنتج بالعربي والإنجليزي معاً؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات) واضغط على المنتج أو (إضافة جديد)", "في الأعلى ستجد تبويبين: (العربية) و(English)", "اضغط تبويب (العربية) وأدخل الاسم والوصف بالعربي", "اضغط تبويب (English) وأدخل الاسم والوصف بالإنجليزي", "اضغط (حفظ)"]}, {"id": 68, "q": "كيف أضيف سعر المنتج وسعره شامل الضريبة؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "أدخل (السعر) — هذا السعر بدون ضريبة", "في يسار الحقل ستجد (السعر شامل الضريبة) يُحسب تلقائياً", "أدخل (سعر التكلفة) لحساب نسبة الربح تلقائياً", "حدد هل المنتج (خاضع للضريبة) أم (غير خاضع للضريبة) من الخيارين في الأعلى", "اضغط (حفظ)"]}, {"id": 69, "q": "كيف أضيف باركود أو SKU للمنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد في قسم (بيانات المخزون):", "حقل (SKU) — وحدة حفظ المخزون — أدخل الكود الداخلي للمنتج", "حقل (الباركود) — أدخل باركود المنتج إن وجد", "حقل (النوع / الموديل) — للمرجع الإضافي", "اضغط (حفظ)"]}, {"id": 70, "q": "كيف أحدد أبعاد المنتج للشحن (الطول والعرض والارتفاع)؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "في قسم (بيانات المخزون) ستجد حقول (الأبعاد: الطول x العرض x الارتفاع)", "أدخل الأبعاد واختر وحدة القياس (Centimeter أو غيرها)", "هذه الأبعاد تُستخدم لحساب تكاليف الشحن تلقائياً", "اضغط (حفظ)"]}, {"id": 71, "q": "كيف أحدد نوع المنتج (شحن أو رقمي)؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "في قسم (بيانات إضافية للمنتج) ستجد (نوع المنتج)", "اختر (منتج قابل للشحن) للمنتجات المادية", "اختر (منتج غير قابل للشحن — رقمي) للمنتجات الرقمية كالملفات والدورات", "اضغط (حفظ)"]}, {"id": 72, "q": "كيف أحدد الحد الأدنى والأقصى للكمية في الطلب الواحد؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد حقل (الحد الأدنى للكمية الممكن شرائها) — الافتراضي 1", "وحقل (أقصى كمية يمكن طلبها في الطلب الواحد) — اتركه 0 لعدم التحديد", "اضغط (حفظ)"]}, {"id": 73, "q": "كيف أحدد ماذا يحدث للمنتج عند نفاذ المخزون؟", "steps": ["افتح المنتج وانتقل لتبويب (البيانات)", "ستجد خيار (اختر حالة ظهور المنتج عندما تكون الكمية المخزون صفر)", "اختر: إخفاء المنتج، أو إظهاره كـ \"غير متوفر\"، أو السماح بالطلب رغم النفاذ", "اضغط (حفظ)"]}, {"id": 74, "q": "كيف أضيف خصماً على المنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (تخفيض على المنتج)", "أدخل سعر الخصم أو نسبته", "يمكن تحديد تاريخ بداية ونهاية للخصم", "اضغط (حفظ) — سيظهر السعر القديم مشطوباً والجديد على صفحة المنتج"]}, {"id": 75, "q": "كيف أضيف خصماً على الكمية (كلما زاد الطلب قل السعر)؟", "steps": ["افتح المنتج وانتقل لتبويب (تخفيض على الكمية)", "أضف شرائح الكمية والسعر المقابل لكل شريحة", "مثال: من 1 إلى 5 قطع بسعر عادي، من 6 قطع فأكثر بخصم 10%", "اضغط (حفظ)"]}, {"id": 76, "q": "كيف أضيف مواصفات للمنتج (جدول المواصفات)؟", "steps": ["افتح المنتج وانتقل لتبويب (المواصفات)", "أضف صفوف المواصفات: الاسم والقيمة (مثال: الوزن — 100 جرام، المادة — قطن)", "ستظهر هذه المواصفات في صفحة المنتج أمام العميل في جدول منظم", "اضغط (حفظ)"]}, {"id": 77, "q": "كيف أضيف إعدادات SEO للمنتج (تحسين البحث)؟", "steps": ["افتح المنتج وانتقل لتبويب (إعدادات تحسين محركات البحث)", "أدخل (عنوان الصفحة) — يظهر في نتائج جوجل", "أدخل (وصف الصفحة) — الملخص الظاهر تحت العنوان في جوجل", "أدخل (الكلمات المفتاحية) المناسبة للمنتج", "اضغط (حفظ)"]}, {"id": 78, "q": "كيف أضيف منتجات مقترحة مع المنتج؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "ابحث عن حقل (منتجات مقترحة مع هذا المنتج)", "اكتب أول حرف من اسم المنتج لتظهر قائمة منسدلة للاختيار منها", "اختر المنتجات المقترحة وستظهر في صفحة المنتج كـ \"قد يعجبك أيضاً\"", "اضغط (حفظ)"]}, {"id": 79, "q": "كيف أغير حالة المنتج (منشور أو مخفي)؟", "steps": ["افتح المنتج وانتقل لتبويب (عام)", "انزل لأسفل الصفحة وستجد حقل (الحالة)", "اختر (منشور) لإظهاره في المتجر", "اختر (مسودة) أو (مخفي) لإخفائه مؤقتاً دون حذفه", "اضغط (حفظ)"]}, {"id": 80, "q": "كيف أعاين المنتج على الموقع قبل نشره؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)", "اضغط زر (استعراض) في الأعلى", "سيفتح صفحة المنتج كما يراها العميل في نافذة جديدة"]}, {"id": 81, "q": "كيف أشارك رابط المنتج مباشرة؟", "steps": ["افتح المنتج من (الأقسام والمنتجات) ثم (المنتجات)", "اضغط زر (مشاركة) في الأعلى", "سيُنسخ رابط المنتج — شاركه مباشرة مع العملاء أو على وسائل التواصل"]}, {"id": 82, "q": "كيف أضيف الملفات الرقمية لمنتج رقمي؟", "steps": ["افتح المنتج وتأكد أن نوعه (منتج غير قابل للشحن — رقمي) من تبويب (البيانات)", "ستجد في القائمة الجانبية للمنتجات قسم (الملفات الرقمية)", "ارفع الملف الرقمي وربطه بالمنتج", "بعد اكتمال الطلب يُرسَل الملف تلقائياً للعميل"]}];
+const TEMPLATE="PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImFyIiBkaXI9InJ0bCI+CjxoZWFkPgo8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KPHRpdGxlPtmF2LPYp9i52K8g2K/YudmFINmF2KrYrNix2Kk8L3RpdGxlPgo8bGluayBocmVmPSJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PUlCTStQbGV4K1NhbnMrQXJhYmljOndnaHRAMzAwOzQwMDs1MDA7NjAwJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KPHN0eWxlPgo6cm9vdHstLWJnOiMwZjBmMTE7LS1zdXI6IzE4MTgxYzstLXN1cjI6IzIyMjIyODstLWJvcjojMmUyZTM4Oy0tYWNjOiNlODM2NWQ7LS1hY2MyOiNmZjZiOGE7LS10eDojZjBmMGY0Oy0tdHgyOiM5MDkwYTA7LS10eDM6IzYwNjA2ZTstLWdybjojMmRkNGEwOy0tcjoxMnB4Oy0tcnM6OHB4fQoqe2JveC1zaXppbmc6Ym9yZGVyLWJveDttYXJnaW46MDtwYWRkaW5nOjB9CmJvZHl7Zm9udC1mYW1pbHk6J0lCTSBQbGV4IFNhbnMgQXJhYmljJyxzYW5zLXNlcmlmO2JhY2tncm91bmQ6dmFyKC0tYmcpO2NvbG9yOnZhcigtLXR4KTttaW4taGVpZ2h0OjEwMHZoO2Rpc3BsYXk6ZmxleDtmbGV4LWRpcmVjdGlvbjpjb2x1bW59CmhlYWRlcntwYWRkaW5nOi45cmVtIDEuNHJlbTtib3JkZXItYm90dG9tOjFweCBzb2xpZCB2YXIoLS1ib3IpO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW47YmFja2dyb3VuZDp2YXIoLS1zdXIpO3Bvc2l0aW9uOnN0aWNreTt0b3A6MDt6LWluZGV4OjEwMH0KLmxvZ297ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtnYXA6MTBweDtmb250LXNpemU6MTZweDtmb250LXdlaWdodDo2MDB9Ci5kb3R7d2lkdGg6OXB4O2hlaWdodDo5cHg7YmFja2dyb3VuZDp2YXIoLS1hY2MpO2JvcmRlci1yYWRpdXM6NTAlO2FuaW1hdGlvbjpwdWxzZSAycyBpbmZpbml0ZX0KQGtleWZyYW1lcyBwdWxzZXswJSwxMDAle29wYWNpdHk6MTt0cmFuc2Zvcm06c2NhbGUoMSl9NTAle29wYWNpdHk6LjU7dHJhbnNmb3JtOnNjYWxlKC44KX19Ci50YWJze2Rpc3BsYXk6ZmxleDtib3JkZXItYm90dG9tOjFweCBzb2xpZCB2YXIoLS1ib3IpO2JhY2tncm91bmQ6dmFyKC0tc3VyKTtwYWRkaW5nOjAgMS40cmVtO292ZXJmbG93LXg6YXV0b30KLnRhYntwYWRkaW5nOjExcHggMTZweDtmb250LXNpemU6MTNweDtjb2xvcjp2YXIoLS10eDMpO2JhY2tncm91bmQ6bm9uZTtib3JkZXI6bm9uZTtib3JkZXItYm90dG9tOjJweCBzb2xpZCB0cmFuc3BhcmVudDtjdXJzb3I6cG9pbnRlcjtmb250LWZhbWlseTppbmhlcml0O3RyYW5zaXRpb246YWxsIC4yczt3aGl0ZS1zcGFjZTpub3dyYXA7ZmxleC1zaHJpbms6MH0KLnRhYjpob3Zlcntjb2xvcjp2YXIoLS10eDIpfS50YWIuYWN0aXZle2NvbG9yOnZhcigtLXR4KTtib3JkZXItYm90dG9tLWNvbG9yOnZhcigtLWFjYyl9Cm1haW57ZmxleDoxO21heC13aWR0aDo3NDBweDttYXJnaW46MCBhdXRvO3dpZHRoOjEwMCU7cGFkZGluZzoxLjJyZW19Ci5wYW5lbHtkaXNwbGF5Om5vbmV9LnBhbmVsLmFjdGl2ZXtkaXNwbGF5OmZsZXg7ZmxleC1kaXJlY3Rpb246Y29sdW1ufQojcGFuZWwtYm90e2dhcDowfQouc2VhcmNoLXdyYXB7cG9zaXRpb246cmVsYXRpdmU7bWFyZ2luLWJvdHRvbToxcmVtfQouc2VhcmNoLXdyYXAgaW5wdXR7d2lkdGg6MTAwJTtwYWRkaW5nOjEycHggNDRweCAxMnB4IDE0cHg7Zm9udC1zaXplOjE0cHg7YmFja2dyb3VuZDp2YXIoLS1zdXIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXIpO2NvbG9yOnZhcigtLXR4KTtmb250LWZhbWlseTppbmhlcml0O3RyYW5zaXRpb246Ym9yZGVyLWNvbG9yIC4yc30KLnNlYXJjaC13cmFwIGlucHV0OmZvY3Vze291dGxpbmU6bm9uZTtib3JkZXItY29sb3I6cmdiYSgyMzIsNTQsOTMsLjUpfQouc2VhcmNoLWljb257cG9zaXRpb246YWJzb2x1dGU7bGVmdDoxNHB4O3RvcDo1MCU7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTUwJSk7Y29sb3I6dmFyKC0tdHgzKTtmb250LXNpemU6MTZweDtwb2ludGVyLWV2ZW50czpub25lfQouY2xlYXItYnRue3Bvc2l0aW9uOmFic29sdXRlO3JpZ2h0OjEycHg7dG9wOjUwJTt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtNTAlKTtiYWNrZ3JvdW5kOm5vbmU7Ym9yZGVyOm5vbmU7Y29sb3I6dmFyKC0tdHgzKTtjdXJzb3I6cG9pbnRlcjtmb250LXNpemU6MjBweDtwYWRkaW5nOjJweCA2cHg7ZGlzcGxheTpub25lO2xpbmUtaGVpZ2h0OjF9Ci5jbGVhci1idG4uc2hvd3tkaXNwbGF5OmJsb2NrfQojYW5zd2VyLXZpZXd7ZGlzcGxheTpub25lO2ZsZXgtZGlyZWN0aW9uOmNvbHVtbn0KI2Fuc3dlci12aWV3LnNob3d7ZGlzcGxheTpmbGV4fQouYmFjay1idG57ZGlzcGxheTppbmxpbmUtZmxleDthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjhweDtwYWRkaW5nOjhweCAxNHB4O2ZvbnQtc2l6ZToxM3B4O2JhY2tncm91bmQ6dmFyKC0tc3VyKTtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcik7Ym9yZGVyLXJhZGl1czp2YXIoLS1yKTtjb2xvcjp2YXIoLS10eDIpO2N1cnNvcjpwb2ludGVyO2ZvbnQtZmFtaWx5OmluaGVyaXQ7bWFyZ2luLWJvdHRvbToxcmVtO3RyYW5zaXRpb246YWxsIC4yczt3aWR0aDpmaXQtY29udGVudH0KLmJhY2stYnRuOmhvdmVye2NvbG9yOnZhcigtLXR4KTtib3JkZXItY29sb3I6dmFyKC0tdHgzKX0KLmFuc3dlci1jYXJke2JhY2tncm91bmQ6dmFyKC0tc3VyKTtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcik7Ym9yZGVyLXJhZGl1czp2YXIoLS1yKTtwYWRkaW5nOjEuMnJlbX0KLmFuc3dlci1xe2ZvbnQtc2l6ZToxNXB4O2ZvbnQtd2VpZ2h0OjYwMDtjb2xvcjp2YXIoLS1hY2MyKTttYXJnaW4tYm90dG9tOjFyZW07cGFkZGluZy1ib3R0b206LjhyZW07Ym9yZGVyLWJvdHRvbToxcHggc29saWQgdmFyKC0tYm9yKX0KLnN0ZXBzLWxpc3R7ZGlzcGxheTpmbGV4O2ZsZXgtZGlyZWN0aW9uOmNvbHVtbjtnYXA6OHB4fQouc3RlcHtkaXNwbGF5OmZsZXg7Z2FwOjEwcHg7YWxpZ24taXRlbXM6ZmxleC1zdGFydDtwYWRkaW5nOjEwcHggMTJweDtiYWNrZ3JvdW5kOnZhcigtLXN1cjIpO2JvcmRlci1yYWRpdXM6dmFyKC0tcnMpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKX0KLnNudW17bWluLXdpZHRoOjI2cHg7aGVpZ2h0OjI2cHg7YmFja2dyb3VuZDpyZ2JhKDIzMiw1NCw5MywuMTUpO2NvbG9yOnZhcigtLWFjYzIpO2JvcmRlci1yYWRpdXM6NnB4O2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OmNlbnRlcjtmb250LXNpemU6MTJweDtmb250LXdlaWdodDo2MDA7ZmxleC1zaHJpbms6MDttYXJnaW4tdG9wOjFweH0KLnN0ZXAtdGV4dHtmb250LXNpemU6MTNweDtsaW5lLWhlaWdodDoxLjY1O2NvbG9yOnZhcigtLXR4KX0KLnN0ZXAtdGV4dCBie2NvbG9yOnZhcigtLXR4KTtmb250LXdlaWdodDo1MDB9Ci5jb3B5LWJ0bnttYXJnaW4tdG9wOjFyZW07cGFkZGluZzo5cHggMThweDtmb250LXNpemU6MTNweDtiYWNrZ3JvdW5kOnZhcigtLXN1cjIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXJzKTtjb2xvcjp2YXIoLS10eDIpO2N1cnNvcjpwb2ludGVyO2ZvbnQtZmFtaWx5OmluaGVyaXQ7dHJhbnNpdGlvbjphbGwgLjJzO2Rpc3BsYXk6aW5saW5lLWZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2dhcDo2cHh9Ci5jb3B5LWJ0bjpob3Zlcntjb2xvcjp2YXIoLS10eCk7Ym9yZGVyLWNvbG9yOnZhcigtLWFjYyl9Ci5saXN0LWhlYWRlcntmb250LXNpemU6MTJweDtjb2xvcjp2YXIoLS10eDMpO21hcmdpbi1ib3R0b206LjdyZW19Ci5saXN0LWhlYWRlciBzcGFue2NvbG9yOnZhcigtLWFjYzIpO2ZvbnQtd2VpZ2h0OjUwMH0KLnEtbGlzdHtkaXNwbGF5OmZsZXg7ZmxleC1kaXJlY3Rpb246Y29sdW1uO2dhcDo2cHh9Ci5xLWl0ZW17cGFkZGluZzoxMnB4IDE0cHg7YmFja2dyb3VuZDp2YXIoLS1zdXIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXIpO2N1cnNvcjpwb2ludGVyO3RyYW5zaXRpb246YWxsIC4ycztkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuO2dhcDoxMHB4fQoucS1pdGVtOmhvdmVye2JvcmRlci1jb2xvcjp2YXIoLS1hY2MpO2JhY2tncm91bmQ6dmFyKC0tc3VyMil9Ci5xLWl0ZW0tdGV4dHtmb250LXNpemU6MTRweDtjb2xvcjp2YXIoLS10eCk7bGluZS1oZWlnaHQ6MS40fQoucS1hcnJvd3tjb2xvcjp2YXIoLS10eDMpO2ZvbnQtc2l6ZToxOHB4O2ZsZXgtc2hyaW5rOjB9Ci5uby1tYXRjaHtwYWRkaW5nOjEuNXJlbTt0ZXh0LWFsaWduOmNlbnRlcjtjb2xvcjp2YXIoLS10eDMpO2ZvbnQtc2l6ZToxNHB4O2JhY2tncm91bmQ6dmFyKC0tc3VyKTtib3JkZXItcmFkaXVzOnZhcigtLXIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKX0KLm5vLW1hdGNoIHN0cm9uZ3tjb2xvcjp2YXIoLS10eDIpO2Rpc3BsYXk6YmxvY2s7bWFyZ2luLWJvdHRvbTo0cHh9CiNwYW5lbC1rYntnYXA6MXJlbX0KLmV4cG9ydC1iYXJ7YmFja2dyb3VuZDp2YXIoLS1zdXIpO2JvcmRlcjoxcHggc29saWQgcmdiYSgyMzIsNTQsOTMsLjIpO2JvcmRlci1yYWRpdXM6dmFyKC0tcik7cGFkZGluZzoxcmVtIDEuMnJlbTtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuO2dhcDoxMnB4fQouZXhwb3J0LWJhciBzdHJvbmd7Y29sb3I6dmFyKC0tdHgpO2ZvbnQtc2l6ZToxNHB4O2Rpc3BsYXk6YmxvY2s7bWFyZ2luLWJvdHRvbToycHh9Ci5leHBvcnQtYmFyIHB7Y29sb3I6dmFyKC0tdHgzKTtmb250LXNpemU6MTJweH0KLmtiLXRvb2xiYXJ7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6c3BhY2UtYmV0d2Vlbn0KLmtiLWNvdW50e2ZvbnQtc2l6ZToxM3B4O2NvbG9yOnZhcigtLXR4Myl9LmtiLWNvdW50IHNwYW57Y29sb3I6dmFyKC0tYWNjMik7Zm9udC13ZWlnaHQ6NjAwfQoua2Itc2VhcmNoLWlucHt3aWR0aDoxMDAlO3BhZGRpbmc6OXB4IDE0cHg7Zm9udC1zaXplOjEzcHg7YmFja2dyb3VuZDp2YXIoLS1zdXIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXJzKTtjb2xvcjp2YXIoLS10eCk7Zm9udC1mYW1pbHk6aW5oZXJpdH0KLmtiLXNlYXJjaC1pbnA6Zm9jdXN7b3V0bGluZTpub25lO2JvcmRlci1jb2xvcjpyZ2JhKDIzMiw1NCw5MywuNCl9Ci5rYi1saXN0e2Rpc3BsYXk6ZmxleDtmbGV4LWRpcmVjdGlvbjpjb2x1bW47Z2FwOjZweH0KLmtiLWl0ZW17YmFja2dyb3VuZDp2YXIoLS1zdXIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXIpO3BhZGRpbmc6MTFweCAxM3B4O2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjEwcHg7dHJhbnNpdGlvbjpib3JkZXItY29sb3IgLjJzfQoua2ItaXRlbTpob3Zlcntib3JkZXItY29sb3I6dmFyKC0tdHgzKX0KLmtiLWl0ZW0tcXtmb250LXNpemU6MTNweDtmb250LXdlaWdodDo1MDA7Y29sb3I6dmFyKC0tdHgpO2ZsZXg6MX0KLmtiLWl0ZW0tbWV0YXtmb250LXNpemU6MTFweDtjb2xvcjp2YXIoLS10eDMpO21hcmdpbi10b3A6MnB4fQoua2ItYWN0aW9uc3tkaXNwbGF5OmZsZXg7Z2FwOjZweDtmbGV4LXNocmluazowfQouYnRuLWVkaXR7cGFkZGluZzo1cHggMTBweDtmb250LXNpemU6MTJweDtiYWNrZ3JvdW5kOm5vbmU7Ym9yZGVyOjFweCBzb2xpZCB0cmFuc3BhcmVudDtib3JkZXItcmFkaXVzOjZweDtjb2xvcjp2YXIoLS10eDMpO2N1cnNvcjpwb2ludGVyO2ZvbnQtZmFtaWx5OmluaGVyaXQ7dHJhbnNpdGlvbjphbGwgLjJzfQouYnRuLWVkaXQ6aG92ZXJ7Y29sb3I6dmFyKC0tZ3JuKTtib3JkZXItY29sb3I6cmdiYSg0NSwyMTIsMTYwLC4zKX0KLmJ0bi1kZWx7cGFkZGluZzo1cHggMTBweDtmb250LXNpemU6MTJweDtiYWNrZ3JvdW5kOm5vbmU7Ym9yZGVyOjFweCBzb2xpZCB0cmFuc3BhcmVudDtib3JkZXItcmFkaXVzOjZweDtjb2xvcjp2YXIoLS10eDMpO2N1cnNvcjpwb2ludGVyO2ZvbnQtZmFtaWx5OmluaGVyaXQ7dHJhbnNpdGlvbjphbGwgLjJzfQouYnRuLWRlbDpob3Zlcntjb2xvcjp2YXIoLS1hY2MpO2JvcmRlci1jb2xvcjpyZ2JhKDIzMiw1NCw5MywuMyl9Ci5pbXBvcnQtYm94e2JhY2tncm91bmQ6dmFyKC0tc3VyKTtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcik7Ym9yZGVyLXJhZGl1czp2YXIoLS1yKTtwYWRkaW5nOjEuMXJlbX0KLmltcG9ydC1ib3ggaDN7Zm9udC1zaXplOjEzcHg7Zm9udC13ZWlnaHQ6NTAwO2NvbG9yOnZhcigtLXR4Mik7bWFyZ2luLWJvdHRvbTo4cHh9Ci5pbXBvcnQtYm94IHRleHRhcmVhe3dpZHRoOjEwMCU7bWluLWhlaWdodDoxMDBweDtwYWRkaW5nOjlweCAxMnB4O2ZvbnQtc2l6ZToxMnB4O2JhY2tncm91bmQ6dmFyKC0tYmcpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXJzKTtjb2xvcjp2YXIoLS10eCk7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO3Jlc2l6ZTp2ZXJ0aWNhbDtsaW5lLWhlaWdodDoxLjY7ZGlyZWN0aW9uOnJ0bH0KLmltcG9ydC1ib3ggdGV4dGFyZWE6Zm9jdXN7b3V0bGluZTpub25lO2JvcmRlci1jb2xvcjpyZ2JhKDIzMiw1NCw5MywuNCl9Ci5pbXAtcm93e2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjhweDttYXJnaW4tdG9wOjhweH0KLmJ0bi1we3BhZGRpbmc6OHB4IDE4cHg7Zm9udC1zaXplOjEzcHg7YmFja2dyb3VuZDp2YXIoLS1hY2MpO2JvcmRlcjpub25lO2JvcmRlci1yYWRpdXM6dmFyKC0tcnMpO2NvbG9yOiNmZmY7Y3Vyc29yOnBvaW50ZXI7Zm9udC1mYW1pbHk6aW5oZXJpdDtmb250LXdlaWdodDo1MDA7dHJhbnNpdGlvbjpiYWNrZ3JvdW5kIC4yc30KLmJ0bi1wOmhvdmVye2JhY2tncm91bmQ6dmFyKC0tYWNjMil9Ci5idG4tc3twYWRkaW5nOjhweCAxNHB4O2ZvbnQtc2l6ZToxM3B4O2JhY2tncm91bmQ6dmFyKC0tc3VyMik7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1ib3IpO2JvcmRlci1yYWRpdXM6dmFyKC0tcnMpO2NvbG9yOnZhcigtLXR4Mik7Y3Vyc29yOnBvaW50ZXI7Zm9udC1mYW1pbHk6aW5oZXJpdDt0cmFuc2l0aW9uOmFsbCAuMnN9Ci5idG4tczpob3Zlcntjb2xvcjp2YXIoLS10eCk7Ym9yZGVyLWNvbG9yOnZhcigtLXR4Myl9Ci5tb2RhbC1vdntwb3NpdGlvbjpmaXhlZDtpbnNldDowO2JhY2tncm91bmQ6cmdiYSgwLDAsMCwuNzUpO2Rpc3BsYXk6bm9uZTthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OmNlbnRlcjt6LWluZGV4OjIwMDtwYWRkaW5nOjFyZW19Ci5tb2RhbC1vdi5vcGVue2Rpc3BsYXk6ZmxleH0KLm1vZGFse2JhY2tncm91bmQ6dmFyKC0tc3VyKTtib3JkZXI6MXB4IHNvbGlkIHZhcigtLWJvcik7Ym9yZGVyLXJhZGl1czp2YXIoLS1yKTtwYWRkaW5nOjEuNHJlbTt3aWR0aDoxMDAlO21heC13aWR0aDo1MDBweDttYXgtaGVpZ2h0Ojkwdmg7b3ZlcmZsb3cteTphdXRvfQoubW9kYWwgaDN7Zm9udC1zaXplOjE1cHg7Zm9udC13ZWlnaHQ6NjAwO21hcmdpbi1ib3R0b206MXJlbX0KLm1vZGFsIGxhYmVse2ZvbnQtc2l6ZToxMnB4O2NvbG9yOnZhcigtLXR4Myk7ZGlzcGxheTpibG9jazttYXJnaW4tYm90dG9tOjRweDttYXJnaW4tdG9wOjEycHh9Ci5tb2RhbCBpbnB1dCwubW9kYWwgdGV4dGFyZWF7d2lkdGg6MTAwJTtwYWRkaW5nOjlweCAxMnB4O2ZvbnQtc2l6ZToxM3B4O2JhY2tncm91bmQ6dmFyKC0tYmcpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXJzKTtjb2xvcjp2YXIoLS10eCk7Zm9udC1mYW1pbHk6aW5oZXJpdDtkaXJlY3Rpb246cnRsfQoubW9kYWwgdGV4dGFyZWF7bWluLWhlaWdodDoxNTBweDtyZXNpemU6dmVydGljYWw7bGluZS1oZWlnaHQ6MS42fQoubW9kYWwgaW5wdXQ6Zm9jdXMsLm1vZGFsIHRleHRhcmVhOmZvY3Vze291dGxpbmU6bm9uZTtib3JkZXItY29sb3I6cmdiYSgyMzIsNTQsOTMsLjQpfQoubW9kYWwtYWN0c3tkaXNwbGF5OmZsZXg7Z2FwOjhweDttYXJnaW4tdG9wOjEuMnJlbTtqdXN0aWZ5LWNvbnRlbnQ6ZmxleC1lbmR9CiNwYW5lbC1zdGF0c3tnYXA6MXJlbX0KLnN0YXRzLWdyaWR7ZGlzcGxheTpncmlkO2dyaWQtdGVtcGxhdGUtY29sdW1uczpyZXBlYXQoMywxZnIpO2dhcDoxMHB4fQouc3RhdHtiYWNrZ3JvdW5kOnZhcigtLXN1cik7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1ib3IpO2JvcmRlci1yYWRpdXM6dmFyKC0tcik7cGFkZGluZzoxNHB4O3RleHQtYWxpZ246Y2VudGVyfQouc3RhdC1ue2ZvbnQtc2l6ZToyNHB4O2ZvbnQtd2VpZ2h0OjYwMDtjb2xvcjp2YXIoLS1hY2MyKX0KLnN0YXQtbHtmb250LXNpemU6MTJweDtjb2xvcjp2YXIoLS10eDMpO21hcmdpbi10b3A6M3B4fQoudG9hc3R7cG9zaXRpb246Zml4ZWQ7Ym90dG9tOjEuNXJlbTtsZWZ0OjUwJTt0cmFuc2Zvcm06dHJhbnNsYXRlWCgtNTAlKSB0cmFuc2xhdGVZKDIwcHgpO2JhY2tncm91bmQ6dmFyKC0tc3VyMik7Ym9yZGVyOjFweCBzb2xpZCB2YXIoLS1ib3IpO2JvcmRlci1yYWRpdXM6dmFyKC0tcik7cGFkZGluZzo5cHggMThweDtmb250LXNpemU6MTNweDtjb2xvcjp2YXIoLS10eCk7b3BhY2l0eTowO3RyYW5zaXRpb246YWxsIC4zczt6LWluZGV4Ojk5OTtwb2ludGVyLWV2ZW50czpub25lfQoudG9hc3Quc2hvd3tvcGFjaXR5OjE7dHJhbnNmb3JtOnRyYW5zbGF0ZVgoLTUwJSkgdHJhbnNsYXRlWSgwKX0KQG1lZGlhKG1heC13aWR0aDo2MDBweCl7bWFpbntwYWRkaW5nOi45cmVtfS5zdGF0cy1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczpyZXBlYXQoMiwxZnIpfX0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPGhlYWRlcj4KICA8ZGl2IGNsYXNzPSJsb2dvIj48ZGl2IGNsYXNzPSJkb3QiPjwvZGl2PtmF2LPYp9i52K8g2K/YudmFINmF2KrYrNix2Kk8L2Rpdj4KICA8c3BhbiBzdHlsZT0iZm9udC1zaXplOjEycHg7Y29sb3I6dmFyKC0tdHgzKSIgaWQ9Imhkci1jb3VudCI+PC9zcGFuPgo8L2hlYWRlcj4KPGRpdiBjbGFzcz0idGFicyI+CiAgPGJ1dHRvbiBjbGFzcz0idGFiIGFjdGl2ZSIgb25jbGljaz0ic3dpdGNoVGFiKCdib3QnLHRoaXMpIj7wn5SNINin2YTYqNit2Ks8L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJ0YWIiIG9uY2xpY2s9InN3aXRjaFRhYigna2InLHRoaXMpIj7wn5OaINmC2KfYudiv2Kkg2KfZhNmF2LnYsdmB2Kk8L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJ0YWIiIG9uY2xpY2s9InN3aXRjaFRhYignc3RhdHMnLHRoaXMpIj7wn5OKINil2K3Ytdin2KbZitin2Ko8L2J1dHRvbj4KPC9kaXY+CjxtYWluPgo8ZGl2IGlkPSJwYW5lbC1ib3QiIGNsYXNzPSJwYW5lbCBhY3RpdmUiPgogIDxkaXYgY2xhc3M9InNlYXJjaC13cmFwIj4KICAgIDxpbnB1dCB0eXBlPSJ0ZXh0IiBpZD0ic2VhcmNoSW5wIiBwbGFjZWhvbGRlcj0i2KfYqNit2Ksg2LnZhiDYo9mKINin2LPYqtmB2LPYp9ixINmE2YTYqtin2KzYsS4uLiIgb25pbnB1dD0ib25TZWFyY2goKSIgYXV0b2NvbXBsZXRlPSJvZmYiLz4KICAgIDxzcGFuIGNsYXNzPSJzZWFyY2gtaWNvbiI+8J+UjTwvc3Bhbj4KICAgIDxidXR0b24gY2xhc3M9ImNsZWFyLWJ0biIgaWQ9ImNsZWFyQnRuIiBvbmNsaWNrPSJjbGVhclNlYXJjaCgpIj7DlzwvYnV0dG9uPgogIDwvZGl2PgogIDxkaXYgaWQ9ImFuc3dlci12aWV3Ij4KICAgIDxidXR0b24gY2xhc3M9ImJhY2stYnRuIiBvbmNsaWNrPSJzaG93TGlzdCgpIj4mIzg1OTI7INix2KzZiNi5INmE2YTZgtin2KbZhdipPC9idXR0b24+CiAgICA8ZGl2IGNsYXNzPSJhbnN3ZXItY2FyZCI+CiAgICAgIDxkaXYgY2xhc3M9ImFuc3dlci1xIiBpZD0iYW5zd2VyLXEiPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJzdGVwcy1saXN0IiBpZD0iYW5zd2VyLXN0ZXBzIj48L2Rpdj4KICAgICAgPGJ1dHRvbiBjbGFzcz0iY29weS1idG4iIG9uY2xpY2s9ImNvcHlBbnN3ZXIoKSI+8J+TiyDZhtiz2K4g2KfZhNix2K8g2YTZhNiq2KfYrNixPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGlkPSJsaXN0LXZpZXciPgogICAgPGRpdiBjbGFzcz0ibGlzdC1oZWFkZXIiPti52LHYtiA8c3BhbiBpZD0ibGlzdC1jb3VudCI+MDwvc3Bhbj4g2KfYs9iq2YHYs9in2LE8L2Rpdj4KICAgIDxkaXYgY2xhc3M9InEtbGlzdCIgaWQ9InFMaXN0Ij48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im5vLW1hdGNoIiBpZD0ibm9NYXRjaCIgc3R5bGU9ImRpc3BsYXk6bm9uZSI+CiAgICAgIDxzdHJvbmc+2YTYpyDYqtmI2KzYryDZhtiq2KfYptisINmF2LfYp9io2YLYqTwvc3Ryb25nPgogICAgICDYrNix2ZHYqCDZg9mE2YXYqSDZhdiu2KrZhNmB2Kkg2KPZiCDYo9i22YEg2KfZhNin2LPYqtmB2LPYp9ixINmF2YYg2KrYqNmI2YrYqCDZgtin2LnYr9ipINin2YTZhdi52LHZgdipCiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9kaXY+CjxkaXYgaWQ9InBhbmVsLWtiIiBjbGFzcz0icGFuZWwiPgogIDxkaXYgY2xhc3M9ImV4cG9ydC1iYXIiPgogICAgPGRpdj4KICAgICAgPHN0cm9uZz7irIfvuI8g2KrYtdiv2YrYsSDZiNiq2K3Yr9mK2Ksg2YTZhNmB2LHZitmCPC9zdHJvbmc+CiAgICAgIDxwPtio2LnYryDYo9mKINiq2LnYr9mK2YQg4oCUINi12K/ZkdixINin2YTZhdmE2YEg2YjYp9ix2YHYudmHINi52YTZiSBHaXRIdWI8L3A+CiAgICA8L2Rpdj4KICAgIDxidXR0b24gY2xhc3M9ImJ0bi1wIiBvbmNsaWNrPSJleHBvcnRIVE1MKCkiPtiq2LXYr9mK2LEgaW5kZXguaHRtbDwvYnV0dG9uPgogIDwvZGl2PgogIDxkaXYgY2xhc3M9ImtiLXRvb2xiYXIiPgogICAgPGRpdiBjbGFzcz0ia2ItY291bnQiPtin2YTYpdis2YXYp9mE2Yo6IDxzcGFuIGlkPSJrYkNvdW50Ij4wPC9zcGFuPiDYp9iz2KrZgdiz2KfYsTwvZGl2PgogICAgPGJ1dHRvbiBjbGFzcz0iYnRuLXAiIG9uY2xpY2s9Im9wZW5BZGQoKSIgc3R5bGU9InBhZGRpbmc6N3B4IDE0cHg7Zm9udC1zaXplOjEycHgiPisg2KXYttin2YHYqSDYrNiv2YrYrzwvYnV0dG9uPgogIDwvZGl2PgogIDxpbnB1dCB0eXBlPSJ0ZXh0IiBjbGFzcz0ia2Itc2VhcmNoLWlucCIgaWQ9ImtiU3JjaCIgcGxhY2Vob2xkZXI9Itin2KjYrdirINmE2YTYqti52K/ZitmEINij2Ygg2KfZhNit2LDZgS4uLiIgb25pbnB1dD0icmVuZGVyS0IoKSIvPgogIDxkaXYgY2xhc3M9ImtiLWxpc3QiIGlkPSJrYkxpc3QiPjwvZGl2PgogIDxkaXYgY2xhc3M9ImltcG9ydC1ib3giPgogICAgPGgzPtin2LPYqtmK2LHYp9ivINiv2YHYudipINmI2KfYrdiv2Kk6PC9oMz4KICAgIDx0ZXh0YXJlYSBpZD0iYnVsa0luIiBwbGFjZWhvbGRlcj0i2LM6INmD2YrZgSDYo9i22YrZgSDYqti12YbZitmB2J8mIzEwO9isOiDZhdmGINin2YTZgtin2KbZhdipINin2YTYrNin2YbYqNmK2KkuLi4mIzEwO9in2YTYrti32YjYqSDYp9mE2KvYp9mG2YrYqS4uLiYjMTA7JiMxMDvYszog2LPYpNin2YQg2KLYrtix2J8mIzEwO9isOiDYp9mE2KXYrNin2KjYqS4uLiI+PC90ZXh0YXJlYT4KICAgIDxkaXYgY2xhc3M9ImltcC1yb3ciPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tcCIgb25jbGljaz0iYnVsa0ltcG9ydCgpIj7Yp9iz2KrZitix2KfYrzwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tcyIgb25jbGljaz0iZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2J1bGtJbicpLnZhbHVlPScnIj7Zhdiz2K08L2J1dHRvbj4KICAgICAgPHNwYW4gaWQ9ImltcE1zZyIgc3R5bGU9ImZvbnQtc2l6ZToxMnB4O2NvbG9yOnZhcigtLWdybikiPjwvc3Bhbj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KPGRpdiBpZD0icGFuZWwtc3RhdHMiIGNsYXNzPSJwYW5lbCI+CiAgPGRpdiBjbGFzcz0ic3RhdHMtZ3JpZCI+CiAgICA8ZGl2IGNsYXNzPSJzdGF0Ij48ZGl2IGNsYXNzPSJzdGF0LW4iIGlkPSJzMSI+MDwvZGl2PjxkaXYgY2xhc3M9InN0YXQtbCI+2YHZiiDZgtin2LnYr9ipINin2YTZhdi52LHZgdipPC9kaXY+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJzdGF0Ij48ZGl2IGNsYXNzPSJzdGF0LW4iIGlkPSJzMiI+MDwvZGl2PjxkaXYgY2xhc3M9InN0YXQtbCI+2KPYs9im2YTYqSDZh9iw2Ycg2KfZhNis2YTYs9ipPC9kaXY+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJzdGF0Ij48ZGl2IGNsYXNzPSJzdGF0LW4iIGlkPSJzMyI+MDwvZGl2PjxkaXYgY2xhc3M9InN0YXQtbCI+2LHYr9mI2K8g2KrZhSDZhtiz2K7Zh9inPC9kaXY+PC9kaXY+CiAgPC9kaXY+CiAgPGRpdiBzdHlsZT0iYmFja2dyb3VuZDp2YXIoLS1zdXIpO2JvcmRlcjoxcHggc29saWQgdmFyKC0tYm9yKTtib3JkZXItcmFkaXVzOnZhcigtLXIpO3BhZGRpbmc6MS4ycmVtIj4KICAgIDxkaXYgc3R5bGU9ImZvbnQtc2l6ZToxM3B4O2ZvbnQtd2VpZ2h0OjUwMDtjb2xvcjp2YXIoLS10eDIpO21hcmdpbi1ib3R0b206MTBweCI+2KLYrtixINin2YTYo9iz2KbZhNipPC9kaXY+CiAgICA8ZGl2IGlkPSJyZWNlbnRRIiBzdHlsZT0iZm9udC1zaXplOjEzcHg7Y29sb3I6dmFyKC0tdHgzKSI+2YTYpyDYqtmI2KzYryDYo9iz2KbZhNipINio2LnYry48L2Rpdj4KICA8L2Rpdj4KPC9kaXY+CjwvbWFpbj4KPGRpdiBjbGFzcz0ibW9kYWwtb3YiIGlkPSJtb2RhbCI+CiAgPGRpdiBjbGFzcz0ibW9kYWwiPgogICAgPGgzIGlkPSJtb2RhbFRpdGxlIj7Ypdi22KfZgdipINin2LPYqtmB2LPYp9ixPC9oMz4KICAgIDxpbnB1dCB0eXBlPSJoaWRkZW4iIGlkPSJlZGl0SWQiLz4KICAgIDxsYWJlbD7Ys9ik2KfZhCDYp9mE2KrYp9is2LE8L2xhYmVsPgogICAgPGlucHV0IHR5cGU9InRleHQiIGlkPSJlZGl0USIgcGxhY2Vob2xkZXI9ItmF2KvYp9mEOiDZg9mK2YEg2KPYttmK2YEg2KrYtdmG2YrZgSDYrNiv2YrYr9ifIi8+CiAgICA8bGFiZWw+2KfZhNiu2LfZiNin2Kog4oCUINmD2YQg2K7Yt9mI2Kkg2YHZiiDYs9i32LEg2YXYs9iq2YLZhDwvbGFiZWw+CiAgICA8dGV4dGFyZWEgaWQ9ImVkaXRTdGVwcyIgcGxhY2Vob2xkZXI9ItmF2YYg2KfZhNmC2KfYptmF2Kkg2KfZhNis2KfZhtio2YrYqSDYp9i22LrYtyDYudmE2YkuLi4mIzEwO9ir2YUg2KfYrtiq2LEuLi4mIzEwO9in2LbYuti3INit2YHYuCI+PC90ZXh0YXJlYT4KICAgIDxkaXYgY2xhc3M9Im1vZGFsLWFjdHMiPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tcyIgb25jbGljaz0iY2xvc2VNb2RhbCgpIj7YpdmE2LrYp9ihPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0bi1wIiBvbmNsaWNrPSJzYXZlRWRpdCgpIj7YrdmB2Lg8L2J1dHRvbj4KICAgIDwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KPGRpdiBjbGFzcz0idG9hc3QiIGlkPSJ0b2FzdCI+PC9kaXY+CjxzY3JpcHQ+CmNvbnN0IERFRkFVTFRfS0I9X19LQl9fOwpjb25zdCBURU1QTEFURT1fX1RNUExfXzsKbGV0IEtCPVtdLHNlc3NDb3VudD0wLGNvcHlDb3VudD0wLHJlY2VudFE9W10sY3VycmVudEl0ZW09bnVsbDsKZnVuY3Rpb24gaW5pdCgpe2NvbnN0IHM9bG9jYWxTdG9yYWdlLmdldEl0ZW0oJ21hdGphcmFfa2JfdjUnKTtpZihzKXt0cnl7S0I9SlNPTi5wYXJzZShzKX1jYXRjaChlKXtLQj1ERUZBVUxUX0tCLnNsaWNlKCl9fWVsc2V7S0I9REVGQVVMVF9LQi5zbGljZSgpO3NhdmVLQigpfXJlbmRlckxpc3QoS0IpO3JlbmRlcktCKCk7dXBkYXRlU3RhdHMoKX0KZnVuY3Rpb24gc2F2ZUtCKCl7bG9jYWxTdG9yYWdlLnNldEl0ZW0oJ21hdGphcmFfa2JfdjUnLEpTT04uc3RyaW5naWZ5KEtCKSk7aWYoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2tiQ291bnQnKSlkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgna2JDb3VudCcpLnRleHRDb250ZW50PUtCLmxlbmd0aDtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnczEnKS50ZXh0Q29udGVudD1LQi5sZW5ndGg7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2hkci1jb3VudCcpLnRleHRDb250ZW50PUtCLmxlbmd0aCsnINin2LPYqtmB2LPYp9ixJ30KZnVuY3Rpb24gb25TZWFyY2goKXtjb25zdCBxPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdzZWFyY2hJbnAnKS52YWx1ZS50cmltKCk7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2NsZWFyQnRuJykuY2xhc3NMaXN0LnRvZ2dsZSgnc2hvdycscS5sZW5ndGg+MCk7c2hvd0xpc3QoKTtyZW5kZXJMaXN0KHE/c2VhcmNoKHEpOktCKX0KZnVuY3Rpb24gY2xlYXJTZWFyY2goKXtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnc2VhcmNoSW5wJykudmFsdWU9Jyc7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2NsZWFyQnRuJykuY2xhc3NMaXN0LnJlbW92ZSgnc2hvdycpO3Nob3dMaXN0KCk7cmVuZGVyTGlzdChLQil9CmZ1bmN0aW9uIHNlYXJjaChxdWVyeSl7Y29uc3QgcT1xdWVyeS50b0xvd2VyQ2FzZSgpLnRyaW0oKTtpZighcSlyZXR1cm4gS0I7Y29uc3QgdG9rZW5zPXEuc3BsaXQoL1xzKy8pLmZpbHRlcih0PT50Lmxlbmd0aD4xKTtjb25zdCBzeW5zPXth2LbYp9mB2Kk6WyfYo9i22YrZgScsJ9in2LbZgScsJ9il2LbYp9mB2KknXSx02LnYr9mK2YQ6WyfYo9i52K/ZhCcsJ9iq2LrZitmK2LEnLCfYo9i62YrYsSddLHLYqNi3Olsn2KPYsdio2LcnLCfYqtmB2LnZitmEJ10sa9mI2KjZiNmGOlsn2K7YtdmFJywn2YLYs9mK2YXYqSddLHTZhNioOlsn2KfZiNix2K/YsSddLHPYrdmGOlsn2KrZiNi12YrZhCddLGTZgdi5Olsn2KjZiNin2KjYqSddLHNlbzpbJ9iz2YrZiCcsJ9mF2K3YsdmD2KfYqiddLG3Zhtiq2Kw6WyfYs9mE2LnYqSddLHrYp9iq2YPYpzpbJ9mB2KfYqtmI2LHYqScsJ9i22LHZitio2KknXX07Y29uc3Qgc2NvcmVkPUtCLm1hcChpdGVtPT57Y29uc3QgaGF5PShpdGVtLnErJyAnK2l0ZW0uc3RlcHMuam9pbignICcpKS50b0xvd2VyQ2FzZSgpO2xldCBzYz0wO2lmKGhheS5pbmNsdWRlcyhxKSlzYys9MTAwO2lmKGl0ZW0ucS50b0xvd2VyQ2FzZSgpLmluY2x1ZGVzKHEpKXNjKz02MDt0b2tlbnMuZm9yRWFjaCh0PT57aWYodC5sZW5ndGg8MilyZXR1cm47aWYoaXRlbS5xLnRvTG93ZXJDYXNlKCkuaW5jbHVkZXModCkpc2MrPTMwO2Vsc2UgaWYoaGF5LmluY2x1ZGVzKHQpKXNjKz0xMn0pO3JldHVybntpdGVtLHNjfX0pO3JldHVybiBzY29yZWQuZmlsdGVyKHg9Pnguc2M+PTEyKS5zb3J0KChhLGIpPT5iLnNjLWEuc2MpLm1hcCh4PT54Lml0ZW0pfQpmdW5jdGlvbiByZW5kZXJMaXN0KGl0ZW1zKXtjb25zdCBlbD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncUxpc3QnKTtjb25zdCBubT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbm9NYXRjaCcpO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsaXN0LWNvdW50JykudGV4dENvbnRlbnQ9aXRlbXMubGVuZ3RoO2lmKCFpdGVtcy5sZW5ndGgpe2VsLmlubmVySFRNTD0nJztubS5zdHlsZS5kaXNwbGF5PSdibG9jayc7cmV0dXJufW5tLnN0eWxlLmRpc3BsYXk9J25vbmUnO2VsLmlubmVySFRNTD1pdGVtcy5tYXAoKGl0ZW0saSk9Pic8ZGl2IGNsYXNzPSJxLWl0ZW0iIG9uY2xpY2s9InNob3dBbnN3ZXIoJytpKycsWycraXRlbXMubWFwKHg9PidcJycrU3RyaW5nKHguaWQpLnJlcGxhY2UoLycvZywiXFwnIikrJ1wnJykuam9pbignLCcpKyddKSI+PHNwYW4gY2xhc3M9InEtaXRlbS10ZXh0Ij4nK2l0ZW0ucSsnPC9zcGFuPjxzcGFuIGNsYXNzPSJxLWFycm93Ij7igLo8L3NwYW4+PC9kaXY+Jykuam9pbignJyl9CmZ1bmN0aW9uIHNob3dBbnN3ZXIoaWR4LGlkcyl7Y29uc3QgaWQ9aWRzW2lkeF07Y29uc3QgaXRlbT1LQi5maW5kKGs9PlN0cmluZyhrLmlkKT09PVN0cmluZyhpZCkpO2lmKCFpdGVtKXJldHVybjtjdXJyZW50SXRlbT1pdGVtO3Nlc3NDb3VudCsrO3JlY2VudFEudW5zaGlmdChpdGVtLnEpO2lmKHJlY2VudFEubGVuZ3RoPjIwKXJlY2VudFEucG9wKCk7dXBkYXRlU3RhdHMoKTtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYW5zd2VyLXEnKS50ZXh0Q29udGVudD1pdGVtLnE7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2Fuc3dlci1zdGVwcycpLmlubmVySFRNTD1pdGVtLnN0ZXBzLm1hcCgocyxpKT0+JzxkaXYgY2xhc3M9InN0ZXAiPjxkaXYgY2xhc3M9InNudW0iPicrKGkrMSkrJzwvZGl2PjxkaXYgY2xhc3M9InN0ZXAtdGV4dCI+JytzLnJlcGxhY2UoL1woKFteKV0rKVwpL2csJzxiPigkMSk8L2I+JykrJzwvZGl2PjwvZGl2PicpLmpvaW4oJycpO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsaXN0LXZpZXcnKS5zdHlsZS5kaXNwbGF5PSdub25lJztjb25zdCBhdj1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYW5zd2VyLXZpZXcnKTthdi5zdHlsZS5kaXNwbGF5PSdmbGV4Jzthdi5jbGFzc0xpc3QuYWRkKCdzaG93Jyk7d2luZG93LnNjcm9sbFRvKDAsMCl9CmZ1bmN0aW9uIHNob3dMaXN0KCl7Y29uc3QgYXY9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2Fuc3dlci12aWV3Jyk7YXYuc3R5bGUuZGlzcGxheT0nbm9uZSc7YXYuY2xhc3NMaXN0LnJlbW92ZSgnc2hvdycpO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsaXN0LXZpZXcnKS5zdHlsZS5kaXNwbGF5PSdibG9jayc7Y3VycmVudEl0ZW09bnVsbH0KZnVuY3Rpb24gY29weUFuc3dlcigpe2lmKCFjdXJyZW50SXRlbSlyZXR1cm47Y29uc3QgdGV4dD1jdXJyZW50SXRlbS5xKydcblxuJytjdXJyZW50SXRlbS5zdGVwcy5tYXAoKHMsaSk9PihpKzEpKycuICcrcykuam9pbignXG4nKTtuYXZpZ2F0b3IuY2xpcGJvYXJkLndyaXRlVGV4dCh0ZXh0KS50aGVuKCgpPT57Y29weUNvdW50Kys7dXBkYXRlU3RhdHMoKTtzaG93VG9hc3QoJ9iq2YUg2YbYs9iuINin2YTYsdivIOKckycpfSl9CmZ1bmN0aW9uIHJlbmRlcktCKCl7Y29uc3Qgc3JjaD0oZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2tiU3JjaCcpPy52YWx1ZXx8JycpLnRvTG93ZXJDYXNlKCk7Y29uc3QgZmlsdGVyZWQ9S0IuZmlsdGVyKGs9PiFzcmNofHxrLnEudG9Mb3dlckNhc2UoKS5pbmNsdWRlcyhzcmNoKXx8ay5zdGVwcy5zb21lKHM9PnMudG9Mb3dlckNhc2UoKS5pbmNsdWRlcyhzcmNoKSkpO2lmKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdrYkNvdW50JykpZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2tiQ291bnQnKS50ZXh0Q29udGVudD1LQi5sZW5ndGg7Y29uc3QgZWw9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2tiTGlzdCcpO2lmKCFmaWx0ZXJlZC5sZW5ndGgpe2VsLmlubmVySFRNTD0nPHAgc3R5bGU9ImZvbnQtc2l6ZToxM3B4O2NvbG9yOnZhcigtLXR4Myk7cGFkZGluZzouOHJlbSAwIj7ZhNinINiq2YjYrNivINmG2KrYp9im2KwuPC9wPic7cmV0dXJufWVsLmlubmVySFRNTD1maWx0ZXJlZC5tYXAoaXRlbT0+JzxkaXYgY2xhc3M9ImtiLWl0ZW0iPjxkaXYgc3R5bGU9ImZsZXg6MSI+PGRpdiBjbGFzcz0ia2ItaXRlbS1xIj4nK2l0ZW0ucSsnPC9kaXY+PGRpdiBjbGFzcz0ia2ItaXRlbS1tZXRhIj4nK2l0ZW0uc3RlcHMubGVuZ3RoKycg2K7Yt9mI2KfYqjwvZGl2PjwvZGl2PjxkaXYgY2xhc3M9ImtiLWFjdGlvbnMiPjxidXR0b24gY2xhc3M9ImJ0bi1lZGl0IiBvbmNsaWNrPVwnb3BlbkVkaXQoJytKU09OLnN0cmluZ2lmeShpdGVtLmlkKSsnKVwnPuKcj++4jyDYqti52K/ZitmEPC9idXR0b24+PGJ1dHRvbiBjbGFzcz0iYnRuLWRlbCIgb25jbGljaz1cJ2RlbEl0ZW0oJytKU09OLnN0cmluZ2lmeShpdGVtLmlkKSsnKVwnPvCfl5E8L2J1dHRvbj48L2Rpdj48L2Rpdj4nKS5qb2luKCcnKX0KZnVuY3Rpb24gZGVsSXRlbShpZCl7aWYoIWNvbmZpcm0oJ9it2LDZgSDZh9iw2Kcg2KfZhNin2LPYqtmB2LPYp9ix2J8nKSlyZXR1cm47S0I9S0IuZmlsdGVyKGs9PmsuaWQhPT1pZCk7c2F2ZUtCKCk7cmVuZGVyS0IoKTtyZW5kZXJMaXN0KEtCKTtzaG93VG9hc3QoJ9iq2YUg2KfZhNit2LDZgScpfQpmdW5jdGlvbiBidWxrSW1wb3J0KCl7Y29uc3QgcmF3PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdidWxrSW4nKS52YWx1ZS50cmltKCk7aWYoIXJhdylyZXR1cm47Y29uc3QgYmxvY2tzPXJhdy5zcGxpdCgvXG4oPz3YszopL2cpO2xldCBhZGRlZD0wO2Jsb2Nrcy5mb3JFYWNoKGJsb2NrPT57Y29uc3QgcW09YmxvY2subWF0Y2goL17YszpccyooLispL20pO2NvbnN0IGFtPWJsb2NrLm1hdGNoKC9e2Kw6XHMqKFtcc1xTXSspL20pO2lmKHFtJiZhbSl7Y29uc3QgcT1xbVsxXS50cmltKCk7Y29uc3Qgc3RlcHM9YW1bMV0udHJpbSgpLnNwbGl0KCdcbicpLm1hcChzPT5zLnRyaW0oKSkuZmlsdGVyKEJvb2xlYW4pO2lmKCFLQi5maW5kKGs9PmsucT09PXEpKXtLQi5wdXNoKHtpZDpEYXRlLm5vdygpK01hdGgucmFuZG9tKCkscSxzdGVwc30pO2FkZGVkKyt9fX0pO2lmKGFkZGVkKXtzYXZlS0IoKTtyZW5kZXJLQigpO3JlbmRlckxpc3QoS0IpO3VwZGF0ZVN0YXRzKCk7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2J1bGtJbicpLnZhbHVlPScnO2NvbnN0IG09ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2ltcE1zZycpO20udGV4dENvbnRlbnQ9J+KckyDYqtmF2Kog2KXYttin2YHYqSAnK2FkZGVkKycg2KfYs9iq2YHYs9in2LEnO3NldFRpbWVvdXQoKCk9Pm0udGV4dENvbnRlbnQ9JycsMzAwMCl9ZWxzZSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnaW1wTXNnJykudGV4dENvbnRlbnQ9J9iq2K3ZgtmCINmF2YYg2KfZhNiq2YbYs9mK2YInfQpmdW5jdGlvbiBvcGVuQWRkKCl7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ21vZGFsVGl0bGUnKS50ZXh0Q29udGVudD0n2KXYttin2YHYqSDYp9iz2KrZgdiz2KfYsSDYrNiv2YrYryc7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2VkaXRJZCcpLnZhbHVlPScnO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdlZGl0UScpLnZhbHVlPScnO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdlZGl0U3RlcHMnKS52YWx1ZT0nJztkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbW9kYWwnKS5jbGFzc0xpc3QuYWRkKCdvcGVuJyk7c2V0VGltZW91dCgoKT0+ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2VkaXRRJykuZm9jdXMoKSwxMDApfQpmdW5jdGlvbiBvcGVuRWRpdChpZCl7Y29uc3QgaXRlbT1LQi5maW5kKGs9PmsuaWQ9PT1pZCk7aWYoIWl0ZW0pcmV0dXJuO2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdtb2RhbFRpdGxlJykudGV4dENvbnRlbnQ9J9iq2LnYr9mK2YQg2KfZhNin2LPYqtmB2LPYp9ixJztkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZWRpdElkJykudmFsdWU9U3RyaW5nKGlkKTtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZWRpdFEnKS52YWx1ZT1pdGVtLnE7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2VkaXRTdGVwcycpLnZhbHVlPWl0ZW0uc3RlcHMuam9pbignXG4nKTtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbW9kYWwnKS5jbGFzc0xpc3QuYWRkKCdvcGVuJyk7c2V0VGltZW91dCgoKT0+ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2VkaXRRJykuZm9jdXMoKSwxMDApfQpmdW5jdGlvbiBjbG9zZU1vZGFsKCl7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ21vZGFsJykuY2xhc3NMaXN0LnJlbW92ZSgnb3BlbicpfQpmdW5jdGlvbiBzYXZlRWRpdCgpe2NvbnN0IGlkPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdlZGl0SWQnKS52YWx1ZTtjb25zdCBxPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdlZGl0UScpLnZhbHVlLnRyaW0oKTtjb25zdCBzdGVwc1Jhdz1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZWRpdFN0ZXBzJykudmFsdWUudHJpbSgpO2lmKCFxfHwhc3RlcHNSYXcpe3Nob3dUb2FzdCgn2YrYsdis2Ykg2YXZhNihINin2YTYs9ik2KfZhCDZiNin2YTYrti32YjYp9iqJyk7cmV0dXJufWNvbnN0IHN0ZXBzPXN0ZXBzUmF3LnNwbGl0KCdcbicpLm1hcChzPT5zLnRyaW0oKSkuZmlsdGVyKEJvb2xlYW4pO2lmKGlkKXtjb25zdCBpZHg9S0IuZmluZEluZGV4KGs9PlN0cmluZyhrLmlkKT09PWlkKTtpZihpZHg+LTEpe0tCW2lkeF0ucT1xO0tCW2lkeF0uc3RlcHM9c3RlcHN9fWVsc2V7S0IucHVzaCh7aWQ6RGF0ZS5ub3coKStNYXRoLnJhbmRvbSgpLHEsc3RlcHN9KX1zYXZlS0IoKTtyZW5kZXJLQigpO3JlbmRlckxpc3QoS0IpO3VwZGF0ZVN0YXRzKCk7Y2xvc2VNb2RhbCgpO3Nob3dUb2FzdChpZD8n2KrZhSDYp9mE2KrYudiv2YrZhCDinJMnOifYqtmF2Kog2KfZhNil2LbYp9mB2Kkg4pyTJyl9CmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdtb2RhbCcpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbihlKXtpZihlLnRhcmdldD09PXRoaXMpY2xvc2VNb2RhbCgpfSk7CmZ1bmN0aW9uIGV4cG9ydEhUTUwoKXtjb25zdCBrYkpzb249SlNPTi5zdHJpbmdpZnkoS0IpO2NvbnN0IG91dD1URU1QTEFURS5yZXBsYWNlKCciX19LQl9fIicsa2JKc29uKS5yZXBsYWNlKCciX19UTVBMX18iJywnIiInKTtjb25zdCBibG9iPW5ldyBCbG9iKFtvdXRdLHt0eXBlOid0ZXh0L2h0bWw7Y2hhcnNldD11dGYtOCd9KTtjb25zdCBhPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2EnKTthLmhyZWY9VVJMLmNyZWF0ZU9iamVjdFVSTChibG9iKTthLmRvd25sb2FkPSdpbmRleC5odG1sJzthLmNsaWNrKCk7c2hvd1RvYXN0KCfYqtmFINiq2YbYstmK2YQgaW5kZXguaHRtbCDinJMnKX0KZnVuY3Rpb24gdXBkYXRlU3RhdHMoKXtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnczEnKS50ZXh0Q29udGVudD1LQi5sZW5ndGg7ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3MyJykudGV4dENvbnRlbnQ9c2Vzc0NvdW50O2RvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdzMycpLnRleHRDb250ZW50PWNvcHlDb3VudDtjb25zdCBycT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncmVjZW50UScpO3JxLmlubmVySFRNTD1yZWNlbnRRLmxlbmd0aD9yZWNlbnRRLm1hcChxPT4nPGRpdiBzdHlsZT0icGFkZGluZzo2cHggMDtib3JkZXItYm90dG9tOjFweCBzb2xpZCB2YXIoLS1ib3IpO2NvbG9yOnZhcigtLXR4MikiPicrcSsnPC9kaXY+Jykuam9pbignJyk6JzxzcGFuPtmE2Kcg2KrZiNis2K8g2KPYs9im2YTYqSDYqNi52K8uPC9zcGFuPid9CmZ1bmN0aW9uIHN3aXRjaFRhYihuYW1lLGJ0bil7ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnBhbmVsJykuZm9yRWFjaChwPT5wLmNsYXNzTGlzdC5yZW1vdmUoJ2FjdGl2ZScpKTtkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcudGFiJykuZm9yRWFjaChiPT5iLmNsYXNzTGlzdC5yZW1vdmUoJ2FjdGl2ZScpKTtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncGFuZWwtJytuYW1lKS5jbGFzc0xpc3QuYWRkKCdhY3RpdmUnKTtidG4uY2xhc3NMaXN0LmFkZCgnYWN0aXZlJyk7aWYobmFtZT09PSdrYicpcmVuZGVyS0IoKTtpZihuYW1lPT09J3N0YXRzJyl1cGRhdGVTdGF0cygpfQpmdW5jdGlvbiBzaG93VG9hc3QobXNnKXtjb25zdCB0PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0b2FzdCcpO3QudGV4dENvbnRlbnQ9bXNnO3QuY2xhc3NMaXN0LmFkZCgnc2hvdycpO3NldFRpbWVvdXQoKCk9PnQuY2xhc3NMaXN0LnJlbW92ZSgnc2hvdycpLDI1MDApfQppbml0KCk7Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4K";
+let KB=[],sessCount=0,copyCount=0,recentQ=[],currentItem=null;
+function init(){const s=localStorage.getItem('matjara_kb_v5');if(s){try{KB=JSON.parse(s)}catch(e){KB=DEFAULT_KB.slice()}}else{KB=DEFAULT_KB.slice();saveKB()}renderList(KB);renderKB();updateStats()}
+function saveKB(){localStorage.setItem('matjara_kb_v5',JSON.stringify(KB));if(document.getElementById('kbCount'))document.getElementById('kbCount').textContent=KB.length;document.getElementById('s1').textContent=KB.length;document.getElementById('hdr-count').textContent=KB.length+' استفسار'}
+function onSearch(){const q=document.getElementById('searchInp').value.trim();document.getElementById('clearBtn').classList.toggle('show',q.length>0);showList();renderList(q?search(q):KB)}
+function clearSearch(){document.getElementById('searchInp').value='';document.getElementById('clearBtn').classList.remove('show');showList();renderList(KB)}
+function search(query){const q=query.toLowerCase().trim();if(!q)return KB;const tokens=q.split(/\s+/).filter(t=>t.length>1);const syns={aضافة:['أضيف','اضف','إضافة'],tعديل:['أعدل','تغيير','أغير'],rبط:['أربط','تفعيل'],kوبون:['خصم','قسيمة'],tلب:['اوردر'],sحن:['توصيل'],dفع:['بوابة'],seo:['سيو','محركات'],mنتج:['سلعة'],zاتكا:['فاتورة','ضريبة']};const scored=KB.map(item=>{const hay=(item.q+' '+item.steps.join(' ')).toLowerCase();let sc=0;if(hay.includes(q))sc+=100;if(item.q.toLowerCase().includes(q))sc+=60;tokens.forEach(t=>{if(t.length<2)return;if(item.q.toLowerCase().includes(t))sc+=30;else if(hay.includes(t))sc+=12});return{item,sc}});return scored.filter(x=>x.sc>=12).sort((a,b)=>b.sc-a.sc).map(x=>x.item)}
+function renderList(items){const el=document.getElementById('qList');const nm=document.getElementById('noMatch');document.getElementById('list-count').textContent=items.length;if(!items.length){el.innerHTML='';nm.style.display='block';return}nm.style.display='none';el.innerHTML=items.map((item,i)=>'<div class="q-item" onclick="showAnswer('+i+',['+items.map(x=>'\''+String(x.id).replace(/'/g,"\\'")+'\'').join(',')+'])"><span class="q-item-text">'+item.q+'</span><span class="q-arrow">›</span></div>').join('')}
+function showAnswer(idx,ids){const id=ids[idx];const item=KB.find(k=>String(k.id)===String(id));if(!item)return;currentItem=item;sessCount++;recentQ.unshift(item.q);if(recentQ.length>20)recentQ.pop();updateStats();document.getElementById('answer-q').textContent=item.q;document.getElementById('answer-steps').innerHTML=item.steps.map((s,i)=>'<div class="step"><div class="snum">'+(i+1)+'</div><div class="step-text">'+s.replace(/\(([^)]+)\)/g,'<b>($1)</b>')+'</div></div>').join('');document.getElementById('list-view').style.display='none';const av=document.getElementById('answer-view');av.style.display='flex';av.classList.add('show');window.scrollTo(0,0)}
+function showList(){const av=document.getElementById('answer-view');av.style.display='none';av.classList.remove('show');document.getElementById('list-view').style.display='block';currentItem=null}
+function copyAnswer(){if(!currentItem)return;const text=currentItem.q+'\n\n'+currentItem.steps.map((s,i)=>(i+1)+'. '+s).join('\n');navigator.clipboard.writeText(text).then(()=>{copyCount++;updateStats();showToast('تم نسخ الرد ✓')})}
+function renderKB(){const srch=(document.getElementById('kbSrch')?.value||'').toLowerCase();const filtered=KB.filter(k=>!srch||k.q.toLowerCase().includes(srch)||k.steps.some(s=>s.toLowerCase().includes(srch)));if(document.getElementById('kbCount'))document.getElementById('kbCount').textContent=KB.length;const el=document.getElementById('kbList');if(!filtered.length){el.innerHTML='<p style="font-size:13px;color:var(--tx3);padding:.8rem 0">لا توجد نتائج.</p>';return}el.innerHTML=filtered.map(item=>'<div class="kb-item"><div style="flex:1"><div class="kb-item-q">'+item.q+'</div><div class="kb-item-meta">'+item.steps.length+' خطوات</div></div><div class="kb-actions"><button class="btn-edit" onclick=\'openEdit('+JSON.stringify(item.id)+')\'>✏️ تعديل</button><button class="btn-del" onclick=\'delItem('+JSON.stringify(item.id)+')\'>🗑</button></div></div>').join('')}
+function delItem(id){if(!confirm('حذف هذا الاستفسار؟'))return;KB=KB.filter(k=>k.id!==id);saveKB();renderKB();renderList(KB);showToast('تم الحذف')}
+function bulkImport(){const raw=document.getElementById('bulkIn').value.trim();if(!raw)return;const blocks=raw.split(/\n(?=س:)/g);let added=0;blocks.forEach(block=>{const qm=block.match(/^س:\s*(.+)/m);const am=block.match(/^ج:\s*([\s\S]+)/m);if(qm&&am){const q=qm[1].trim();const steps=am[1].trim().split('\n').map(s=>s.trim()).filter(Boolean);if(!KB.find(k=>k.q===q)){KB.push({id:Date.now()+Math.random(),q,steps});added++}}});if(added){saveKB();renderKB();renderList(KB);updateStats();document.getElementById('bulkIn').value='';const m=document.getElementById('impMsg');m.textContent='✓ تمت إضافة '+added+' استفسار';setTimeout(()=>m.textContent='',3000)}else document.getElementById('impMsg').textContent='تحقق من التنسيق'}
+function openAdd(){document.getElementById('modalTitle').textContent='إضافة استفسار جديد';document.getElementById('editId').value='';document.getElementById('editQ').value='';document.getElementById('editSteps').value='';document.getElementById('modal').classList.add('open');setTimeout(()=>document.getElementById('editQ').focus(),100)}
+function openEdit(id){const item=KB.find(k=>k.id===id);if(!item)return;document.getElementById('modalTitle').textContent='تعديل الاستفسار';document.getElementById('editId').value=String(id);document.getElementById('editQ').value=item.q;document.getElementById('editSteps').value=item.steps.join('\n');document.getElementById('modal').classList.add('open');setTimeout(()=>document.getElementById('editQ').focus(),100)}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
-
-function saveEdit(){
-  const id=document.getElementById('editId').value;
-  const q=document.getElementById('editQ').value.trim();
-  const stepsRaw=document.getElementById('editSteps').value.trim();
-  if(!q||!stepsRaw){showToast('يرجى ملء السؤال والخطوات');return}
-  const steps=stepsRaw.split('\n').map(s=>s.trim()).filter(Boolean);
-  if(id){
-    const idx=KB.findIndex(k=>String(k.id)===id);
-    if(idx>-1){KB[idx].q=q;KB[idx].steps=steps}
-  }else{
-    KB.push({id:Date.now()+Math.random(),q,steps});
-  }
-  saveKB();renderKB();renderList(KB);updateStats();closeModal();
-  showToast(id?'تم التعديل ✓':'تمت الإضافة ✓');
-}
-
+function saveEdit(){const id=document.getElementById('editId').value;const q=document.getElementById('editQ').value.trim();const stepsRaw=document.getElementById('editSteps').value.trim();if(!q||!stepsRaw){showToast('يرجى ملء السؤال والخطوات');return}const steps=stepsRaw.split('\n').map(s=>s.trim()).filter(Boolean);if(id){const idx=KB.findIndex(k=>String(k.id)===id);if(idx>-1){KB[idx].q=q;KB[idx].steps=steps}}else{KB.push({id:Date.now()+Math.random(),q,steps})}saveKB();renderKB();renderList(KB);updateStats();closeModal();showToast(id?'تم التعديل ✓':'تمت الإضافة ✓')}
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
-
-// ── EXPORT ──
-function exportHTML(){
-  // Build fresh HTML with current KB embedded as DEFAULT_KB
-  const kbJson = JSON.stringify(KB, null, 0);
-
-  // Get full page source, replace DEFAULT_KB with current KB
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', window.location.href, false);
-  try {
-    xhr.send();
-    let src = xhr.responseText;
-    // Replace the DEFAULT_KB array with current KB
-    src = src.replace(/const DEFAULT_KB = \[[\s\S]*?\];/, 'const DEFAULT_KB = ' + kbJson + ';');
-    // Also clear localStorage key so new visitors get fresh DEFAULT_KB
-    const blob = new Blob([src], {type:'text/html;charset=utf-8'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'index.html';
-    a.click();
-    showToast('تم تنزيل index.html ✓ ارفعه على GitHub');
-  } catch(e) {
-    // Fallback: use outerHTML (works locally, may not catch all changes on GitHub)
-    let src = '<!DOCTYPE html>' + document.documentElement.outerHTML;
-    src = src.replace(/const DEFAULT_KB = \[[\s\S]*?\];/, 'const DEFAULT_KB = ' + kbJson + ';');
-    const blob = new Blob([src], {type:'text/html;charset=utf-8'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'index.html';
-    a.click();
-    showToast('تم تنزيل index.html ✓ ارفعه على GitHub');
-  }
-}
-
-// ── STATS ──
-function updateStats(){
-  document.getElementById('s1').textContent=KB.length;
-  document.getElementById('s2').textContent=sessCount;
-  document.getElementById('s3').textContent=copyCount;
-  const rq=document.getElementById('recentQ');
-  rq.innerHTML=recentQ.length
-    ?recentQ.map(q=>`<div style="padding:6px 0;border-bottom:1px solid var(--bor);color:var(--tx2)">${q}</div>`).join('')
-    :'<span>لا توجد أسئلة بعد.</span>';
-}
-
-// ── TABS ──
-function switchTab(name,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
-  btn.classList.add('active');
-  if(name==='kb')renderKB();
-  if(name==='stats')updateStats();
-}
-
-// ── TOAST ──
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-
+function exportHTML(){var kbJson=JSON.stringify(KB);var src=decodeURIComponent(escape(atob(TEMPLATE)));src=src.replace("__KB__",kbJson);src=src.replace("__TMPL__",'"'+TEMPLATE+'"');var blob=new Blob([src],{type:"text/html;charset=utf-8"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";a.click();showToast("تم تنزيل index.html ✓");}
+function updateStats(){document.getElementById('s1').textContent=KB.length;document.getElementById('s2').textContent=sessCount;document.getElementById('s3').textContent=copyCount;const rq=document.getElementById('recentQ');rq.innerHTML=recentQ.length?recentQ.map(q=>'<div style="padding:6px 0;border-bottom:1px solid var(--bor);color:var(--tx2)">'+q+'</div>').join(''):'<span>لا توجد أسئلة بعد.</span>'}
+function switchTab(name,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('panel-'+name).classList.add('active');btn.classList.add('active');if(name==='kb')renderKB();if(name==='stats')updateStats()}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
 init();
 </script>
-
-</body></html>
+</body>
+</html>
